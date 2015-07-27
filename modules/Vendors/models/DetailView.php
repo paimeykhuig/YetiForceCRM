@@ -26,24 +26,26 @@ class Vendors_DetailView_Model extends Vtiger_DetailView_Model {
 		
 		$emailModuleModel = Vtiger_Module_Model::getInstance('OSSMail');
 		if($currentUserModel->hasModulePermission($emailModuleModel->getId())) {
+			$config = $emailModuleModel->getComposeParameters();
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEWBASIC',
 				'linklabel' => '',
-				'linkurl' => 'index.php?module=OSSMail&view=compose&mod='.$moduleName.'&record='.$recordId,
-				'linkicon' => 'icon-envelope',
-				'linktarget' => '_blank',
-				'title' => vtranslate('LBL_SEND_EMAIL')
+				'linkurl' => $emailModuleModel->getComposeUrl($moduleName, $recordId, 'Detail', $config['popup']),
+				'linkicon' => 'glyphicon glyphicon-envelope',
+				'linktarget' => $config['target'],
+				'linkPopup' => $config['popup'],
+				'linkhint' => 'LBL_SEND_EMAIL'
 			);
 			$linkModelList['DETAILVIEWBASIC'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}
+		
 		$purchaseOrderModuleModel = Vtiger_Module_Model::getInstance('PurchaseOrder');
 		if($currentUserModel->hasModuleActionPermission($purchaseOrderModuleModel->getId(), 'EditView')) {
 			$basicActionLink = array(
 				'linktype' => 'DETAILVIEW',
-				'linklabel' => '',
+				'linklabel' => vtranslate('LBL_CREATE').' '.vtranslate($purchaseOrderModuleModel->getSingularLabelKey(), 'PurchaseOrder'),
 				'linkurl' => $recordModel->getCreatePurchaseOrderUrl(),
-				'linkicon' => 'icon-list-alt',
-				'title' => vtranslate('LBL_CREATE').' '.vtranslate($purchaseOrderModuleModel->getSingularLabelKey(), 'PurchaseOrder'),
+				'linkicon' => 'glyphicon glyphicon-list-alt',
 			);
 			$linkModelList['DETAILVIEW'][] = Vtiger_Link_Model::getInstanceFromValues($basicActionLink);
 		}

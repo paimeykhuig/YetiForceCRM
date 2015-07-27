@@ -49,10 +49,8 @@
 		<div id="timeEmployees" style="height:400px;width:100%;"></div>
 	</div>
 {else}
-<div class="alert alert-error">
+<div class="alert alert-warning">
 	<p>{vtranslate('LBL_TOTAL_TIME')}  {vtranslate('LBL_EMPLOYEE')}</p>
 	{vtranslate('LBL_RECORDS_NO_FOUND')}
 </div>	
 {/if}
-
-

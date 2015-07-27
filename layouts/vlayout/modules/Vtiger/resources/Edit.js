@@ -194,7 +194,7 @@ jQuery.Class("Vtiger_Edit_Js",{
 								mapFieldDisplayElement.val(response[value[0]+'_label']).attr('readonly',true);
 								var referenceModulesList = formElement.find('#'+app.getModuleName()+'_editView_fieldName_'+key+'_dropDown');
 								if(referenceModulesList.length > 0){
-									referenceModulesList.val( value[1] ).trigger("liszt:updated");
+									referenceModulesList.val( value[1] ).trigger("chosen:updated");
 								}
 							}
 						}
@@ -398,6 +398,8 @@ jQuery.Class("Vtiger_Edit_Js",{
 				var searchValue = request.term;
 				var params = thisInstance.getReferenceSearchParams(inputElement);
 				params.search_value = searchValue;
+				params.parent_id = app.getRecordId();
+				params.parent_module = app.getModuleName();
 				thisInstance.searchModuleNames(params).then(function(data){
 					var reponseDataList = new Array();
 					var serverDataFormat = data.result
@@ -440,8 +442,7 @@ jQuery.Class("Vtiger_Edit_Js",{
 			},
 			'open' : function(event,ui) {
 				//To Make the menu come up in the case of quick create
-				jQuery(this).data('autocomplete').menu.element.css('z-index','100001');
-
+				jQuery(this).data('ui-autocomplete').menu.element.css('z-index','100001');
 			}
 		});
 	},
@@ -506,7 +507,6 @@ jQuery.Class("Vtiger_Edit_Js",{
 	},
 	
 	referenceCreateHandler : function(container) {
-		console.log('referenceCreateHandler');
 		var thisInstance = this;
 		var postQuickCreateSave  = function(data) {
 			var params = {};
@@ -691,11 +691,11 @@ jQuery.Class("Vtiger_Edit_Js",{
 				var block = element.closest('table');
 				var from = element.data('label');
 				var to = block.data('label');
-				var recordRelativeAccountId = jQuery('[name="'+lead_id+'"]').val();
+				var recordRelativeAccountId = jQuery('[name="'+vendor_id+'"]').val();
 				if(recordRelativeAccountId == "" || recordRelativeAccountId == "0"){
 					Vtiger_Helper_Js.showPnotify(app.vtranslate('JS_PLEASE_SELECT_AN_VENDOR_TO_COPY_ADDRESS'));
 				} else {
-					var recordRelativeAccountName = jQuery('#'+lead_id+'_display').val();
+					var recordRelativeAccountName = jQuery('#'+vendor_id+'_display').val();
 					var data = {
 						'record' : recordRelativeAccountId,
 						'selectedName' : recordRelativeAccountName,
@@ -876,7 +876,6 @@ jQuery.Class("Vtiger_Edit_Js",{
 		this.registerRecordAccessCheckEvent(container);
 		this.registerEventForPicklistDependencySetup(container);
 		this.registerRecordPreSaveEventEvent(container);
-		this.registerEventForCopyAddress();
 		this.registerReferenceSelectionEvent(container);
 		this.registerMaskFields(container);
 	},
@@ -1076,7 +1075,7 @@ jQuery.Class("Vtiger_Edit_Js",{
 				})
 				var targetPickListSelectedValue = '';
 				var targetPickListSelectedValue = targetOptions.filter('[selected]').val();
-				targetPickList.html(targetOptions).val(targetPickListSelectedValue).trigger("liszt:updated");
+				targetPickList.html(targetOptions).val(targetPickListSelectedValue).trigger("chosen:updated");
 			})
 		});
 
@@ -1097,8 +1096,8 @@ jQuery.Class("Vtiger_Edit_Js",{
         var row = jQuery('.ckEditorSource').parents('tr');
         var td = jQuery('.ckEditorSource').parent();
         jQuery(row).find('.fieldLabel').remove();
-        jQuery(td).removeClass('span10');
-        jQuery(td).addClass('span12');
+        jQuery(td).removeClass('col-md-10');
+        jQuery(td).addClass('col-md-12');
     },
     
     	/**
@@ -1127,44 +1126,63 @@ jQuery.Class("Vtiger_Edit_Js",{
 	},
 	registerHelpInfo : function(){
 		var form = this.getForm();
-		form.find('.HelpInfoPopover').hover(
-			function () {
-				$(this).popover('show');
-			}, 
-			function () {
-				$(this).popover('hide');
-			}
-		);
+		app.showPopoverElementView(form.find('.HelpInfoPopover'));
 	},
 	registerBlockAnimationEvent : function(){
 		var detailContentsHolder = this.getForm();
-		detailContentsHolder.on('click','.blockToggle',function(e){
-			var currentTarget =  jQuery(e.currentTarget);
+		detailContentsHolder.on('click','.blockHeader',function(e){
+			if(jQuery(e.target).is('input') || jQuery(e.target).is('button') || jQuery(e.target).parents().is('button')){
+				return false;
+			}
+			var currentTarget =  jQuery(e.currentTarget).find('.blockToggle').not('.hide');
 			var blockId = currentTarget.data('id');
 			var closestBlock = currentTarget.closest('.blockContainer');
 			var bodyContents = closestBlock.find('tbody');
 			var data = currentTarget.data();
 			var module = app.getModuleName();
 			var hideHandler = function() {
-				bodyContents.hide('slow');
+				bodyContents.addClass('hide');
 				app.cacheSet(module+'.'+blockId, 0)
 			}
 			var showHandler = function() {
-				bodyContents.show();
+				bodyContents.removeClass('hide');
 				app.cacheSet(module+'.'+blockId, 1)
 			}
-
 			if(data.mode == 'show'){
 				hideHandler();
-				currentTarget.hide();
-				closestBlock.find("[data-mode='hide']").show();
+				currentTarget.addClass('hide');
+				closestBlock.find('[data-mode="hide"]').removeClass('hide');
 			}else{
 				showHandler();
-				currentTarget.hide();
-				closestBlock.find("[data-mode='show']").show();
+				currentTarget.addClass('hide');
+				closestBlock.find("[data-mode='show']").removeClass('hide');
 			}
 		});
 
+	},
+	
+	registerBlockStatusCheckOnLoad : function(){
+		var blocks = this.getForm().find('.blockContainer');
+		var module = app.getModuleName();
+		blocks.each(function(index,block){
+			var currentBlock = jQuery(block);
+			var headerAnimationElement = currentBlock.find('.blockToggle').not('.hide');
+			var bodyContents = currentBlock.find('tbody')
+			var blockId = headerAnimationElement.data('id');
+			var cacheKey = module+'.'+blockId;
+			var value = app.cacheGet(cacheKey, null);
+			if(value != null){
+				if(value == 1){
+					headerAnimationElement.addClass('hide');
+					currentBlock.find("[data-mode='show']").removeClass('hide');
+					bodyContents.removeClass('hide');
+				} else {
+					headerAnimationElement.addClass('hide');
+					currentBlock.find("[data-mode='hide']").removeClass('hide');
+					bodyContents.addClass('hide');
+				}
+			}
+		});
 	},
 	
 	getDataFromOG : function(request, apiData){
@@ -1367,16 +1385,18 @@ jQuery.Class("Vtiger_Edit_Js",{
 		}
 		this.registerHelpInfo();
 		this.registerBlockAnimationEvent();
+		this.registerBlockStatusCheckOnLoad();
 		this.registerEventForCkEditor();
 		this.stretchCKEditor();
 		this.registerBasicEvents(this.getForm());
+		this.registerEventForCopyAddress();
 		this.registerEventForImageDelete();
 		this.registerSubmitEvent();
 		this.registerLeavePageWithoutSubmit(editViewForm);
 
 		app.registerEventForDatePickerFields('#EditView');
 		
-		var params = app.validationEngineOptions;
+		var params = app.validationEngineOptionsForRecord;
 		params.onValidationComplete = function(element,valid){
 			if(valid){
 				var ckEditorSource = editViewForm.find('.ckEditorSource');
@@ -1415,3 +1435,4 @@ jQuery.Class("Vtiger_Edit_Js",{
 		return [];
 	}
 });
+

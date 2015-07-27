@@ -80,23 +80,7 @@ class Accounts extends CRMEntity {
 
 	// For Alphabetical search
 	var $def_basicsearch_col = 'accountname';
-
-	var $related_module_table_index = array(
-		'Contacts' => array('table_name' => 'vtiger_contactdetails', 'table_index' => 'contactid', 'rel_index' => 'accountid'),
-		'Potentials' => array('table_name' => 'vtiger_potential', 'table_index' => 'potentialid', 'rel_index' => 'related_to'),
-		'Quotes' => array('table_name' => 'vtiger_quotes', 'table_index' => 'quoteid', 'rel_index' => 'accountid'),
-		'SalesOrder' => array('table_name' => 'vtiger_salesorder', 'table_index' => 'salesorderid', 'rel_index' => 'accountid'),
-		'Invoice' => array('table_name' => 'vtiger_invoice', 'table_index' => 'invoiceid', 'rel_index' => 'accountid'),
-		'HelpDesk' => array('table_name' => 'vtiger_troubletickets', 'table_index' => 'ticketid', 'rel_index' => 'parent_id'),
-		'Products' => array('table_name' => 'vtiger_seproductsrel', 'table_index' => 'productid', 'rel_index' => 'crmid'),
-		'Documents' => array('table_name' => 'vtiger_senotesrel', 'table_index' => 'notesid', 'rel_index' => 'crmid'),
-		'ServiceContracts' => array('table_name' => 'vtiger_servicecontracts', 'table_index' => 'servicecontractsid', 'rel_index' => 'sc_related_to'),
-		'Services' => array('table_name' => 'vtiger_crmentityrel', 'table_index' => 'crmid', 'rel_index' => 'crmid'),
-		'Campaigns' => array('table_name' => 'vtiger_campaignaccountrel', 'table_index' => 'campaignid', 'rel_index' => 'accountid'),
-		'Assets' => array('table_name' => 'vtiger_assets', 'table_index' => 'assetsid', 'rel_index' => 'account'),
-		'Project' => array('table_name' => 'vtiger_project', 'table_index' => 'projectid', 'rel_index' => 'linktoaccountscontacts'),
-	);
-
+	
 	function Accounts() {
 		$this->log =LoggerManager::getLogger('account');
 		$this->db = PearDatabase::getInstance();
@@ -466,13 +450,7 @@ class Accounts extends CRMEntity {
 				LEFT JOIN vtiger_invoiceaddress ON vtiger_invoiceaddress.invoiceaddressid = vtiger_invoice.invoiceid
 				LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid
 				LEFT JOIN vtiger_users ON vtiger_crmentity.smownerid = vtiger_users.id
-				WHERE vtiger_crmentity.deleted = 0 AND (vtiger_invoice.accountid = $id";
-
-		if(!empty ($entityIds)){
-			$query .= " OR vtiger_invoice.contactid IN (".$entityIds."))";
-		} else {
-			$query .= ")";
-		}
+				WHERE vtiger_crmentity.deleted = 0 AND vtiger_invoice.accountid = $id";
 
         $return_value = GetRelatedList($this_module, $related_module, $other, $query, $button, $returnset);
 
@@ -579,26 +557,18 @@ class Accounts extends CRMEntity {
 			}
 		}
 
-		$entityIds = $this->getRelatedContactsIds($id);
-		$entityIds = implode(',', $entityIds);
-
 		$userNameSql = getSqlForNameInDisplayFormat(array('first_name'=>'vtiger_users.first_name', 'last_name' => 'vtiger_users.last_name'), 'Users');
 
 		$query = "SELECT case when (vtiger_users.user_name not like '') then $userNameSql else vtiger_groups.groupname end as user_name, vtiger_users.id,
 				vtiger_troubletickets.title, vtiger_troubletickets.ticketid AS crmid, vtiger_troubletickets.status, vtiger_troubletickets.priority,
-				vtiger_troubletickets.parent_id, vtiger_troubletickets.contact_id, vtiger_troubletickets.ticket_no, vtiger_crmentity.smownerid, vtiger_crmentity.modifiedtime
+				vtiger_troubletickets.parent_id, vtiger_troubletickets.ticket_no, vtiger_crmentity.smownerid, vtiger_crmentity.modifiedtime
 				FROM vtiger_troubletickets
 				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_troubletickets.ticketid
 				LEFT JOIN vtiger_ticketcf ON vtiger_troubletickets.ticketid = vtiger_ticketcf.ticketid
 				LEFT JOIN vtiger_users ON vtiger_users.id=vtiger_crmentity.smownerid
 				LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid
-				WHERE  vtiger_crmentity.deleted = 0 and (vtiger_troubletickets.parent_id = $id";
+				WHERE  vtiger_crmentity.deleted = 0 and vtiger_troubletickets.parent_id = $id";
 
-		if(!empty ($entityIds)){
-			$query .= " OR vtiger_troubletickets.contact_id IN (".$entityIds."))";
-		} else {
-			$query .= ")";
-		}
 		$return_value = GetRelatedList($this_module, $related_module, $other, $query, $button, $returnset);
 
 		if($return_value == null) $return_value = Array();
@@ -773,7 +743,7 @@ class Accounts extends CRMEntity {
 					"vtiger_salesorder"=>"accountid","vtiger_invoice"=>"accountid",
 					"vtiger_senotesrel"=>"crmid","vtiger_seattachmentsrel"=>"crmid","vtiger_troubletickets"=>"parent_id",
 					"vtiger_seproductsrel"=>"crmid","vtiger_servicecontracts"=>"sc_related_to","vtiger_campaignaccountrel"=>"accountid",
-					"vtiger_assets"=>"account","vtiger_project"=>"linktoaccountscontacts","vtiger_payments"=>"relatedorganization");
+					"vtiger_assets"=>"parent_id","vtiger_project"=>"linktoaccountscontacts","vtiger_payments"=>"relatedorganization");
 
 		foreach($transferEntityIds as $transferId) {
 			foreach($rel_table_arr as $rel_module=>$rel_table) {
@@ -1457,3 +1427,4 @@ class Accounts extends CRMEntity {
 		return $entityIds;
 	}
 }
+

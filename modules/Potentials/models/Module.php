@@ -11,34 +11,6 @@
 class Potentials_Module_Model extends Vtiger_Module_Model {
 
 	/**
-	 * Function to get the Quick Links for the module
-	 * @param <Array> $linkParams
-	 * @return <Array> List of Vtiger_Link_Model instances
-	 */
-	public function getSideBarLinks($linkParams) {
-		$parentQuickLinks = parent::getSideBarLinks($linkParams);
-		$quickLink = array();
-		
-		if(Vtiger_DashBoard_Model::verifyDashboard($this->getName())){
-			$quickLink = array(
-					'linktype' => 'SIDEBARLINK',
-					'linklabel' => 'LBL_DASHBOARD',
-					'linkurl' => $this->getDashBoardUrl(),
-					'linkicon' => '',
-			);
-		}
-		//Check profile permissions for Dashboards
-		$moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
-		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		$permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
-		if($permission && $quickLink) {
-			$parentQuickLinks['SIDEBARLINK'][] = Vtiger_Link_Model::getInstanceFromValues($quickLink);
-		}
-		
-		return $parentQuickLinks;
-	}
-
-	/**
 	 * Function returns number of Open Potentials in each of the sales stage
 	 * @param <Integer> $owner - userid
 	 * @return <Array>
@@ -291,7 +263,7 @@ class Potentials_Module_Model extends Vtiger_Module_Model {
 			$instance = CRMEntity::getInstance($relatedModuleName);
 			$securityParameter = $instance->getUserAccessConditionsQuerySR($relatedModuleName);
 			if ($securityParameter != '')
-				$sql .= $securityParameter;
+				$query .= $securityParameter;
 		} elseif ($functionName === 'get_mails' && $relatedModule->getName() == 'OSSMailView') {
 			$query = OSSMailView_Record_Model::getMailsQuery($recordId, $relatedModule->getName());
 		} else {

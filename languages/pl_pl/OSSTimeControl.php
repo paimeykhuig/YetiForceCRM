@@ -109,9 +109,13 @@ $languageStrings = [
 	'LBL_AVERAGEWORKTIME_INFO' => 'Średni czas pracy',
 	'LBL_AVERAGEBREAKTIME_INFO' => 'Średni czas przerw',
 	'LBL_WORKDAYS_INFO' => 'Dni pracownicze',
+	'LBL_SUM' => 'Suma',
+	'LBL_SUM_OF_WORKING_TIME_DIVIDED_INTO_USERS' => 'Wykres czasu pracy z podziałem na uzytkowników',
 ];
 $jsLanguageStrings = [
     'MSG_ERROR_NUMBER' => 'Dopuszczalne znaki: [0-9]',
 	'JS_DATE_SHOULD_BE_GREATER_THAN' => 'Data zakończenia nie może być mniejsza od daty początkowej',
 	'JS_HOURS_SHOULD_BE_SMALLER_THAN' => 'Czas pracy nie może przekraczać 24 godzin',
+	'JS_START_DATE' => 'Czas rozpoczęcia',
+	'JS_END_DATE' => 'Czas zakończenia',
 ];

@@ -73,8 +73,8 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 	 * @param Vtiger_Request $request
 	 * @return <Array> - List of Vtiger_JsScript_Model instances
 	 */
-	function getHeaderScripts(Vtiger_Request $request) {
-		$headerScriptInstances = parent::getHeaderScripts($request);
+	function getFooterScripts(Vtiger_Request $request) {
+		$headerScriptInstances = parent::getFooterScripts($request);
 		$moduleName = $request->getModule();
 
 		$jsFileNames = array(
@@ -108,21 +108,8 @@ abstract class Vtiger_Basic_View extends Vtiger_Footer_View {
 		);
 
 		$jsScriptInstances = $this->checkAndConvertJsScripts($jsFileNames);
-		$headerScriptInstances = array_merge($jsScriptInstances,$headerScriptInstances);
+		$headerScriptInstances = array_merge($headerScriptInstances,$jsScriptInstances);
 		return $headerScriptInstances;
-	}
-
-	public function getHeaderCss(Vtiger_Request $request) {
-		$headerCssInstances = parent::getHeaderCss($request);
-
-		$cssFileNames = array(
-			'~/libraries/jquery/timepicker/jquery.timepicker.css',
-			'~/layouts/vlayout/modules/OSSMail/resources/OSSMailBoxInfo.css',
-			'~/layouts/vlayout/skins/glabal_style.css',
-		);
-		$cssInstances = $this->checkAndConvertCssStyles($cssFileNames);
-		$headerCssInstances = array_merge($headerCssInstances, $cssInstances);
-		return $headerCssInstances;
 	}
 
 	function getGuiderModels(Vtiger_Request $request) {

@@ -9,6 +9,7 @@
  * Contributor(s): Valmir C. Trindade - Brazilian Portuguese Translation - valmir@ttcasolucoes.com.br
  ************************************************************************************/
 $languageStrings = [
+	'SINGLE_Users' => 'User',
 	'dd-mm-yyyy' => 'dd-mm-yyyy',
 	'mm-dd-yyyy' => 'mm-dd-yyyy',
 	'yyyy-mm-dd' => 'yyyy-mm-dd',
@@ -316,7 +317,7 @@ $languageStrings = [
 	'LBL_GENERATED_COLOR' => 'Cor gerada',
 	'LBL_SAVE_COLOR' => 'Cor salva',
 	'LBL_EMAIL' => 'e-mail',
-	'LBL_SPACE' => 'Space',
+	'LBL_SPACE' => 'Espaço',
 ];
 
 $jsLanguageStrings = [

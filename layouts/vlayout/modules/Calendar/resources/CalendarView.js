@@ -38,25 +38,18 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	registerWidget: function () {
 		var thisInstance = this.getInstanceByView();
 		var widgetContainer = jQuery('#rightPanel .quickWidget');
-		widgetContainer.find('.switchsParent').on('switchChange.bootstrapSwitch', function(event, state) {
+		widgetContainer.find('.switchsParent').on('switchChange.bootstrapSwitch', function (event, state) {
 			element = jQuery(this).closest('.quickWidget');
-			if(state){
-				element.find('.widgetContainer input.switchBtn').bootstrapSwitch('state', false);
-			}else{
+			if (state) {
 				element.find('.widgetContainer input.switchBtn').bootstrapSwitch('state', true);
+			} else {
+				element.find('.widgetContainer input.switchBtn').bootstrapSwitch('state', false);
 			}
 		});
-		widgetContainer.find(".refreshCalendar").on('click',function () {
+		widgetContainer.find(".refreshCalendar").on('click', function () {
 			thisInstance.loadCalendarData();
 			return false;
 		});
-	/*	widgetContainer.find(".quickWidgetHeader").hover(
-			function () {
-				$(this).css('overflow','visible');
-			}, function () {
-				$(this).css('overflow','hidden');
-			}
-		);*/
 	},
 	registerColorField : function(field, fieldClass){
 		var params = {};
@@ -135,11 +128,11 @@ jQuery.Class("Calendar_CalendarView_Js", {
 					title: event.title,
 					placement: 'top',
 					html: true,
-					content: '<i class="icon-time"></i> '+app.vtranslate('JS_START_DATE') + ': ' + event.start.format('YYYY-MM-DD HH:mm') + '<br /><i class="icon-time"></i> ' + app.vtranslate('JS_END_DATE') + ': ' + event.end.format('YYYY-MM-DD HH:mm') + '<br />' +
+					content: '<i class="glyphicon glyphicon-time"></i> '+app.vtranslate('JS_START_DATE') + ': ' + event.start.format('YYYY-MM-DD HH:mm') + '<br /><i class="glyphicon glyphicon-time"></i> ' + app.vtranslate('JS_END_DATE') + ': ' + event.end.format('YYYY-MM-DD HH:mm') + '<br />' +
 							(event.lok != '' ? '<i class="icon-globe"></i> '+app.vtranslate('JS_LOCATION') + ': ' + event.lok + '<br />' : '') + (event.pri ? '<i class="icon-warning-sign"></i> '+app.vtranslate('JS_PRIORITY') + ': ' + app.vtranslate('JS_' + event.pri) + '<br />' : '')+
 							'<i class="icon-question-sign"></i> '+app.vtranslate('JS_STATUS') + ': ' + app.vtranslate('JS_' + event.sta) + '<br />' + (event.accname ? '<i class="calIcon modIcon_Accounts"></i> '+app.vtranslate('JS_ACCOUNTS') + ': ' + event.accname + '<br />' : '') +
 							(event.linkl ? '<i class="calIcon modIcon_'+event.linkm+'"></i> '+app.vtranslate('JS_RELATION') + ': ' + event.linkl + '<br />' : '') + (event.procl ? '<i class="calIcon modIcon_'+event.procm+'"></i> '+app.vtranslate('JS_PROCESS') + ': ' + event.procl + '<br />' : '') + 
-							(event.state ? '<i class="icon-star-empty"></i> '+app.vtranslate('JS_STATE') + ': ' + app.vtranslate(event.state) + '<br />' : '') + '<i class="icon-eye-open"></i> '+app.vtranslate('JS_VISIBILITY') + ': ' + app.vtranslate('JS_' + event.vis) + '<br />' 
+							(event.state ? '<i class="icon-star-empty"></i> '+app.vtranslate('JS_STATE') + ': ' + app.vtranslate(event.state) + '<br />' : '') + '<i class="glyphicon glyphicon-eye-open"></i> '+app.vtranslate('JS_VISIBILITY') + ': ' + app.vtranslate('JS_' + event.vis) + '<br />' 
 				});
 			},
 			monthNames: [app.vtranslate('JS_JANUARY'), app.vtranslate('JS_FEBRUARY'), app.vtranslate('JS_MARCH'),
@@ -261,8 +254,18 @@ jQuery.Class("Calendar_CalendarView_Js", {
 		end = end.format();
 		var view = thisInstance.getCalendarView().fullCalendar('getView');
 		if (view.name == "month") {
-			start = start + 'T' + $('#start_hour').val() + ':00';
-			end = end + 'T' + $('#end_hour').val() + ':00';
+			var start_hour = $('#start_hour').val();
+			var end_hour = $('#end_hour').val();
+
+			if (start_hour == '') {
+				start_hour = '00';
+			}
+			if (end_hour == '') {
+				end_hour = '00';
+			}
+
+			start = start + 'T' + start_hour + ':00';
+			end = end + 'T' + end_hour + ':00';
 		}
 		this.getCalendarCreateView().then(function (data) {
 			if (data.length <= 0) {
@@ -276,6 +279,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 			} else {
 				defaultTimeFormat = 'hh:mm tt';
 			}
+			
 			var startDateInstance = Date.parse(start);
 			var startDateString = app.getDateInVtigerFormat(dateFormat, startDateInstance);
 			var startTimeString = startDateInstance.toString(defaultTimeFormat);
@@ -297,7 +301,22 @@ jQuery.Class("Calendar_CalendarView_Js", {
 		});
 	},
 	addCalendarEvent: function (calendarDetails) {
+		var state = $('.fc-toolbar input.switchBtn').bootstrapSwitch('state');
 		var eventObject = {};
+		if (calendarDetails.activitytype.value == 'Task') {
+			eventObject.status = calendarDetails.taskstatus.value;
+		} else {
+			eventObject.status = calendarDetails.eventstatus.value;
+		}
+
+		var taskstatus = $.inArray( eventObject.status, ['Held', 'Completed','Deferred'] );
+		if(state == true && taskstatus >= 0){
+			return false;
+		}
+		if(state != true && taskstatus == -1){
+			return false;
+		}
+		
 		eventObject.id = calendarDetails._recordId;
 		eventObject.title = calendarDetails.subject.display_value;
 		var startDate = Date.parse(calendarDetails.date_start.display_value + 'T' + calendarDetails.time_start.display_value);
@@ -307,11 +326,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 		eventObject.end = endDate.toString();
 		eventObject.url = 'index.php?module=Calendar&view=Detail&record=' + calendarDetails._recordId;
 		eventObject.activitytype = calendarDetails.activitytype.value;
-		if (calendarDetails.activitytype.value == 'Task') {
-			eventObject.status = calendarDetails.taskstatus.value;
-		} else {
-			eventObject.status = calendarDetails.eventstatus.value;
-		}
+
 		if('on' == calendarDetails.allday.value)
 			eventObject.allDay = true;
 		else
@@ -379,7 +394,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	createAddButton: function () {
 		var thisInstance = this;
 		var calendarview = this.getCalendarView();
-		jQuery('<span class="pull-left"><button class="btn addButton">' + app.vtranslate('JS_ADD_EVENT_TASK') + '</button></span>')
+		jQuery('<span class=""><button class="btn btn-default fc-button fc-state-default addButton">' + app.vtranslate('JS_ADD_EVENT_TASK') + '</button></span>')
 			.prependTo(calendarview.find('.fc-toolbar .fc-right')).on('click', 'button', function (e) {
 			thisInstance.getCalendarCreateView().then(function (data) {
 				var headerInstance = new Vtiger_Header_Js();
@@ -392,7 +407,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	createAddSwitch: function () {
 		var thisInstance = this;
 		var calendarview = this.getCalendarView();
-		var switchBtn =  jQuery('<span class="pull-left"><input class="switchBtn" type="checkbox" title="' + app.vtranslate('JS_CHANGE_ACTIVITY_TIME') + '" checked data-size="small" data-label-width="5" data-handle-width="90" data-on-text="' + app.vtranslate('JS_TO_REALIZE') + '" data-off-text="' + app.vtranslate('JS_HISTORY') + '"></span>')
+		var switchBtn =  jQuery('<span class=""><input class="switchBtn" type="checkbox" title="' + app.vtranslate('JS_CHANGE_ACTIVITY_TIME') + '" checked data-size="small" data-handle-width="90" data-label-width="5" data-on-text="' + app.vtranslate('JS_TO_REALIZE') + '" data-off-text="' + app.vtranslate('JS_HISTORY') + '"></span>')
 			.prependTo(calendarview.find('.fc-toolbar .fc-right'))
 			.on('switchChange.bootstrapSwitch', function (e, state) {
 			if(state)

@@ -98,6 +98,14 @@ jQuery.Class("OSSTimeControl_Calendar_Js",{
 			eventResize: function (event, delta, revertFunc) {
 				thisInstance.updateEvent(event, delta, revertFunc);
 			},
+			eventRender: function (event, element) {
+				element.find('.fc-info').popover({
+					title: event.title,
+					placement: 'top',
+					html: true,
+					content: '<i class="icon-time"></i> '+app.vtranslate('JS_START_DATE') + ': ' + event.start.format('YYYY-MM-DD HH:mm') + '<br /><i class="icon-time"></i> ' + app.vtranslate('JS_END_DATE') + ': ' + event.end.format('YYYY-MM-DD HH:mm')
+				});
+			},
 			monthNames: [app.vtranslate('JS_JANUARY'), app.vtranslate('JS_FEBRUARY'), app.vtranslate('JS_MARCH'),
 				app.vtranslate('JS_APRIL'), app.vtranslate('JS_MAY'), app.vtranslate('JS_JUNE'), app.vtranslate('JS_JULY'),
 				app.vtranslate('JS_AUGUST'), app.vtranslate('JS_SEPTEMBER'), app.vtranslate('JS_OCTOBER'),
@@ -121,7 +129,7 @@ jQuery.Class("OSSTimeControl_Calendar_Js",{
 			allDayText: app.vtranslate('JS_ALL_DAY'),
 			eventLimitText: app.vtranslate('JS_MORE')
 		});
-    },
+	},
 	loadCalendarData : function(allEvents) {
 		var progressInstance = jQuery.progressIndicator();
 		var thisInstance = this;
@@ -136,7 +144,10 @@ jQuery.Class("OSSTimeControl_Calendar_Js",{
 		}
 		if (jQuery('#timecontrolTypes').length > 0) {
 			var types = jQuery('#timecontrolTypes').val();	
+		}else{
+			allEvents = true;
 		}
+
 		if(allEvents == true || types != null){
 			var params = {
 				module: 'OSSTimeControl',
@@ -220,6 +231,7 @@ jQuery.Class("OSSTimeControl_Calendar_Js",{
 				}
 			}else{
 				endDateInstance.setMinutes(endDateInstance.getMinutes() + 30);
+
 				var endTimeString = endDateInstance.toString(defaultTimeFormat);
 			}
 
@@ -230,12 +242,16 @@ jQuery.Class("OSSTimeControl_Calendar_Js",{
 
 			var headerInstance = new Vtiger_Header_Js();
 			headerInstance.handleQuickCreateData(data, {callbackFunction: function (data) {
-				thisInstance.addCalendarEvent(data.result);
+				thisInstance.addCalendarEvent(data.result, dateFormat);
 			}});
 			jQuery('.modal-body').css({'max-height': '500px', 'overflow-y': 'auto'});
 		});
 	},
-	addCalendarEvent : function(calendarDetails) {
+	addCalendarEvent : function(calendarDetails, dateFormat) {
+		// convert dates to db format
+		calendarDetails.date_start.display_value = app.getDateInDBInsertFormat(dateFormat, calendarDetails.date_start.display_value);
+		calendarDetails.due_date.display_value = app.getDateInDBInsertFormat(dateFormat, calendarDetails.due_date.display_value);
+
 		var eventObject = {};
 		eventObject.id = calendarDetails._recordId;
 		eventObject.title = calendarDetails.name.display_value;

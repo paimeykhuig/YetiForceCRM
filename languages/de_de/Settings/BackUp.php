@@ -1,27 +1,14 @@
 <?php
-/*+***********************************************************************************************************************************
- * The contents of this file are subject to the YetiForce Public License Version 1.1 (the "License"); you may not use this file except
- * in compliance with the License.
- * Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
- * See the License for the specific language governing rights and limitations under the License.
- * The Original Code is YetiForce.
- * The Initial Developer of the Original Code is YetiForce. Portions created by YetiForce are Copyright (C) www.yetiforce.com. 
- * All Rights Reserved.
- *************************************************************************************************************************************/
-
+/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
 $languageStrings = [
 	'LBL_BACKUP_DESCRIPTION' => 'Verwaltung von Sicherungen',
 	'LBL_SAVE_BACKUP' => 'Sicherung speichern',
-	'LBL_GENERATE_BACKUP' => 'Sicherung starten',
+	'LBL_SCHEDULE_BACKUP' => 'Sicherung starten',
 	'LBL_LOADING' => 'Sicherung wird geladen, bitte warten...',
-	'LBL_BACKUP_ENDED' => 'Sicherung beendet',
-	'LBL_BACKUP_PREPARE' => 'Sicherung wird vorbereitet' ,
 	'LBL_FTP_SETTINGS' => 'FTP Einstellungen',
 	'LBL_BACKUP_CREATING' => 'Sicherungsverwaltung',
-	'LBL_FILE_BACKUP_LOADING' => 'Dateien werden gesichert',
-	'LBL_DB_BACKUP_LOADING' => 'Datenbank wird gesichert',
 	'LBL_RESUME_BACKUP' => 'Sicherung wiederaufnehmen',
-	'LBL_CREATED_AT' => 'Erstellt um',
+	'LBL_START_TIME' => 'Erstellt um',
 	'LBL_FILE_NAME' => 'Dateiname',
 	'LBL_ACTION' => 'Aktion',
 	'LBL_FTP_SAVE_CONFIG' => 'Konfiguration sichern',
@@ -42,8 +29,33 @@ $languageStrings = [
 	'LBL_BACKUPFOLDER_INFO' => 'Wollen Sie eine Datensicherung des Sicherungsverzeichnissen durchführen',
 	'LBL_VALUES' => 'Values',
 	'LBL_DETAIL' => 'Detail',
+	'LBL_BACKUP_COPY_TYPE' => 'Backup save type',
+	'LBL_BACKUP_SINGLE' => 'Partial',
+	'LBL_BACKUP_OVERALL' => 'Full',
+	'LBL_ALERT_NO_ZIP_EXTENSION_TITLE' => 'No active ZIP library found',
+	'LBL_ALERT_NO_ZIP_EXTENSION_DESC' => 'Complete backup is impossible, backup will only create a database copy and it will not be compressed ',
+	'LBL_ALERT_CRON_NOT_ACTIVE_TITLE' => 'Cron - backup of data is not active',
+	'LBL_ALERT_CRON_NOT_ACTIVE_DESC' => 'Making a backup copy will not be possible, to enable it go to <a href="index.php?module=CronTasks&parent=Settings&view=List" target="_blank">Harmonogram</a> and activate Backup',
+	'LBL_ALERT_OUTGOING_MAIL_NOT_CONFIGURED_TITLE' => 'Outgoing mail server is not configured',
+	'LBL_ALERT_OUTGOING_MAIL_NOT_CONFIGUREDE_DESC' => 'All email notifications that should be sent after backup will not be sent',
+	'LBL_END_TIME' => 'End time',
+	'LBL_BACKUP_TIME' => 'Backup duration time',
+	'LBL_LOGS' => 'Logs',
+	'Completed' => 'Correct',
+	'In progress' => 'In progress',
+	'LBL_SET_SCHEDULE_BACKUP' => 'Backup has been scheduled',
+	'LBL_ON' => 'ON',
+	'LBL_OFF' => 'OFF',
+	'LBL_STAGE_1' => 'Creating empty SQL file',
+	'LBL_STAGE_2' => 'Generating backup structure',
+	'LBL_STAGE_3' => 'Creating database backup',
+	'LBL_STAGE_4' => 'Generating files and folders structure',
+	'LBL_STAGE_5' => 'Creating file and folders backups',
+	'LBL_STAGE_6' => 'Merging backup files',
+	'LBL_STAGE_7' => 'Clearing provisional data',
+	'LBL_STAGE_8' => 'Sending data to FTP',
+	'LBL_STAGE_9' => 'Completing backup',
 ];
-
 $jsLanguageStrings = [
 	'JS_MANDATORY_FIELDS_EMPTY' => 'Pflichtfelder dürfen nicht leer sein',
 	'JS_PORT_ONLY_NUMBERS' => 'In Feld Port können nur Ziffern hinterlegt werden',

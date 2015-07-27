@@ -1,51 +1,50 @@
-<span id="headerLinksBig" class="pull-right headerLinksContainer">
+{strip}
 	{if $PAINTEDICON eq 1}
-		<span class="dropdown span settingIcons">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				<img src="{vimage_path('theme_brush.png')}" alt="theme roller" title="Theme Roller" />
-			</a>
-			<ul class="dropdown-menu themeMenuContainer">
-				<div id="themeContainer">
-					{assign var=COUNTER value=0}
-					{assign var=THEMES_LIST value=Vtiger_Theme::getAllSkins()}
-					<div class="row-fluid themeMenu">
-						{foreach key=SKIN_NAME item=SKIN_COLOR from=$THEMES_LIST}
-						{if $COUNTER eq 3}
+		<ul class="settingIcons nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<img src="{vimage_path('theme_brush.png')}" alt="theme roller" title="Theme Roller" />
+				</a>
+				<ul class="dropdown-menu themeMenuContainer">
+					<div id="themeContainer">
+						{assign var=COUNTER value=0}
+						{assign var=THEMES_LIST value=Vtiger_Theme::getAllSkins()}
+						<div class="row themeMenu">
+							{foreach key=SKIN_NAME item=SKIN_COLOR from=$THEMES_LIST}
+							{if $COUNTER eq 3}
+						</div>
+						<div class="row themeMenu">
+							{assign var=COUNTER value=1}
+							{else}
+							{assign var=COUNTER value=$COUNTER+1}
+							{/if}
+							<div class="col-md-4 themeElement {if $USER_MODEL->get('theme') eq $SKIN_NAME}themeSelected{/if}" data-skin-name="{$SKIN_NAME}" title="{ucfirst($SKIN_NAME)}" style="background-color:{$SKIN_COLOR};"></div>
+							{/foreach}
+						</div>
 					</div>
-					<div class="row-fluid themeMenu">
-						{assign var=COUNTER value=1}
-						{else}
-						{assign var=COUNTER value=$COUNTER+1}
-						{/if}
-						<div class="span4 themeElement {if $USER_MODEL->get('theme') eq $SKIN_NAME}themeSelected{/if}" data-skin-name="{$SKIN_NAME}" title="{ucfirst($SKIN_NAME)}" style="background-color:{$SKIN_COLOR};"></div>
-						{/foreach}
-					</div>
-				</div>
-				<div id="progressDiv"></div>
-			</ul>
-		</span>
+					<div id="progressDiv"></div>
+				</ul>
+			</li>
+		</ul>
 	{/if}
 	{foreach key=index item=obj from=$HEADER_LINKS}
 		{assign var="src" value=$obj->getIconPath()}
 		{assign var="icon" value=$obj->getIcon()}
 		{assign var="title" value=$obj->getLabel()}
 		{assign var="childLinks" value=$obj->getChildLinks()}
-		<span class="dropdown span{if !empty($src)} settingIcons {/if}">
+		<ul class="{if !empty($src)} settingIcons {/if} nav navbar-nav navbar-right">
+			<li class="dropdown">
 			{if !empty($src)}
 				<a id="menubar_item_right_{$title}" class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="{$src}" alt="{vtranslate($title,$MODULE)}" title="{vtranslate($title,$MODULE)}" /></a>
-				{else}
-					{assign var=title value=$USER_MODEL->get('first_name')}
-					{if empty($title)}
-				{assign var=title value=$USER_MODEL->get('last_name')}
-			{/if}
-				<span class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<a id="menubar_item_right_{$title}"  class="userName textOverflowEllipsis" title="{$title}"><strong>{$title}</strong>&nbsp;<span class="caret"></span> </a> </span>
+			{else}
+				{assign var=title value=$USER_MODEL->get('first_name')|cat:' '|cat:$USER_MODEL->get('last_name')}
+				<a id="menubar_item_right_{$title}"  class="userName dropdown-toggle" data-toggle="dropdown" href="#" title="{$title}"><strong>{$title}</strong><span class="caret"></span> </a>
 			{/if}
 			{if !empty($childLinks)}
 				<ul class="dropdown-menu pull-right">
 					{foreach key=index item=obj from=$childLinks}
 						{if $obj->getLabel() eq NULL}
-							<li class="divider">&nbsp;</li>
+							<li class="divider"></li>
 						{else}
 							{assign var="id" value=$obj->getId()}
 							{assign var="href" value=$obj->getUrl()}
@@ -62,39 +61,56 @@
 					{/foreach}
 				</ul>
 			{/if}
-		</span>
+			</li>
+		</ul>
 	{/foreach}
-</span>
+	<ul class="headerLinksContainer nav navbar-nav navbar-right">
+		<li>
+			<div class="remindersNotice">
+				<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+				<span class="badge hide">0</span>
+			</div>
+		</li>
+	</ul>
 {if $CHAT_ACTIVE eq true}
-	<span class="pull-right headerLinksContainer headerLinksAJAXChat">
-		<span class="span">
+	<ul class="headerLinksContainer headerLinksAJAXChat nav navbar-nav navbar-right">
+		<li>
 			<a class="ChatIcon" href="#"><img src="layouts/vlayout/skins/images/chat.png" alt="chat_icon"/></a>
-		</span>
-	</span>
+		</li>
+	</ul>
 {/if}
 {assign var=CONFIG value=Settings_Mail_Config_Model::getConfig('mailIcon')}
 {assign var=AUTOLOGINUSERS value=OSSMail_Autologin_Model::getAutologinUsers()}
 {if $CONFIG['showMailIcon']=='true' && count($AUTOLOGINUSERS) > 0}
-	<span class="pull-right headerLinksContainer headerLinksMails" id="OSSMailBoxInfo" {if $CONFIG['showNumberUnreadEmails']=='true'}data-numberunreademails="true" data-interval="{$CONFIG['timeCheckingMail']}"{/if} style="margin-top: -5px;">
-		<div class="btn-group pull-right" style="margin-top: 0;">
-			{assign var=MAIN_MAIL value=OSSMail_Module_Model::getDefaultMailAccount($AUTOLOGINUSERS)}
-			<a class="btn btn-small mainMail" href="index.php?module=OSSMail&view=index" title="{$MAIN_MAIL.username}"><span class="mail_user_name">{$MAIN_MAIL.username}</span> <span class="noMails_{$MAIN_MAIL.rcuser_id}"></span></a>
+	{assign var=MAIN_MAIL value=OSSMail_Module_Model::getDefaultMailAccount($AUTOLOGINUSERS)}
+	<div class="nav navbar-nav navbar-right headerLinksContainer headerLinksMails" id="OSSMailBoxInfo" {if $CONFIG['showNumberUnreadEmails']=='true'}data-numberunreademails="true" data-interval="{$CONFIG['timeCheckingMail']}"{/if}>
+		<div class="btn-group">
+			<a type="button" class="btn btn-sm btn-default" title="{$MAIN_MAIL.username}" href="index.php?module=OSSMail&view=index">
+				{$ITEM.username}
+				<span class="mail_user_name">{$MAIN_MAIL.username}</span>
+				<span class="noMails_{$MAIN_MAIL.rcuser_id}"></span>
+			</a>
 			{if $CONFIG['showMailAccounts']=='true'}
-				<button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+				<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
 				</button>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" role="menu">
 					{foreach key=KEY item=ITEM from=$AUTOLOGINUSERS}
-						<li data-id="{$KEY}" {if $ITEM.active}selested{/if}><a href="#">{$ITEM.username} <span class="noMails"></span></a></li>
+						<li data-id="{$KEY}" {if $ITEM.active}selested{/if}>
+							<a href="#">
+								{$ITEM.username} <span class="noMails"></span>
+							</a>
+						</li>
 					{/foreach}
 				</ul>
 			{/if}
 		</div>
-	</span>
+	</div>
 {/if}
-<div id="headerLinksCompact">
+<div id="headerLinksCompact" class="hide">
 	<span id="dropdown-headerLinksBig" class="dropdown">
-		<a class="dropdown-toggle btn-navbar" data-toggle="dropdown" href="#">
+		<a class="dropdown-toggle navbar-btn" data-toggle="dropdown" href="#">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -106,7 +122,7 @@
 				{assign var="title" value=$obj->getLabel()}
 				{assign var="childLinks" value=$obj->getChildLinks()}
 				{if $smarty.foreach.compactIndex.index neq 0}
-					<li class="divider">&nbsp;</li>
+					<li class="divider"></li>
 				{/if}
 				{foreach key=index item=obj from=$childLinks}
 					{assign var="id" value=$obj->getId()}
@@ -125,3 +141,4 @@
 		</ul>
 	</span>
 </div>
+{/strip}

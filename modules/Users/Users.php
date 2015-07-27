@@ -86,7 +86,7 @@ class Users extends CRMEntity {
     // This is used to retrieve related fields from form posts.
     var $additional_column_fields = Array('reports_to_name');
 
-    var $sortby_fields = Array('status','email1','phone_work','is_admin','user_name','last_name');
+    var $sortby_fields = Array('status','email1','is_admin','user_name','last_name');
 
     // This is the list of vtiger_fields that are in the lists.
     var $list_fields = Array(
@@ -96,8 +96,7 @@ class Users extends CRMEntity {
             'User Name'=>Array('vtiger_users'=>'user_name'),
 			'Status'=>Array('vtiger_users'=>'status'),
 			'Email'=>Array('vtiger_users'=>'email1'),
-            'Admin'=>Array('vtiger_users'=>'is_admin'),
-            'Phone'=>Array('vtiger_users'=>'phone_work')
+            'Admin'=>Array('vtiger_users'=>'is_admin')
     );
     var $list_fields_name = Array(
             'First Name'=>'first_name',
@@ -106,8 +105,7 @@ class Users extends CRMEntity {
             'User Name'=>'user_name',
 			'Status'=>'status',
             'Email'=>'email1',
-            'Admin'=>'is_admin',
-            'Phone'=>'phone_work'
+            'Admin'=>'is_admin'
     );
 
     //Default Fields for Email Templates -- Pavani
@@ -375,8 +373,8 @@ class Users extends CRMEntity {
 		//Default authentication
 		$this->log->debug('Using integrated/SQL authentication');
 		$query = "SELECT crypt_type, user_name FROM $this->table_name WHERE user_name=?";
-		$result = $this->db->requirePsSingleResult($query, array($userName), false);
-		if (empty($result)) {
+		$result = $this->db->pquery($query,[$userName]);
+		if ($result->rowCount() != 1) {
 			$this->log->error("User not found: $userName");
 			return FALSE;
 		}
@@ -384,8 +382,8 @@ class Users extends CRMEntity {
 		$this->column_fields["user_name"] = $this->db->query_result($result, 0, 'user_name');
 		$encryptedPassword = $this->encrypt_password($userPassword, $cryptType);
 		$query = "SELECT 1 from $this->table_name where user_name=? AND user_password=? AND status = ?";
-		$result = $this->db->requirePsSingleResult($query, array($userName, $encryptedPassword, 'Active'), false);
-		if (!empty($result)) {
+		$result = $this->db->pquery($query,[$userName, $encryptedPassword, 'Active']);
+		if ($result->rowCount() == 1) {
 			$this->log->debug("Authentication OK. User: $userName");
 			return TRUE;
 		}
@@ -492,55 +490,51 @@ class Users extends CRMEntity {
      * Contributor(s): ______________________________________..
      */
     function change_password($user_password, $new_password, $dieOnError = true) {
+		$usr_name = $this->column_fields["user_name"];
+		global $mod_strings;
+		$current_user = vglobal('current_user');
+		$this->log->debug("Starting password change for $usr_name");
 
-        $usr_name = $this->column_fields["user_name"];
-        global $mod_strings;
-        $current_user  = vglobal('current_user');
-        $this->log->debug("Starting password change for $usr_name");
-
-        if( !isset($new_password) || $new_password == "") {
-            $this->error_string = $mod_strings['ERR_PASSWORD_CHANGE_FAILED_1'].$user_name.$mod_strings['ERR_PASSWORD_CHANGE_FAILED_2'];
-            return false;
-        }
-
-        if (!is_admin($current_user)) {
-              #commenting this as the the transaction is already started in vtws_changepassword
-//            $this->db->startTransaction();
-            if(!$this->verifyPassword($user_password)) {
-                $this->log->warn("Incorrect old password for $usr_name");
-                $this->error_string = $mod_strings['ERR_PASSWORD_INCORRECT_OLD'];
-                return false;
-            }
-            if($this->db->hasFailedTransaction()) {
-                if($dieOnError) {
-                    die("error verifying old transaction[".$this->db->database->ErrorNo()."] ".
-                            $this->db->database->ErrorMsg());
-                }
-                return false;
-            }
-        }
+		if (!isset($new_password) || $new_password == "") {
+			$this->error_string = $mod_strings['ERR_PASSWORD_CHANGE_FAILED_1'] . $user_name . $mod_strings['ERR_PASSWORD_CHANGE_FAILED_2'];
+			return false;
+		}
+		
+		if (!is_admin($current_user)) {
+			if (!$this->verifyPassword($user_password)) {
+				$this->log->warn("Incorrect old password for $usr_name");
+				$this->error_string = $mod_strings['ERR_PASSWORD_INCORRECT_OLD'];
+				return false;
+			}
+			if ($this->db->hasFailedTransaction()) {
+				if ($dieOnError) {
+					die("error verifying old transaction[" . $this->db->database->ErrorNo() . "] " .
+							$this->db->database->ErrorMsg());
+				}
+				return false;
+			}
+		}
 
 
-        $user_hash = $this->get_user_hash($new_password);
+		$user_hash = $this->get_user_hash($new_password);
 
-        //set new password
-        $crypt_type = $this->DEFAULT_PASSWORD_CRYPT_TYPE;
-        $encrypted_new_password = $this->encrypt_password($new_password, $crypt_type);
+		//set new password
+		$crypt_type = $this->DEFAULT_PASSWORD_CRYPT_TYPE;
+		$encrypted_new_password = $this->encrypt_password($new_password, $crypt_type);
 
-        $query = "UPDATE $this->table_name SET user_password=?, confirm_password=?, user_hash=?, ".
-                "crypt_type=? where id=?";
-          #commenting this as the the transaction is already started in vtws_changepassword
-//        $this->db->startTransaction();
-        $this->db->pquery($query, array($encrypted_new_password, $encrypted_new_password,
-                $user_hash, $crypt_type, $this->id));
-        if($this->db->hasFailedTransaction()) {
-            if($dieOnError) {
-                die("error setting new password: [".$this->db->database->ErrorNo()."] ".
-                        $this->db->database->ErrorMsg());
-            }
-            return false;
-        }
-
+		$query = "UPDATE $this->table_name SET user_password=?, confirm_password=?, user_hash=?, " .
+				"crypt_type=? where id=?";
+		$this->db->startTransaction();
+		$this->db->pquery($query, array($encrypted_new_password, $encrypted_new_password,
+			$user_hash, $crypt_type, $this->id));
+		if ($this->db->hasFailedTransaction()) {
+			if ($dieOnError) {
+				die("error setting new password: [" . $this->db->database->ErrorNo() . "] " .
+						$this->db->database->ErrorMsg());
+			}
+			return false;
+		}
+		$this->db->completeTransaction();
 		// Fill up the post-save state of the instance.
 		if (empty($this->column_fields['user_hash'])) {
 			$this->column_fields['user_hash'] = $user_hash;
@@ -550,10 +544,10 @@ class Users extends CRMEntity {
 		$this->column_fields['confirm_password'] = $encrypted_new_password;
 
 		$this->triggerAfterSaveEventHandlers();
-        return true;
-    }
+		return true;
+	}
 
-    function de_cryption($data) {
+	function de_cryption($data) {
         require_once('include/utils/encryption.php');
         $de_crypt = new Encryption();
         if(isset($data)) {
@@ -1128,7 +1122,7 @@ class Users extends CRMEntity {
         if($save_file == 'true') {
 
             $sql1 = "insert into vtiger_crmentity (crmid,smcreatorid,smownerid,setype,description,createdtime,modifiedtime) values(?,?,?,?,?,?,?)";
-            $params1 = array($current_id, $current_user->id, $ownerid, $module." Attachment", $this->column_fields['description'], $this->db->formatString("vtiger_crmentity","createdtime",$date_var), $this->db->formatDate($date_var, true));
+            $params1 = array($current_id, $current_user->id, $ownerid, $module." Attachment", $this->column_fields['description'], $this->db->formatDate($date_var,true), $this->db->formatDate($date_var, true));
             $this->db->pquery($sql1, $params1);
 
             $sql2="insert into vtiger_attachments(attachmentsid, name, description, type, path) values(?,?,?,?,?)";
@@ -1160,7 +1154,24 @@ class Users extends CRMEntity {
      *
      */
     function save($module_name) {
-        $adb = PearDatabase::getInstance(); $log = vglobal('log');
+        $adb = PearDatabase::getInstance();
+		$log = vglobal('log');
+		
+		//Event triggering code
+		require_once("include/events/include.inc");
+
+		//In Bulk mode stop triggering events
+		if (!self::isBulkSaveMode()) {
+			$em = new VTEventsManager($adb);
+			// Initialize Event trigger cache
+			$em->initTriggerCache();
+			$entityData = VTEntityData::fromCRMEntity($this);
+
+			$em->triggerEvent("vtiger.entity.beforesave.modifiable", $entityData);
+			$em->triggerEvent("vtiger.entity.beforesave", $entityData);
+			$em->triggerEvent("vtiger.entity.beforesave.final", $entityData);
+		}
+		
         if($this->mode != 'edit') {
         	$sql = 'SELECT id FROM vtiger_users WHERE user_name = ? OR email1 = ?';
         	$result = $adb->pquery($sql, array($this->column_fields['user_name'] , $this->column_fields['email1']));
@@ -1172,9 +1183,27 @@ class Users extends CRMEntity {
         	}
         	
         }
+		// update dashboard widgets when changing users role
+		else {
+			$query = 'SELECT `roleid` FROM `vtiger_user2role` WHERE `userid` = ? LIMIT 1;';
+			$oldRoleResult = $adb->pquery($query, [$this->id]);
+			$oldRole = $adb->query_result($oldRoleResult, 0, 'roleid');
+
+			if ( $oldRole != $this->column_fields['roleid'] ) {
+				$query = 'DELETE FROM `vtiger_module_dashboard_widgets` WHERE `userid` = ?;';
+				$adb->pquery($query, [$this->id]);
+			}
+		}
         //Save entity being called with the modulename as parameter
         $this->saveentity($module_name);
 
+		if ($em) {
+			//Event triggering code
+			$em->triggerEvent("vtiger.entity.aftersave", $entityData);
+			$em->triggerEvent("vtiger.entity.aftersave.final", $entityData);
+			//Event triggering code ends
+		}
+		
         // Added for Reminder Popup support
         $query_prev_interval = $adb->pquery("SELECT reminder_interval from vtiger_users where id=?",
                 array($this->id));
@@ -1505,9 +1534,9 @@ class Users extends CRMEntity {
 
 		vtws_transferOwnership($userId, $transformToUserId);
 
-		//delete from user vtiger_table;
-		$sql = "delete from vtiger_users where id=?";
-		$adb->pquery($sql, array($userId));
+		//updating the vtiger_users table;
+		$sql = "UPDATE vtiger_users SET status=?,deleted=? where id=?";
+		$adb->pquery($sql, array('Inactive', true, $userId));
 	}
 
     /**

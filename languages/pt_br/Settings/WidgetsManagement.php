@@ -30,14 +30,15 @@ $languageStrings = [
 	'LBL_DEFAULT_FILTER' => 'Filtro padrão',
 	'LBL_FILTERS_AVAILABLE' => 'Filtros disponíveis',
 	'LBL_PLEASE_SELECT_ATLEAST_ONE_OPTION' => 'Por favor, selecione pelo menos uma opção',
-	'LBL_VIEW_CONFIGURATION' => 'Configuration view',
+	'LBL_VIEW_CONFIGURATION' => 'Exibir Configuração',
+	'LBL_WIDGET_ADDED' => 'O Widget foi adicionado com sucesso no bloco',
 ];
 $jsLanguageStrings = [
 	'JS_BLOCK_ADDED' => 'O bloco foi adicionado com sucesso',
-	'JS_CUSTOM_FIELD_ADDED' => 'O Widget foi adicionado com sucesso no bloco',
 	'JS_CUSTOM_FIELD_DELETED' => 'O Widget foi apagado com sucesso',
 	'JS_CUSTOM_BLOCK_DELETED' => 'O bloco foi apagado com sucesso',
 	'JS_FIELD_EMPTY' => 'O campo não pode estar vazio',
 	'JS_FILTERS_AVAILABLE' => 'Filtros disponíveis',
+	'JS_WIDGET_ADDED' => 'O Widget foi adicionado com sucesso no bloco',
 ];
 

@@ -18,7 +18,7 @@ if(!$no_include_config){
 	chdir ($currentPath);
 	ini_set('include_path',$include_path);
 }
-$config['db_dsnw'] = 'mysql://'.$dbconfig['db_username'].':'.$dbconfig['db_password'].'@'.$dbconfig['db_server'].$dbconfig['db_port'].'/'.$dbconfig['db_name'];
+$config['db_dsnw'] = 'mysql://'.$dbconfig['db_username'].':'.$dbconfig['db_password'].'@'.$dbconfig['db_server'].':'.$dbconfig['db_port'].'/'.$dbconfig['db_name'];
 $config['db_prefix'] = 'roundcube_';
 $config['default_host'] = 'ssl://imap.gmail.com';
 $config['validate_cert'] = false;
@@ -31,7 +31,7 @@ $config['support_url'] = 'http://yetiforce.com';
 $config['des_key'] = 'rGOQ26hR%gxlZk=QA!$HMOvb';
 $config['username_domain'] = 'gmail.com';
 $config['product_name'] = 'YetiForce';
-$config['plugins'] = array('autologon','identity_smtp','ical_attachments','yetiforce');
+$config['plugins'] = array('autologon','identity_smtp','ical_attachments','yetiforce','thunderbird_labels');
 $config['language'] = 'en_US';
 $config['mime_param_folding'] = 0;
 $config['skin_logo'] = array("*" => "/images/null.png");

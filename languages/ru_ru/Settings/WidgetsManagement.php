@@ -30,13 +30,14 @@ $languageStrings = [
 	'LBL_DEFAULT_FILTER' => 'Фильтр по умолчанию',
 	'LBL_FILTERS_AVAILABLE' => 'Доступные фильтры',
 	'LBL_PLEASE_SELECT_ATLEAST_ONE_OPTION' => 'Необходимо выбрать, как минимум 1 пункт',
-	'LBL_VIEW_CONFIGURATION' => 'Configuration view',
+	'LBL_VIEW_CONFIGURATION' => 'Настройка вида',
+	'LBL_WIDGET_ADDED'	=>	'Виджет успешно добавлен',
 ];
 $jsLanguageStrings = [
 	'JS_BLOCK_ADDED'	=>	'Блок Виджетов успешно добавлен',
-	'JS_CUSTOM_FIELD_ADDED'	=>	'Виджет успешно добавлен',
 	'JS_CUSTOM_FIELD_DELETED'	=>	'Виджет успешно добавлен',
 	'JS_CUSTOM_BLOCK_DELETED'	=>	'Блок Виджетов успешно удален',
 	'JS_FIELD_EMPTY'	=>	'Поле не может быть пустым',
 	'JS_FILTERS_AVAILABLE' => 'Доступные фильтры',
+	'JS_WIDGET_ADDED'	=>	'Виджет успешно добавлен',
 ];

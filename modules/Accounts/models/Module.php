@@ -12,34 +12,6 @@
 class Accounts_Module_Model extends Vtiger_Module_Model {
 
 	/**
-	 * Function to get the Quick Links for the module
-	 * @param <Array> $linkParams
-	 * @return <Array> List of Vtiger_Link_Model instances
-	 */
-	public function getSideBarLinks($linkParams) {
-		$parentQuickLinks = parent::getSideBarLinks($linkParams);
-		$quickLink = array();
-		
-		if(Vtiger_DashBoard_Model::verifyDashboard($this->getName())){
-			$quickLink = array(
-					'linktype' => 'SIDEBARLINK',
-					'linklabel' => 'LBL_DASHBOARD',
-					'linkurl' => $this->getDashBoardUrl(),
-					'linkicon' => '',
-			);
-		}
-		//Check profile permissions for Dashboards
-		$moduleModel = Vtiger_Module_Model::getInstance('Dashboard');
-		$userPrivilegesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		$permission = $userPrivilegesModel->hasModulePermission($moduleModel->getId());
-		if($permission && $quickLink) {
-			$parentQuickLinks['SIDEBARLINK'][] = Vtiger_Link_Model::getInstanceFromValues($quickLink);
-		}
-		
-		return $parentQuickLinks;
-	}
-
-	/**
 	 * Function to get list view query for popup window
 	 * @param <String> $sourceModule Parent module
 	 * @param <String> $field parent fieldname
@@ -122,7 +94,7 @@ class Accounts_Module_Model extends Vtiger_Module_Model {
 			$instance = CRMEntity::getInstance($relatedModuleName);
 			$securityParameter = $instance->getUserAccessConditionsQuerySR($relatedModuleName);
 			if ($securityParameter != '')
-				$sql .= $securityParameter;
+				$query .= $securityParameter;
 
 			// There could be more than one contact for an activity.
 			$query .= ' GROUP BY vtiger_activity.activityid';
@@ -136,5 +108,22 @@ class Accounts_Module_Model extends Vtiger_Module_Model {
 		}
 		
 		return $query;
+	}
+	
+	/**
+	 * Function searches the records in the module, if parentId & parentModule
+	 * is given then searches only those records related to them.
+	 * @param <String> $searchValue - Search value
+	 * @param <Integer> $parentId - parent recordId
+	 * @param <String> $parentModule - parent module name
+	 * @return <Array of Vtiger_Record_Model>
+	 */
+	public function searchRecord($searchValue, $parentId = false, $parentModule = false, $relatedModule = false)
+	{
+		$matchingRecords = parent::searchRecord($searchValue, $parentId, $parentModule, $relatedModule);
+		if (!empty($parentId) && !empty($parentModule)) {
+			unset($matchingRecords[$relatedModule][$parentId]);
+		}
+		return $matchingRecords;
 	}
 }

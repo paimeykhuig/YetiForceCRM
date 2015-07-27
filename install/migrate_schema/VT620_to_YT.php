@@ -1881,7 +1881,7 @@ class VT620_to_YT {
 		foreach($lang as $params)
 			$adb->pquery("insert  into `vtiger_language`(`name`,`prefix`,`label`,`lastupdated`,`sequence`,`isdefault`,`active`) values (?,?,?,?,?,?,?);", $params);
 		$adb->query("UPDATE vtiger_language_seq SET `id` = (SELECT count(*) FROM `vtiger_language`);");
-		$adb->pquery("UPDATE vtiger_version SET `current_version` = ? ;",array(1, $YetiForce_current_version));
+		$adb->pquery("UPDATE vtiger_version SET `current_version` = ? ;",[$YetiForce_current_version]);
 		//update tax in inventoryproductrel
 		$adb->query(" UPDATE `vtiger_inventoryproductrel` SET tax = 
 			  CASE
@@ -4051,7 +4051,7 @@ class RemoveModule {
 		$take_cvid = $adb->query( "select cvid from vtiger_customview where entitytype = '".$this->module_name."'", true, "Błąd podczas pobierania tabid w konstruktorze klasy RemoveModule - vtiger_customview" );
 		if( $adb->num_rows( $take_cvid ) > 0 )
 		{
-			$this->cvid = $take_cvid->GetArray();
+			$this->cvid = $take_cvid->getSingleValue();
 			
 		}
 

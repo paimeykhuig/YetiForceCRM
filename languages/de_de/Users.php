@@ -8,6 +8,7 @@
  * All Rights Reserved.
  *************************************************************************************/
 $languageStrings = [
+	'SINGLE_Users' => 'Benutzer',
 	'dd-mm-yyyy' => 'tt-mm-jjjj',
 	'mm-dd-yyyy' => 'mm-tt-jjjj',
 	'yyyy-mm-dd' => 'jjjj-mm-tt',
@@ -314,7 +315,7 @@ $languageStrings = [
 	
 	'LBL_GENERATED_COLOR' => 'Farbe generiert',
 	'LBL_SAVE_COLOR' => 'Farbe gesichert',
-	'LBL_EMAIL' => 'e-mail',
+	'LBL_EMAIL' => 'E-Mail',
 	'LBL_SPACE' => 'Space',
 ];
 

@@ -101,14 +101,12 @@ function get_available_module_picklist($picklist_details){
  * @return array $arr - the array containing the picklist values
  */
 function getAllPickListValues($fieldName,$lang = Array() ){
-	$adb = PearDatabase::getInstance();
-	$sql = 'SELECT * FROM vtiger_'.$adb->sql_escape_string($fieldName);
-	$result = $adb->query($sql);
-	$count = $adb->num_rows($result);
-
-	$arr = array();
-	for($i=0;$i<$count;$i++){
-		$pick_val = decode_html($adb->query_result($result, $i, $fieldName));
+	$db = PearDatabase::getInstance();
+	$result = $db->query('SELECT * FROM vtiger_'.$fieldName);
+	
+	$arr = [];
+	while($row = $db->fetchByAssoc($result)){
+		$pick_val = decode_html($row[$fieldName]);
 		if($lang[$pick_val] != ''){
 			$arr[$pick_val] = $lang[$pick_val];
 		}
@@ -201,9 +199,9 @@ function getAssignedPicklistValues($tableName, $roleid, $adb, $lang=array()){
 			$roleids[] = $role;
 		}
 
-		$sql = "SELECT distinct ".$adb->sql_escape_string($tableName)." FROM ". $adb->sql_escape_string("vtiger_$tableName")
-				. " inner join vtiger_role2picklist on ".$adb->sql_escape_string("vtiger_$tableName").".picklist_valueid=vtiger_role2picklist.picklistvalueid"
-				. " and roleid in (".generateQuestionMarks($roleids).") order by sortid";
+		$sql = 'SELECT distinct '.$adb->sql_escape_string($tableName,true).' FROM '. $adb->sql_escape_string("vtiger_$tableName",true)
+				. ' inner join vtiger_role2picklist on '.$adb->sql_escape_string("vtiger_$tableName",true).'.picklist_valueid=vtiger_role2picklist.picklistvalueid'
+				. ' and roleid in ('.$adb->generateQuestionMarks($roleids).') order by sortid';
 		$result = $adb->pquery($sql, $roleids);
 		$count = $adb->num_rows($result);
 

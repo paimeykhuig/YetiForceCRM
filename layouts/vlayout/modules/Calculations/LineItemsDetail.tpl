@@ -12,8 +12,15 @@
 {assign var=FINAL_DETAILS value=$RELATED_PRODUCTS.1.final_details}
 <table class="table table-bordered mergeTables">
     <thead>
-    <th colspan="7" class="detailViewBlockHeader">
+    <th colspan="3" class="detailViewBlockHeader">
 	{vtranslate('LBL_ITEM_DETAILS', $MODULE_NAME)}
+    </th>
+    <th colspan="2" class="detailViewBlockHeader">
+	{assign var=CURRENCY_INFO value=$RECORD->getCurrencyInfo()}
+	{vtranslate('LBL_CURRENCY', $MODULE_NAME)} : {vtranslate($CURRENCY_INFO['currency_name'],$MODULE_NAME)}({$CURRENCY_INFO['currency_symbol']})
+    </th>
+    <th colspan="2" class="detailViewBlockHeader">
+
     </th>
 	</thead>
 	<tbody>
@@ -43,11 +50,11 @@
     {foreach key=INDEX item=LINE_ITEM_DETAIL from=$RELATED_PRODUCTS}
 	<tr>
 	    <td>
-		<div class="row-fluid">
+		<div>
 		    {$LINE_ITEM_DETAIL["productName$INDEX"]}
 		</div>
 		{if $LINE_ITEM_DETAIL["productDeleted$INDEX"]}
-			<div class="row-fluid redColor deletedItem">
+			<div class="row redColor deletedItem">
 				{if empty($LINE_ITEM_DETAIL["productName$INDEX"])}
 					{vtranslate('LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM',$MODULE_NAME)}
 				{else}

@@ -111,9 +111,9 @@ $languageStrings = [
 	'Duration'=>'Czas trwania',
 	'Duration Minutes'=>'Czas trwania w Minutach',
 	'No Time'=>'Brak czasu',
-    'TASK_PREV' => 'Zadania zaplanowane na poprzedni dzień',
-    'TASK_CUR' => 'Zadania zaplanowane na dziś',
-    'TASK_NEXT' => 'Zadania zaplanowane na jutro',
+    'TASK_PREV' => 'Zaplanowane na dzień przed',
+    'TASK_CUR' => 'Zaplanowane na wybrany dzień',
+    'TASK_NEXT' => 'Zaplanowane na dzień po',
 	'LBL_NO_DESCRIPTION'=>'Brak opisu',
 	'LBL_IMPORT_ICS_ERROR_NO_RECORD'=>'Błędny plik ICS',
 	'LBL_IMPORT_ICS_SUCCESS'=>'Dodano wpis do kalendarza',
@@ -127,6 +127,8 @@ $languageStrings = [
 	'LBL_USERS_BLOCK_SHIFT' => 'Pokaż lub ukryj blok użytkownicy',
 	'LBL_GROUPS_BLOCK_SHIFT' => 'Pokaż lub ukryj blok grupy',
 	'LBL_SHIFT_BLOCK' => 'Pokaż lub ukryj blok',
+	'LBL_ON_SWITCH' => 'ON',
+	'LBL_OFF_SWITCH' => 'OFF',
 ];
 
 $jsLanguageStrings = [
@@ -135,7 +137,6 @@ $jsLanguageStrings = [
 	'JS_CALENDAR_VIEW_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten kalendarz?',
 	'JS_CALENDAR_VIEW_DELETED_SUCCESSFULLY' => 'Usunięto kalendarz',
 	'JS_EDIT_CALENDAR' => 'Edytuj kalendarz',
-    'JS_FUTURE_EVENT_CANNOT_BE_HELD' => 'Przyszłego wydarzenia nie można oznaczyć jako wykonanego',
 	'JS_NO_CALENDAR_VIEWS_TO_ADD' => 'Brak kalendarzy do dodania',
 	'JS_NO_DELETE_PERMISSION' => 'Nie masz uprawnień do usuwania wpisów w kalendarzu.',
 	'JS_NO_EDIT_PERMISSION' => 'Nie masz uprawnień do modyfikowania wpisów w kalendarzu',
@@ -174,6 +175,5 @@ $jsLanguageStrings = [
 	'JS_Public' => 'Publiczne',
 	'LBL_CANT_SELECT_CONTACT_FROM_LEADS' => 'Nie można powiązać kontaktów z potencjalnymi klientami',
 	'Mobile Call' => 'Połączenie',
-    'NOTIFICATION_ACCEPTED' => 'Zaakceptuj',
     'JS_CHANGE_ACTIVITY_TIME' => 'Zmień czas zdarzenia na do realizacji lub historię',
 ];

@@ -1,41 +1,39 @@
 <?php
-/*+***********************************************************************************************************************************
- * The contents of this file are subject to the YetiForce Public License Version 1.1 (the "License"); you may not use this file except
- * in compliance with the License.
- * Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
- * See the License for the specific language governing rights and limitations under the License.
- * The Original Code is YetiForce.
- * The Initial Developer of the Original Code is YetiForce. Portions created by YetiForce are Copyright (C) www.yetiforce.com. 
- * All Rights Reserved.
- *************************************************************************************************************************************/
+/* {[The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html]} */
+
 class OSSMail_Record_Model extends Vtiger_Record_Model {
 	function getAccountsList($user = false, $onlyMy = false, $password = false) {
 		$adb = PearDatabase::getInstance();
 		$currentUserModel = Users_Record_Model::getCurrentUserModel();
-		$param = array();
+		$param = $users = [];
 		$sql = "SELECT * FROM roundcube_users";
-		if( $password ){
+		$where = false;
+		if ($password) {
 			$where .= " AND password <> ''";
 		}
-		if( $user ){
+		if ($user) {
 			$where .= " AND user_id = ?";
 			$param[] = $user;
 		}
-		if( $onlyMy ){
+		if ($onlyMy) {
 			$where .= " AND crm_user_id = ?";
 			$param[] = $currentUserModel->getId();
-		}	
-		if( $where ){
-			$sql .= ' WHERE'.substr($where, 4);
-		}		
-		$result = $adb->pquery( $sql, $param, true);
-		$Num = $adb->num_rows($result);
-		if($Num == 0){
+		}
+		if ($where) {
+			$sql .= ' WHERE' . substr($where, 4);
+		}
+		$result = $adb->pquery($sql, $param);
+		$num = $adb->num_rows($result);
+		if ($num == 0) {
 			return false;
-		}else{
-			return $result->GetArray();
+		} else {
+			while ($row = $adb->fetch_array($result)) {
+				$users[] = $row;
+			}
+			return $users;
 		}
 	}
+
 	function ComposeEmail($params,$ModuleName) {
 		$_SESSION['POST'] = $params;
 		header('Location: '.self::GetSite_URL().'index.php?module=OSSMail&view=compose');
@@ -48,7 +46,7 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
             $queryParams[] = $conf_type;
 		}
 		$result = $adb->pquery( "SELECT * FROM vtiger_ossmailscanner_config $sql ORDER BY parameter DESC" ,$queryParams, true);
-		foreach($result->GetArray() as $row){
+		while ($row = $adb->fetch_array($result)) {
 			if($conf_type != '' || $conf_type != false){
 				$return[$row['parameter']] = $row['value'];
 			}else{
@@ -88,15 +86,16 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 			$port = $roundcube_config['default_port'];
 		}
 		if (empty($port)){ $port = $roundcube_config['default_port'];}
-		if (empty($port)){ $port = $roundcube_config['default_port'];}
+		if (!$roundcube_config['validate_cert']) { $validatecert = '/novalidate-cert';}
 		if ($roundcube_config['imap_open_add_connection_type']) { $ssl_mode = '/'.$ssl_mode; }else{ $ssl_mode = ''; }
+	
 		imap_timeout(IMAP_OPENTIMEOUT,5);
 		$log->debug("imap_open({".$host.":".$port."/imap".$ssl_mode.$validatecert."}$folder, $user , $password) method ...");
 		if($dieOnError){
 			$mbox = @imap_open("{".$host.":".$port."/imap".$ssl_mode.$validatecert."}$folder", $user , $password) OR
 			die( self::imap_open_error(imap_last_error()) );
 		}else{
-			$mbox = @imap_open("{".$host.":".$port."/imap/".$ssl_mode.$validatecert."}$folder", $user , $password );
+			$mbox = @imap_open("{".$host.":".$port."/imap".$ssl_mode.$validatecert."}$folder", $user , $password );
 		}
 		$log->debug("Exit OSSMail_Record_Model::imap_connect() method ...");
 		return $mbox;
@@ -206,11 +205,13 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 		}
 	}
 
-	public static function get_account_detail_by_name($name) {
-		$adb = PearDatabase::getInstance();
-		$result = $adb->pquery( "SELECT * FROM roundcube_users where username = ? ", array($name) ,true);
-		return $result->GetArray();
+	public static function get_account_detail_by_name($name)
+	{
+		$db = PearDatabase::getInstance();
+		$result = $db->pquery('SELECT * FROM roundcube_users where username = ?', [$name]);
+		return $db->fetch_array($result);
 	}
+
 	public static function _decode_text($text) {
 		$data = imap_mime_header_decode($text);
 		$charset = ($data[0]->charset == 'default') ? 'ASCII' : $data[0]->charset;
@@ -430,15 +431,19 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 		return true;
 	}
 	public static function get_default_mailboxes() {
-		$Accounts = self::getAccountsList(false,false,true);
-		$mailboxs = Array();
-		if($Accounts){
-			$mbox = self::imap_connect($Accounts[0]['username'] , $Accounts[0]['password']);
-			$ref = "{".$Accounts[0]['mail_host']."}";
-			$list = imap_list($mbox, $ref , "*");
-			foreach($list as $mailboxname) {
-				$name = str_replace($ref, '', $mailboxname);
-				$mailboxs[$name] = self::convertCharacterEncoding($name, 'UTF-8', 'UTF7-IMAP');
+		$accounts = self::getAccountsList(false,false,true);
+		$mailboxs = [];
+		if($accounts){
+			foreach($accounts as $account) {
+				$mbox = self::imap_connect($account['username'] , $account['password'], 'INBOX', false);
+				if($mbox){
+					$ref = "{".$account['mail_host']."}";
+					$list = imap_list($mbox, $ref , "*");
+					foreach($list as $mailboxname) {
+						$name = str_replace($ref, '', $mailboxname);
+						$mailboxs[$name] = self::convertCharacterEncoding($name, 'UTF-8', 'UTF7-IMAP');
+					}
+				}
 			}
 			return $mailboxs;
 		}else{
@@ -568,6 +573,7 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 		return array(
 			'product_name'				=> array('label' => 'LBL_RC_product_name',			'fieldType' => 'text'		,'required' => 1),
 			'validate_cert'				=> array('label' => 'LBL_RC_validate_cert',			'fieldType' => 'checkbox'	,'required' => 0),
+			'imap_open_add_connection_type'	=> array('label' => 'LBL_RC_imap_open_add_connection_type',	'fieldType' => 'checkbox'	,'required' => 0),
 			'default_host'				=> array('label' => 'LBL_RC_default_host',			'fieldType' => 'text'		,'required' => 1),
 			'default_port'				=> array('label' => 'LBL_RC_default_port',			'fieldType' => 'int'		,'required' => 1),
 			'smtp_server'				=> array('label' => 'LBL_RC_smtp_server',			'fieldType' => 'text'		,'required' => 1),
@@ -580,7 +586,6 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 			'ip_check'					=> array('label' => 'LBL_RC_ip_check',				'fieldType' => 'checkbox'	,'required' => 0),
 			'enable_spellcheck'			=> array('label' => 'LBL_RC_enable_spellcheck',		'fieldType' => 'checkbox'	,'required' => 0),
 			'identities_level'			=> array('label' => 'LBL_RC_identities_level',		'fieldType' => 'picklist' 	,'required' => 1, 'value' => array(0,1,2,3,4) ),
-			'smtp_log'					=> array('label' => 'LBL_RC_smtp_log',				'fieldType' => 'checkbox'	,'required' => 0),
 			'session_lifetime'			=> array('label' => 'LBL_RC_session_lifetime',		'fieldType' => 'int'		,'required' => 1),
 		);
 	}
@@ -611,22 +616,5 @@ class OSSMail_Record_Model extends Vtiger_Record_Model {
 		}
 		return $mails;
 	}
-	
-	function getUrlToCompose($module, $record) {
-        if ( !isRecordExists($record) )
-            return false;
-		$recordModel_OSSMailView = Vtiger_Record_Model::getCleanInstance('OSSMailView');
-		$email = $recordModel_OSSMailView->findEmail( $record, $module );
-		$url = '&to='.$email;
-		$InstanceModel = Vtiger_Record_Model::getInstanceById($record, $module);
-		if($module == 'HelpDesk'){
-			$urldata = '&subject='.$InstanceModel->get('ticket_no').' - '.$InstanceModel->get('ticket_title');
-		}elseif($module == 'Potentials'){
-			$urldata = '&subject='.$InstanceModel->get('potential_no').' - '.$InstanceModel->get('potentialname');
-		}elseif($module == 'Project'){
-			$urldata = '&subject='.$InstanceModel->get('project_no').' - '.$InstanceModel->get('projectname');
-		}
-		$url .= $urldata;
-		return $url;
-	}
+
 }

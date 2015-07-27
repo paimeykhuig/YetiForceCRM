@@ -24,9 +24,9 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 			var element = jQuery(e.currentTarget);
 			var closestDiv = element.closest('div').next();
 			if(element.is(':checked')) {
-				closestDiv.show();
+				closestDiv.removeClass('hide');
 			} else {
-				closestDiv.hide();
+				closestDiv.addClass('hide');
 			}
 		})
 	},
@@ -40,9 +40,9 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 			var element = jQuery(e.currentTarget);
 			var repeatUI = jQuery('#repeatUI');
 			if(element.is(':checked')) {
-				repeatUI.show();
+				repeatUI.removeClass('hide');
 			} else {
-				repeatUI.hide();
+				repeatUI.addClass('hide');
 			}
 		});
 	},
@@ -97,12 +97,12 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 		//If repeatDay radio button is checked then only select2 elements will be enable
 			if(jQuery('#repeatDay').is(':checked')) {
 				jQuery('#repeatMonthDate').attr('disabled', true);
-				jQuery('#repeatMonthDayType').select2("enable");
-				jQuery('#repeatMonthDay').select2("enable");
+				jQuery('#repeatMonthDayType').prop("disabled", false);
+				jQuery('#repeatMonthDay').prop("disabled", false);
 			} else {
 				jQuery('#repeatMonthDate').removeAttr('disabled');
-				jQuery('#repeatMonthDayType').select2("disable");
-				jQuery('#repeatMonthDay').select2("disable");
+				jQuery('#repeatMonthDayType').prop("disabled", true);
+				jQuery('#repeatMonthDay').prop("disabled", true);
 			}
 	},
 	
@@ -169,31 +169,13 @@ Vtiger_Edit_Js("Calendar_Edit_Js",{
 			var dateFormat = $('#userDateFormat').val();
 			var timeFormat = $('#userTimeFormat').val();
 			if(start > end){
-				var diff = start - end;
-				end.setTime(start.getTime() + diff)
+				end = start;
 				var endDateString = app.getDateInVtigerFormat(dateFormat, end);
 				endDateElement.val(endDateString);
 				app.registerEventForDatePickerFields(container);
 			}
             var timeStartElement = startDateElement.closest('td.fieldValue').find('[name="time_start"]');
             timeStartElement.trigger('changeTime');
-        });
-		
-        container.find('[name="due_date"]').on('change',function(e) {
-			var endDateElement = jQuery(e.currentTarget);
-			var startDateElement = container.find('[name="date_start"]');
-			
-			var start = thisInstance.getDateInstance(container, 'start');
-			var end = thisInstance.getDateInstance(container, 'end');
-			var dateFormat = $('#userDateFormat').val();
-			var timeFormat = $('#userTimeFormat').val();
-			if(start > end){
-				var diff = start - end;
-				start.setTime(end.getTime() - diff)
-				var startDateString = app.getDateInVtigerFormat(dateFormat, start);
-				startDateElement.val(startDateString);
-				app.registerEventForDatePickerFields(container);
-			}
         });
 		
 		container.find('input[name="time_start"]').on('focus',function(e){

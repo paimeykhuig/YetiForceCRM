@@ -85,7 +85,7 @@ function OSSProjectTemplatesEdit() {
                                     jQuery('[name="' + val + '"]').val(data.result[val]);
                                 } else {
                                     var tabValue = JSON.parse(data.result[val]);
-                                    jQuery('#' + val + '_edit').val(tabValue).trigger('liszt:updated');
+                                    jQuery('#' + val + '_edit').val(tabValue).trigger('chosen:updated');
                                 }
                                 var dateIntervalCheckbox = jQuery('[name="' + val + '_day_type"]');
 
@@ -167,7 +167,7 @@ function OSSProjectTemplatesEdit() {
                     })
 
                     if (!state) {
-                        var msg = "JS_FIELD_INCORRECT";
+                        var msg = app.vtranslate("JS_FIELD_INCORRECT");
                         thisInstance.showErrorMessage(msg);
                     }
 

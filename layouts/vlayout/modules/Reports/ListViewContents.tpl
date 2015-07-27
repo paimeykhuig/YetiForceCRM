@@ -63,9 +63,9 @@
 						<div class="pull-right actions">
 							<span class="actionImages">
 								{if $REPORT_MODEL->isEditable()}
-									<a href='{$LISTVIEW_ENTRY->getEditViewUrl()}'><span title="{vtranslate('LBL_EDIT', $MODULE)}" class="icon-pencil alignMiddle"></span></a>&nbsp;
+									<a href='{$LISTVIEW_ENTRY->getEditViewUrl()}'><span title="{vtranslate('LBL_EDIT', $MODULE)}" class="glyphicon glyphicon-pencil alignMiddle"></span></a>&nbsp;
 									{if $LISTVIEW_ENTRY->isDefault() eq false}
-										<a class="deleteRecordButton"><span title="{vtranslate('LBL_DELETE', $MODULE)}" class="icon-trash alignMiddle"></span></a>
+										<a class="deleteRecordButton"><span title="{vtranslate('LBL_DELETE', $MODULE)}" class="glyphicon glyphicon-trash alignMiddle"></span></a>
 									{/if}
 								{/if}
 							</span>
@@ -85,7 +85,7 @@
 			<tr>
 				<td>
 					{assign var=SINGLE_MODULE value="SINGLE_$MODULE"}
-					{vtranslate('LBL_NO')} {vtranslate($MODULE, $MODULE)} {vtranslate('LBL_FOUND')}. {vtranslate('LBL_CREATE')} <a href="{$MODULE_MODEL->getCreateRecordUrl()}&folderid={$VIEWNAME}">{vtranslate($SINGLE_MODULE, $MODULE)}</a>
+					{vtranslate('LBL_RECORDS_NO_FOUND')}. {vtranslate('LBL_CREATE')} <a href="{$MODULE_MODEL->getCreateRecordUrl()}&folderid={$VIEWNAME}">{vtranslate($SINGLE_MODULE, $MODULE)}</a>
 				</td>
 			</tr>
 		</tbody>

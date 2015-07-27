@@ -51,11 +51,11 @@
     {foreach key=INDEX item=LINE_ITEM_DETAIL from=$RELATED_PRODUCTS}
 	<tr>
 	    <td>
-		<div class="row-fluid">
+		<div>
 		    {$LINE_ITEM_DETAIL["productName$INDEX"]}
 		</div>
 		{if $LINE_ITEM_DETAIL["productDeleted$INDEX"]}
-			<div class="row-fluid redColor deletedItem">
+			<div class="row redColor deletedItem">
 				{if empty($LINE_ITEM_DETAIL["productName$INDEX"])}
 					{vtranslate('LBL_THIS_LINE_ITEM_IS_DELETED_FROM_THE_SYSTEM_PLEASE_REMOVE_THIS_LINE_ITEM',$MODULE_NAME)}
 				{else}
@@ -271,7 +271,7 @@
                         {if $RECORD->getDisplayValue('received')}
 							{$RECORD->getDisplayValue('received')}
                         {else}
-                            0.00
+                            0
                         {/if}
                     </span>
                 {else}
@@ -279,7 +279,7 @@
                         {if $RECORD->getDisplayValue('paid')}
 							{$RECORD->getDisplayValue('paid')}
                         {else}
-                            0.00
+                            0
                         {/if}
                     </span>
                 {/if}
@@ -296,7 +296,7 @@
                 <span class="pull-right">
                     {if $RECORD->getDisplayValue('balance')}
 						{$RECORD->getDisplayValue('balance')}
-                    {else}0.00
+                    {else}0
                     {/if}
                 </span>
             </td>
