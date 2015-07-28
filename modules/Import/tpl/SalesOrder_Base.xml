@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/* +***********************************************************************************************************************************
+ * The contents of this file are subject to the YetiForce Public License Version 1.1 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is YetiForce.
+ * The Initial Developer of the Original Code is YetiForce. Portions created by YetiForce are Copyright (C) www.yetiforce.com. 
+ * All Rights Reserved.
+ * Contributor(s): ______________________________________.
+ * *********************************************************************************************************************************** */
+-->
+
+<!--
+Commented elements in template there are optional
+-->
+
+<Document-Order>
+	<Order-Header> 
+		<OrderNumber crmfield="salesorder_no" crmfieldtype="string"></OrderNumber> 
+		<VendorOrderNumber></VendorOrderNumber> 
+		<OrderDate crmfield="createdtime" crmfieldtype="date" partvalue="0"></OrderDate> 
+		<ExpectedDeliveryDate></ExpectedDeliveryDate> 
+		<ExpectedDeliveryTime></ExpectedDeliveryTime> 
+		<CollectionDate></CollectionDate> 
+		<CollectionTime></CollectionTime> 
+		<PromotionReference></PromotionReference>	
+		<DocumentFunctionCode constvalue="O"></DocumentFunctionCode>
+		<MessageType constvalue="OD"></MessageType> 
+		<Remarks crmfield="attention" crmfieldtype="string"></Remarks> 
+		<OrderCurrency crmfield="currency_id" crmfieldtype="currency"></OrderCurrency> 
+<!--		<Payment> 
+			<PaymentTerms> 
+				<PaymentDescription></PaymentDescription> 
+				<Percentage></Percentage> 
+				<PaymentDate></PaymentDate> 
+			</PaymentTerms> 
+		</Payment>
+		<Delivery> 
+			<DeliveryTerms> 
+				<DeliveryTermsCode></DeliveryTermsCode>
+				<DeliveryTermsDescription></DeliveryTermsDescription> 
+			</DeliveryTerms>
+		</Delivery> -->
+	</Order-Header>
+	
+	<Order-Parties> 
+		<Buyer> 
+			<ILN refmoule="Accounts" crmfieldtype="reference" crmfield="iln" refkeyfld="account_id"></ILN>  
+			<TaxID refmoule="Accounts" crmfieldtype="reference" crmfield="vat_id" refkeyfld="account_id"></TaxID> 
+			<AccountNumber refmoule="Accounts" crmfieldtype="reference" crmfield="bank_account_number" refkeyfld="account_id"></AccountNumber> 
+			<Name refmoule="Accounts" crmfieldtype="reference" crmfield="accountname" refkeyfld="account_id"></Name>
+			<StreetAndNumber crmfieldtype="string" crmfield="addresslevel8a buildingnumbera localnumbera" refkeyfld="account_id"></StreetAndNumber>  
+			<CityName crmfieldtype="string" crmfield="addresslevel5a" refkeyfld="account_id"></CityName> 
+			<PostalCode crmfieldtype="string" crmfield="addresslevel7a" refkeyfld="account_id"></PostalCode>   
+			<Country crmfieldtype="string" crmfield="addresslevel1a" refkeyfld="account_id"></Country>  
+			<CourtAndCapitalInformation></CourtAndCapitalInformation> 
+			<ContactInformation></ContactInformation>
+		</Buyer>
+		<BuyerHeadquarters> 
+			<ILN refmoule="Accounts" crmfieldtype="reference" crmfield="iln" refkeyfld="account_id"></ILN> 
+			<Name refmoule="Accounts" crmfieldtype="reference" crmfield="accountname" refkeyfld="account_id"></Name> 
+			<StreetAndNumber crmfieldtype="string" crmfield="addresslevel8b buildingnumberb localnumberb"></StreetAndNumber>  
+			<CityName crmfieldtype="string" crmfield="addresslevel5b"></CityName> 
+			<PostalCode crmfieldtype="string" crmfield="addresslevel7b"></PostalCode>  
+			<Country crmfieldtype="string" crmfield="addresslevel1b"></Country>  
+		</BuyerHeadquarters>
+		<Invoicee>
+			<ILN></ILN> 
+			<TaxID></TaxID> 
+			<Name></Name>
+			<StreetAndNumber></StreetAndNumber> 
+			<CityName></CityName> 
+			<PostalCode></PostalCode> 
+			<Country></Country>
+		</Invoicee>
+		<Seller>
+			<ILN crmfieldtype="company" crmfield="iln"></ILN>
+			<TaxID crmfieldtype="company" crmfield="vatid"></TaxID> 
+			<AccountNumber crmfieldtype="company" crmfield="bank_account_number"></AccountNumber> 
+			<Name crmfieldtype="company" crmfield="organizationname"></Name> 
+			<StreetAndNumber crmfieldtype="company" crmfield="address"></StreetAndNumber> 
+			<CityName crmfieldtype="company" crmfield="city"></CityName> 
+			<PostalCode crmfieldtype="company" crmfield="code"></PostalCode> 
+			<Country crmfieldtype="company" crmfield="country"></Country> 
+			<CodeByBuyer></CodeByBuyer> 
+			<Fax crmfieldtype="company" crmfield="fax"></Fax>
+		</Seller>
+<!--		<DeliveryPoint> 
+			<ILN></ILN>
+			<Name></Name> 
+			<StreetAndNumber></StreetAndNumber> 
+			<CityName></CityName> 
+			<PostalCode></PostalCode> 
+			<Country></Country>
+		</DeliveryPoint>
+		<ShipFrom> 
+			<ILN></ILN>
+			<Name></Name>
+			<StreetAndNumber></StreetAndNumber> 
+			<CityName></CityName> 
+			<PostalCode></PostalCode> 
+			<Country></Country>
+		</ShipFrom>
+		<UltimateCustomer> 
+			<ILN></ILN>
+			<Name></Name>
+			<StreetAndNumber></StreetAndNumber> 
+			<CityName></CityName> 
+			<PostalCode></PostalCode> 
+			<Country></Country>
+		</UltimateCustomer>
+		<Carrier>
+			￼<ILN></ILN> 
+			<ModeOfTransport></ModeOfTransport>
+		</Carrier>-->
+		<OrderedBy>
+			<ILN refmoule="Accounts" crmfieldtype="reference" crmfield="iln" refkeyfld="account_id"></ILN> 
+			<TaxID refmoule="Accounts" crmfieldtype="reference" crmfield="vat_id" refkeyfld="account_id"></TaxID> 
+			<AccountNumber refmoule="Accounts" crmfieldtype="reference" crmfield="bank_account_number" refkeyfld="account_id"></AccountNumber> 
+			<Name refmoule="Accounts" crmfieldtype="reference" crmfield="accountname" refkeyfld="account_id"></Name>
+			<StreetAndNumber refmoule="Accounts" crmfieldtype="reference" crmfield="addresslevel8a" refkeyfld="account_id"></StreetAndNumber> 
+			<CityName refmoule="Accounts" crmfieldtype="reference" crmfield="addresslevel5a" refkeyfld="account_id"></CityName> 
+			<PostalCode refmoule="Accounts" crmfieldtype="reference" crmfield="addresslevel7a" refkeyfld="account_id"></PostalCode> 
+			<Country refmoule="Accounts" crmfieldtype="reference" crmfield="addresslevel1a" refkeyfld="account_id"></Country>
+		</OrderedBy>
+	</Order-Parties>
+	
+	<Order-Lines> 
+		<Line type="product">
+			<Line-Item notrepeat="true">
+				<LineNumber notrepeat="true"></LineNumber> 
+				<EAN notrepeat="true" crmfield="ean" frommodule="true" ></EAN> 
+				<!--<BuyerItemCode notrepeat="true"></BuyerItemCode>--> 
+				<SupplierItemCode notrepeat="true" crmfield="product_no|service_no" frommodule="true"></SupplierItemCode> 
+				<PackageEAN notrepeat="true" crmfield="package_ean" frommodule="true"></PackageEAN> 
+				<ItemDescription notrepeat="true" crmfield="productname|servicename" frommodule="true"></ItemDescription> 
+				<!--<ItemType></ItemType>-->
+				<OrderedQuantity notrepeat="true" crmfield="qty" alt="1"></OrderedQuantity> 
+				<!--<FreeOrderedQuantity></FreeOrderedQuantity>-->
+				<OrderedUnitPacksize notrepeat="true" crmfield="qty_per_unit" alt="" frommodule="true"></OrderedUnitPacksize>
+				<InvoicedQuantity notrepeat="true" crmfield="qty" alt="1"></InvoicedQuantity> 
+				<!--<UnitOfMeasure></UnitOfMeasure>-->
+				<OrderedUnitNetPrice notrepeat="true" crmfield="hdnSubTotal" fromfinal="true"></OrderedUnitNetPrice> 
+				<OrderedUnitRetailPrice notrepeat="true" crmfield="listPrice"></OrderedUnitRetailPrice> 
+				<!--<OrderCurrency></OrderCurrency>--> 
+				<!--<ExpectedDeliveryDate></ExpectedDeliveryDate>--> 
+				<!--<ExpectedDeliveryTime></ExpectedDeliveryTime>--> 
+				<!--<ExpirationDate></ExpirationDate>--> 
+				<!--<PromotionReference></PromotionReference>--> 
+				<!--<PackageNumber></PackageNumber>-->
+				<!--<PackageType></PackageType>-->
+				<Remarks notrepeat="true" crmfield="comment"></Remarks>
+			</Line-Item>
+<!--			<Line-Parties> 
+				<DeliveryPoint>
+					<ILN></ILN>
+					<Name></Name> 
+					<StreetAndNumber>Przemysłowa 5</StreetAndNumber> 
+					<CityName></CityName> 
+					<PostalCode></PostalCode> 
+					<Country></Country>
+				</DeliveryPoint> 
+			</Line-Parties> -->
+		</Line> 
+	</Order-Lines>
+	<Order-Summary>
+		<TotalLines></TotalLines> 
+		<TotalOrderedAmount></TotalOrderedAmount> 
+		<TotalNetAmount></TotalNetAmount>
+	</Order-Summary> 
+</Document-Order>

@@ -67,7 +67,7 @@ if (typeof (ImportJs) == 'undefined') {
 				importFile.focus();
 				return false;
 			}
-			if (!ImportJs.uploadFilter("import_file", "csv|vcf")) {
+			if (!ImportJs.uploadFilter("import_file", "csv|vcf|xml")) {
 				return false;
 			}
 			if (!ImportJs.uploadFileSize("import_file")) {

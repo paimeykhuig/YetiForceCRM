@@ -212,51 +212,41 @@ var Vtiger_Index_Js = {
 	 * Function request for reminder popups
 	 */
 	requestReminder: function (typeRemainder) {
-		var thisInstance = this;
 		var content = $('.remindersNoticeContainer');
+		var badge = $(".remindersNotice .badge");
 		var url = 'index.php?module=Calendar&view=Reminders';
 		if (typeRemainder) {
 			url += '&type_remainder=true';
 		}
 		AppConnector.request(url).then(function (data) {
 			content.append(data);
-			thisInstance.refreshNumberNotifications(content);
+
+			var count = content.find('.panel').length;
+			badge.text(count);
+			badge.removeClass('hide');
+			if (count > 0) {
+				$(".remindersNotice").effect( "pulsate", 1500);
+			} else {
+				badge.addClass('hide');
+			}
+
 			content.find('.reminderAccept').on('click', function (e) {
 				var currentElement = jQuery(e.currentTarget);
 				var recordID = currentElement.closest('.panel').data('record');
 				var url = 'index.php?module=Calendar&action=ActivityReminder&mode=cancelReminder&record=' + recordID;
 				AppConnector.request(url).then(function (data) {
-					currentElement.closest('.panel').fadeOut(300, function() { 
-						$(this).remove();
-						thisInstance.refreshNumberNotifications(content);
-					});
+					currentElement.closest('.panel').hide("slow");
 				});
 			});
-			
 			content.find('.reminderPostpone').on('click', function (e) {
 				var currentElement = jQuery(e.currentTarget);
 				var recordID = currentElement.closest('.panel').data('record');
 				var url = 'index.php?module=Calendar&action=ActivityReminder&mode=postpone&record=' + recordID + '&time=' + currentElement.data('time');
 				AppConnector.request(url).then(function (data) {
-					currentElement.closest('.panel').fadeOut(300, function() { 
-						$(this).remove();
-						thisInstance.refreshNumberNotifications(content);
-					});
+					currentElement.closest('.panel').hide("slow");
 				});
 			});
 		});
-	},
-	
-	refreshNumberNotifications: function(content){
-		var badge = $(".remindersNotice .badge");
-		var count = content.find('.panel:visible').length;
-		badge.text(count);
-		badge.removeClass('hide');
-		if (count > 0) {
-			$(".remindersNotice").effect( "pulsate", 1500);
-		} else {
-			badge.addClass('hide');
-		}
 	},
 
 	registerResizeEvent: function(){
@@ -450,6 +440,17 @@ var Vtiger_Index_Js = {
 			}
 		});
 	},
+	//*** import
+	showTplForXmlSelect : function(){
+		jQuery('.exportContents select[name="export_type"]').on('change', function(){
+			if ('xml' == jQuery(this).val()) {
+				jQuery('.exportContents .xml-tpl').removeClass('hide');
+			} else {
+				jQuery('.exportContents .xml-tpl').addClass('hide');
+			}
+		});
+	},
+	//***
 
 	loadPreSaveRecord : function(form) {
 		SaveResult = new SaveResult()
@@ -465,6 +466,9 @@ var Vtiger_Index_Js = {
 		Vtiger_Index_Js.registerShowHideLeftPanelEvent();
 		Vtiger_Index_Js.registerShowHideRightPanelEvent();
 		Vtiger_Index_Js.registerResizeEvent();
+		//*** import
+		Vtiger_Index_Js.showTplForXmlSelect();
+		//***
 	},
 
 	registerPostAjaxEvents: function() {

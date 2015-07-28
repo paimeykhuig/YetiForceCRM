@@ -8,7 +8,9 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  * *********************************************************************************** */
-
+//*** import
+vimport('modules.Import.helpers.XmlUtils');
+//***
 class Vtiger_Import_View extends Vtiger_Index_View {
 
 	function __construct() {
@@ -82,6 +84,9 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 
 		$viewer->assign('FOR_MODULE', $moduleName);
 		$viewer->assign('MODULE', 'Import');
+		//*** import
+		$viewer->assign('XML_IMPORT_TPL', XmlUtils::getListTplForXmlType($moduleName));
+		//***
 		$viewer->assign('SUPPORTED_FILE_TYPES', Import_Utils_Helper::getSupportedFileExtensions());
 		$viewer->assign('SUPPORTED_FILE_ENCODING', Import_Utils_Helper::getSupportedFileEncoding());
 		$viewer->assign('SUPPORTED_DELIMITERS', Import_Utils_Helper::getSupportedDelimiters());
@@ -105,48 +110,69 @@ class Vtiger_Import_View extends Vtiger_Index_View {
 	function uploadAndParse(Vtiger_Request $request) {
 
 		if(Import_Utils_Helper::validateFileUpload($request)) {
-			$moduleName = $request->getModule();
-			$user = Users_Record_Model::getCurrentUserModel();
+			//*** import
+			if ('xml' != $request->get('type')) {
+			//***
+				$moduleName = $request->getModule();
+				$user = Users_Record_Model::getCurrentUserModel();
 
-			$fileReader = Import_Utils_Helper::getFileReader($request, $user);
-			if($fileReader == null) {
-				$request->set('error_message', vtranslate('LBL_INVALID_FILE', 'Import'));
-				$this->importBasicStep($request);
-				exit;
-			}
+				$fileReader = Import_Utils_Helper::getFileReader($request, $user);
+				if($fileReader == null) {
+					$request->set('error_message', vtranslate('LBL_INVALID_FILE', 'Import'));
+					$this->importBasicStep($request);
+					exit;
+				}
 
-			$hasHeader = $fileReader->hasHeader();
-			$rowData = $fileReader->getFirstRowData($hasHeader);
+				$hasHeader = $fileReader->hasHeader();
+				$rowData = $fileReader->getFirstRowData($hasHeader);
 
-			$viewer = $this->getViewer($request);
-			$autoMerge = $request->get('auto_merge');
-			if(!$autoMerge) {
-				$request->set('merge_type', 0);
-				$request->set('merge_fields', '');
+				$viewer = $this->getViewer($request);
+				$autoMerge = $request->get('auto_merge');
+				if(!$autoMerge) {
+					$request->set('merge_type', 0);
+					$request->set('merge_fields', '');
+				} else {
+					$viewer->assign('MERGE_FIELDS', Zend_Json::encode($request->get('merge_fields')));
+				}
+
+				$moduleName = $request->getModule();
+				$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+				$moduleMeta = $moduleModel->getModuleMeta();
+
+
+				$viewer->assign('DATE_FORMAT', $user->date_format);
+				$viewer->assign('FOR_MODULE', $moduleName);
+				$viewer->assign('MODULE', 'Import');
+
+				$viewer->assign('HAS_HEADER', $hasHeader);
+				$viewer->assign('ROW_1_DATA', $rowData);
+				$viewer->assign('USER_INPUT', $request);
+
+				$viewer->assign('AVAILABLE_FIELDS', $moduleMeta->getImportableFields($moduleName));
+				$viewer->assign('ENCODED_MANDATORY_FIELDS', Zend_Json::encode($moduleMeta->getMandatoryFields($moduleName)));
+				$viewer->assign('SAVED_MAPS', Import_Map_Model::getAllByModule($moduleName));
+				$viewer->assign('USERS_LIST', Import_Utils_Helper::getAssignedToUserList($moduleName));
+				$viewer->assign('GROUPS_LIST', Import_Utils_Helper::getAssignedToGroupList($moduleName));
+
+				return $viewer->view('ImportAdvanced.tpl', 'Import');
+			//*** import
 			} else {
-				$viewer->assign('MERGE_FIELDS', Zend_Json::encode($request->get('merge_fields')));
+				try {
+					$importXml = Import_Utils_Helper::getFileReader($request, Users_Record_Model::getCurrentUserModel());
+					
+					if ($importXml == null) {
+						$request->set('error_message', vtranslate('LBL_INVALID_FILE', 'Import'));
+						$this->importBasicStep($request);
+						exit;
+					}
+
+					$importXml->startImport();
+					$importXml->showResults();
+				} catch (Exception $exc) {
+					echo $exc->getMessage();
+				}
 			}
-
-			$moduleName = $request->getModule();
-			$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
-			$moduleMeta = $moduleModel->getModuleMeta();
-
-
-			$viewer->assign('DATE_FORMAT', $user->date_format);
-			$viewer->assign('FOR_MODULE', $moduleName);
-			$viewer->assign('MODULE', 'Import');
-
-			$viewer->assign('HAS_HEADER', $hasHeader);
-			$viewer->assign('ROW_1_DATA', $rowData);
-			$viewer->assign('USER_INPUT', $request);
-
-			$viewer->assign('AVAILABLE_FIELDS', $moduleMeta->getImportableFields($moduleName));
-			$viewer->assign('ENCODED_MANDATORY_FIELDS', Zend_Json::encode($moduleMeta->getMandatoryFields($moduleName)));
-			$viewer->assign('SAVED_MAPS', Import_Map_Model::getAllByModule($moduleName));
-			$viewer->assign('USERS_LIST', Import_Utils_Helper::getAssignedToUserList($moduleName));
-			$viewer->assign('GROUPS_LIST', Import_Utils_Helper::getAssignedToGroupList($moduleName));
-
-			return $viewer->view('ImportAdvanced.tpl', 'Import');
+			//***
 		} else {
 			$this->importBasicStep($request);
 		}

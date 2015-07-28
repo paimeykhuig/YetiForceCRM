@@ -1,102 +1,51 @@
 <?php
-/* +***********************************************************************************
- * The contents of this file are subject to the vtiger CRM Public License Version 1.0
- * ("License"); You may not use this file except in compliance with the License
- * The Original Code is:  vtiger CRM Open Source
- * The Initial Developer of the Original Code is vtiger.
- * Portions created by vtiger are Copyright (C) vtiger.
+
+/* +***********************************************************************************************************************************
+ * The contents of this file are subject to the YetiForce Public License Version 1.1 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * Software distributed under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is YetiForce.
+ * The Initial Developer of the Original Code is YetiForce. Portions created by YetiForce are Copyright (C) www.yetiforce.com. 
  * All Rights Reserved.
- * *********************************************************************************** */
-//*** import
-vimport('modules.Import.export.ExportToXml');	
-//***
-class Vtiger_ExportData_Action extends Vtiger_Mass_Action
-{
+ * Contributor(s): ______________________________________.
+ * *********************************************************************************************************************************** */
 
-	function checkPermission(Vtiger_Request $request)
-	{
-		$moduleName = $request->getModule();
-		$moduleModel = Vtiger_Module_Model::getInstance($moduleName);
+abstract class Export {
 
-		$currentUserPriviligesModel = Users_Privileges_Model::getCurrentUserPrivilegesModel();
-		if (!$currentUserPriviligesModel->hasModuleActionPermission($moduleModel->getId(), 'Export')) {
-			throw new AppException('LBL_PERMISSION_DENIED');
-		}
-	}
+	public function getRecords(Vtiger_Request $request) {
+		$db = PearDatabase::getInstance();
+		$moduleName = $request->get('source_module');
 
-	/**
-	 * Function is called by the controller
-	 * @param Vtiger_Request $request
-	 */
-	function process(Vtiger_Request $request)
-	{
-		$this->ExportData($request);
-	}
+		$this->moduleInstance = Vtiger_Module_Model::getInstance($moduleName);
+		$this->moduleFieldInstances = $this->moduleInstance->getFields();
+		$this->focus = CRMEntity::getInstance($moduleName);
 
-	private $moduleInstance;
-	private $focus;
+		$query = $this->getExportQuery($request);
+		$explodeQuery = explode("SELECT ", $query);
+		$focus = new $moduleName();
+		$query = "SELECT " . $focus->table_name . '.' . $focus->table_index . ' as id, ' . $explodeQuery[1];
+		$result = $db->pquery($query, array());
 
-	/**
-	 * Function exports the data based on the mode
-	 * @param Vtiger_Request $request
-	 */
-	function ExportData(Vtiger_Request $request)
-	{
-		//*** import
-		if ('xml' == $request->get('export_type')) {
-			$xmlExport = new ExportToXml();
-			$xmlExport->process($request);
-		} else {
-		//***
-			$db = PearDatabase::getInstance();
-			$moduleName = $request->get('source_module');
+		$existingRecord = false;
 
-			$this->moduleInstance = Vtiger_Module_Model::getInstance($moduleName);
-			$this->moduleFieldInstances = $this->moduleInstance->getFields();
-			$this->focus = CRMEntity::getInstance($moduleName);
-
-			$query = $this->getExportQuery($request);
-			$result = $db->pquery($query, array());
-
-			$headers = array();
-			//Query generator set this when generating the query
-			if (!empty($this->accessibleFields)) {
-				$accessiblePresenceValue = array(0, 2);
-				foreach ($this->accessibleFields as $fieldName) {
-					$fieldModel = $this->moduleFieldInstances[$fieldName];
-					// Check added as querygenerator is not checking this for admin users
-					$presence = $fieldModel->get('presence');
-					if (in_array($presence, $accessiblePresenceValue)) {
-						$headers[] = $fieldModel->get('label');
-					}
-				}
-			} else {
-				foreach ($this->moduleFieldInstances as $field)
-					$headers[] = $field->get('label');
+		$entries = array();
+		for ($j = 0; $j < $db->num_rows($result); $j++) {
+			$resultTab = $db->fetchByAssoc($result, $j);
+			$resultTab['label'] = $resultTab[strtolower($moduleName).'_no'];
+			// client wanted file names as part of records label text
+			/*$resultTab['label'] = explode('-', $resultTab['label']);
+			$resultTab['label'] = array_pop($resultTab['label']);*/
+			if ($resultTab['id'] != $existingRecord) {
+				$entries[] = $this->sanitizeValues($resultTab);
+				$existingRecord = $resultTab['id'];
 			}
-			$translatedHeaders = array();
-			foreach ($headers as $header)
-				$translatedHeaders[] = vtranslate(html_entity_decode($header, ENT_QUOTES), $moduleName);
-
-
-			$entries = array();
-			for ($j = 0; $j < $db->num_rows($result); $j++) {
-				$entries[] = $this->sanitizeValues($db->fetchByAssoc($result, $j));
-			}
-
-			$this->output($request, $translatedHeaders, $entries);
-		//*** import
 		}
-		//***
+
+		return $entries;
 	}
 
-	/**
-	 * Function that generates Export Query based on the mode
-	 * @param Vtiger_Request $request
-	 * @return <String> export query
-	 */
-	function getExportQuery(Vtiger_Request $request)
-	{
+	function getExportQuery(Vtiger_Request $request) {
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$mode = $request->getMode();
 		$cvId = $request->get('viewname');
@@ -162,60 +111,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action
 		}
 	}
 
-	/**
-	 * Function returns the export type - This can be extended to support different file exports
-	 * @param Vtiger_Request $request
-	 * @return <String>
-	 */
-	function getExportContentType(Vtiger_Request $request)
-	{
-		$type = $request->get('export_type');
-		if (empty($type)) {
-			return 'text/csv';
-		}
-	}
-
-	/**
-	 * Function that create the exported file
-	 * @param Vtiger_Request $request
-	 * @param <Array> $headers - output file header
-	 * @param <Array> $entries - outfput file data
-	 */
-	function output($request, $headers, $entries)
-	{
-		$moduleName = $request->get('source_module');
-		$fileName = str_replace(' ', '_', decode_html(vtranslate($moduleName, $moduleName))).'.csv';
-		$exportType = $this->getExportContentType($request);
-
-		header("Content-Disposition: attachment; filename=\"$fileName\"");
-		header("Content-Type: $exportType; charset=UTF-8");
-		header("Expires: Mon, 31 Dec 2000 00:00:00 GMT");
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		header("Cache-Control: post-check=0, pre-check=0", false);
-
-		$header = implode("\", \"", $headers);
-		$header = "\"" . $header;
-		$header .= "\"\r\n";
-		echo $header;
-
-		foreach ($entries as $row) {
-			$line = implode("\",\"", $row);
-			$line = "\"" . $line;
-			$line .= "\"\r\n";
-			echo $line;
-		}
-	}
-
-	private $picklistValues;
-	private $fieldArray;
-	private $fieldDataTypeCache = array();
-
-	/**
-	 * this function takes in an array of values for an user and sanitizes it for export
-	 * @param array $arr - the array of values
-	 */
-	function sanitizeValues($arr)
-	{
+	function sanitizeValues($arr) {
 		$db = PearDatabase::getInstance();
 		$currentUser = Users_Record_Model::getCurrentUserModel();
 		$roleid = $currentUser->get('roleid');
@@ -237,7 +133,9 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action
 			if (isset($this->fieldArray[$fieldName])) {
 				$fieldInfo = $this->fieldArray[$fieldName];
 			} else {
-				unset($arr[$fieldName]);
+				if ('id' != $fieldName) {
+					unset($arr[$fieldName]);
+				}
 				continue;
 			}
 			$value = trim(decode_html($value), "\"");
@@ -274,7 +172,7 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action
 						}
 					}
 					if (!empty($parent_module) && !empty($displayValue)) {
-						$value = $parent_module . "::::" . $displayValue;
+						
 					} else {
 						$value = "";
 					}
@@ -294,6 +192,43 @@ class Vtiger_ExportData_Action extends Vtiger_Mass_Action
 				array_push($new_arr, $value);
 			}
 		}
+		$arr['label'] = $arr[strtolower($moduleName).'_no'];
+		$arr['label'] = explode('-', $arr['label']);
+		$arr['label'] = array_pop($arr['label']);
 		return $arr;
 	}
+
+	protected function getRecordsListFromRequest(Vtiger_Request $request) {
+		$cvId = $request->get('viewname');
+		$module = $request->get('module');
+		if (!empty($cvId) && $cvId == "undefined") {
+			$sourceModule = $request->get('sourceModule');
+			$cvId = CustomView_Record_Model::getAllFilterByModule($sourceModule)->getId();
+		}
+		$selectedIds = $request->get('selected_ids');
+		$excludedIds = $request->get('excluded_ids');
+
+		if (!empty($selectedIds) && $selectedIds != 'all') {
+			if (!empty($selectedIds) && count($selectedIds) > 0) {
+				return $selectedIds;
+			}
+		}
+
+		$customViewModel = CustomView_Record_Model::getInstanceById($cvId);
+		if ($customViewModel) {
+			$searchKey = $request->get('search_key');
+			$searchValue = $request->get('search_value');
+			$operator = $request->get('operator');
+			if (!empty($operator)) {
+				$customViewModel->set('operator', $operator);
+				$customViewModel->set('search_key', $searchKey);
+				$customViewModel->set('search_value', $searchValue);
+			}
+
+			$customViewModel->set('search_params', $request->get('search_params'));
+			return $customViewModel->getRecordIds($excludedIds, $module);
+		}
+	}
+
+	abstract function process(Vtiger_Request $request);
 }

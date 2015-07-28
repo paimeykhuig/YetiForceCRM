@@ -967,6 +967,11 @@ $languageStrings = [
 	'LBL_LEGAL_FORM' => 'Forma prawna',
 	
 	'LBL_QUICK_EXPORT_TO_EXCEL' => 'Eksport do Excel',
+	//*** import
+	'LBL_EXPORT_TYPE' => 'Format pliku exportu',
+	'LBL_XML_EXPORT_TPL' => 'Szablon',
+	'LBL_PDF_SENT' => 'Dokument PDF został wysłany do kontrahenta.',
+	//***
 ];
 $jsLanguageStrings = [
 	'JS_DATE_SHOULD_BE_GREATER_THAN' => 'Data zakończenia nie może być mniejsza od daty początkowej',
@@ -1186,6 +1191,5 @@ $jsLanguageStrings = [
 	'JS_AN_INCORRECT_RANGE_OF_DATES_WAS_ENTERED' => 'Wprowadzono błędny zakres dat',
 	'JS_STARTED_GENERATING_FILE' => 'Trwa generowanie pliku...',
 	'JS_CAN_NOT_REMOVE_COMMENT' => 'Nie można usuwać komentarzy zawierających odpowiedzi. Usuń wszystkie odpowiedzi aby móc usunąć komentarz.',
-	'JS_DELETE_COMMENT_CONFIRMATION' => 'Czy na pewno chcesz usunąć komentarz?',
-	'JS_SET_TAX_FOR' => 'Ustaw podatek dla',
+	'LBL_DELETE_COMMENT_CONFIRMATION' => 'Czy na pewno chcesz usunąć komentarz?',
 ];

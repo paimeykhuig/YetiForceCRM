@@ -8,6 +8,9 @@
  * All Rights Reserved.
  *************************************************************************************/
 
+//*** import
+vimport('modules.Import.helpers.XmlUtils');
+//***
 class Vtiger_Export_View extends Vtiger_Index_View {
 
 	function checkPermission(Vtiger_Request $request) {
@@ -36,7 +39,10 @@ class Vtiger_Export_View extends Vtiger_Index_View {
 		$viewer->assign('PAGE', $page);
 		$viewer->assign('SOURCE_MODULE', $source_module);
 		$viewer->assign('MODULE','Export');
-        
+		//*** import
+		$viewer->assign('export_to_xml_available', XmlUtils::checkTplExist($source_module));
+		$viewer->assign('XML_TPL_LIST', XmlUtils::getListTplForXmlType($source_module));
+		//***
         $searchKey = $request->get('search_key');
         $searchValue = $request->get('search_value');
 		$operator = $request->get('operator');
