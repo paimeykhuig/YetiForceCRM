@@ -49,6 +49,17 @@
 			</select>
 		</td>
 	</tr>
+	<tr id="xml_tpl" class="hide">
+		<td>&nbsp;</td>
+		<td><span>{vtranslate('LBL_XML_EXPORT_TPL', $MODULE)}</span></td>
+		<td>
+			<select name="xml_import_tpl" class="chzn-select" id="xml_import_tpl" title="{vtranslate('LBL_XML_EXPORT_TPL', $MODULE)}">
+				{foreach key=key item=item from=$XML_IMPORT_TPL}
+					<option value="{$item}">{vtranslate($item, 'Import')}</option>
+				{/foreach}
+			</select>
+		</td>
+	</tr>
 	<tr id="has_header_container">
 		<td>&nbsp;</td>
 		<td><span>{'LBL_HAS_HEADER'|@vtranslate:$MODULE}</span></td>

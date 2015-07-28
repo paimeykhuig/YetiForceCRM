@@ -29,6 +29,7 @@ class Settings_Vtiger_CompanyDetails_Model extends Settings_Vtiger_Module_Model
 		'phone' => 'text',
 		'fax' => 'text',
 		'website' => 'text',
+	'iln' => 'text',
 		'vatid' => 'text'
 	);
 

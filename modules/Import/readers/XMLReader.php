@@ -162,8 +162,8 @@ class Import_XmlReader_Reader extends Import_FileReader_Reader {
 					}
 				}
 				
-				$currCode = $this->findInFieldMap('currency', $singleMap);
-				$currId = $this->currencyExist($currCode); 
+				$currCode = $this->findInFieldMap('currency_id', $singleMap);
+				$currId = $this->currencyExist($currCode);
 						
 				if(!$currId){
 					throw new Exception(vtranslate('LBL_NO_CURRENCY', 'Import') . ' - ' . $currCode);
@@ -242,6 +242,9 @@ class Import_XmlReader_Reader extends Import_FileReader_Reader {
 
 		$recordModel->save();
 
+		if (array_key_exists(1, $productLine)) {
+			$total = $this->findValueInProdTab('hdnSubTotal', $productLine[1]);
+		}
 		if (!empty($productLine)) {
 			$this->addProduct($recordList['main'], $productLine, $total);
 		}

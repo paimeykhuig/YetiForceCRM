@@ -33,12 +33,27 @@ if (typeof (ImportJs) == 'undefined') {
 			var fileType = jQuery('#type').val();
 			var delimiterContainer = jQuery('#delimiter_container');
 			var hasHeaderContainer = jQuery('#has_header_container');
+			var xmlTpl = jQuery('#xml_tpl');
+
 			if (fileType != 'csv') {
 				delimiterContainer.hide();
 				hasHeaderContainer.hide();
+				
+				if ('xml' == fileType) {
+					if (xmlTpl.hasClass('hide')) {
+						xmlTpl.removeClass('hide');
+					}
+				} else {
+					if (!xmlTpl.hasClass('hide')) {
+						xmlTpl.addClass('hide');
+					}
+				}
 			} else {
 				delimiterContainer.show();
 				hasHeaderContainer.show();
+				if (!xmlTpl.hasClass('hide')) {
+					xmlTpl.addClass('hide');
+				}
 			}
 		},
 		uploadAndParse: function () {
