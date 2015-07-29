@@ -971,6 +971,8 @@ $languageStrings = [
 	'LBL_EXPORT_TYPE' => 'Format pliku exportu',
 	'LBL_XML_EXPORT_TPL' => 'Szablon',
 	'LBL_PDF_SENT' => 'Dokument PDF został wysłany do kontrahenta.',
+	'LBL_IMPORTED_REC' => 'Zaimportowanych rekordów',
+	'LBL_SKIP_REC' => 'Pominiętych rekordów',
 	//***
 ];
 $jsLanguageStrings = [
