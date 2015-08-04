@@ -969,12 +969,10 @@ insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`m
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`inheritsharing`,`was_read`) values (106,1,1,NULL,1,'OSSMailTemplates',NULL,NULL,'2015-02-18 08:35:26','2015-02-18 08:35:26','2015-02-18 08:35:27',NULL,NULL,0,1,0,'New comment added to ticket','New comment added to ticket',0,0);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`inheritsharing`,`was_read`) values (107,1,1,NULL,1,'OSSMailTemplates',NULL,NULL,'2015-02-26 09:59:53','2015-02-26 09:59:53','2015-02-26 09:59:53',NULL,NULL,0,1,0,'Security risk has been detected - Brute Force','Security risk has been detected - Brute Force',0,0);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`inheritsharing`,`was_read`) values (108,1,1,NULL,1,'OSSMailTemplates',NULL,NULL,'2015-03-12 07:44:12','2015-03-12 07:44:12','2015-03-12 07:44:13',NULL,NULL,0,1,0,'Backup has been made','Backup has been made',0,0);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`inheritsharing`,`was_read`) values (109,1,1,NULL,1,'Products','',NULL,'2015-07-28 19:00:19','2015-07-28 19:00:19','2015-07-28 19:00:23',NULL,NULL,0,1,0,'produkt 1','produkt 1',0,0);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`inheritsharing`,`was_read`) values (110,1,1,NULL,1,'Products','',NULL,'2015-07-28 19:00:48','2015-07-28 19:05:04','2015-07-28 19:00:51',NULL,NULL,0,1,0,'produkt 2','produkt 2',0,0);
 
 /*Data for the table `vtiger_crmentity_seq` */
 
-insert  into `vtiger_crmentity_seq`(`id`) values (136);
+insert  into `vtiger_crmentity_seq`(`id`) values (108);
 
 /*Data for the table `vtiger_crmentityrel` */
 
@@ -5111,19 +5109,6 @@ insert  into `vtiger_inventorynotification_seq`(`id`) values (3);
 
 /*Data for the table `vtiger_inventoryproductrel` */
 
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (111,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,1,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (111,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,2,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (113,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,3,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (113,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,4,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (115,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,5,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (115,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,6,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (117,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,7,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (117,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,8,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (133,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,9,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (133,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,10,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (135,109,1,1.000,100.00000000,NULL,NULL,'',NULL,0,11,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-insert  into `vtiger_inventoryproductrel`(`id`,`productid`,`sequence_no`,`quantity`,`listprice`,`discount_percent`,`discount_amount`,`comment`,`description`,`incrementondel`,`lineitem_id`,`tax`,`tax1`,`tax2`,`tax3`,`calculationsid`,`purchase`,`margin`,`marginp`) values (135,110,2,1.000,100.00000000,NULL,NULL,'',NULL,0,12,NULL,NULL,NULL,NULL,0,0.00,0.00,0.00);
-
 /*Data for the table `vtiger_inventoryproductrel_seq` */
 
 insert  into `vtiger_inventoryproductrel_seq`(`id`) values (0);
@@ -5641,7 +5626,7 @@ insert  into `vtiger_modentity_num_seq`(`id`) values (49);
 
 /*Data for the table `vtiger_modtracker_basic_seq` */
 
-insert  into `vtiger_modtracker_basic_seq`(`id`) values (67);
+insert  into `vtiger_modtracker_basic_seq`(`id`) values (0);
 
 /*Data for the table `vtiger_modtracker_detail` */
 
@@ -5953,7 +5938,7 @@ insert  into `vtiger_org_share_action_mapping`(`share_action_id`,`share_action_n
 
 /*Data for the table `vtiger_organizationdetails` */
 
-insert  into `vtiger_organizationdetails`(`organization_id`,`organizationname`,`address`,`city`,`state`,`country`,`code`,`phone`,`fax`,`website`,`logoname`,`logo`,`vatid`,`iln`) values (1,'YetiForce','ul. Marszałkowska 111','Warszawa','Mazowieckie','Poland','00-102','+48 22 415 49 34','','yetiforce.com','logo_yetiforce.png',NULL,'PL5272638357','qwe');
+insert  into `vtiger_organizationdetails`(`organization_id`,`organizationname`,`address`,`city`,`state`,`country`,`code`,`phone`,`fax`,`website`,`logoname`,`logo`,`vatid`,`iln`) values (1,'YetiForce','ul. Marszałkowska 111','Warszawa','Mazowieckie','Poland','00-102','+48 22 415 49 34','','yetiforce.com','logo_yetiforce.png',NULL,'PL5272638357','');
 
 /*Data for the table `vtiger_organizationdetails_seq` */
 
@@ -6506,18 +6491,9 @@ insert  into `vtiger_postatus_seq`(`id`) values (5);
 
 /*Data for the table `vtiger_productcf` */
 
-insert  into `vtiger_productcf`(`productid`) values (109);
-insert  into `vtiger_productcf`(`productid`) values (110);
-
 /*Data for the table `vtiger_productcurrencyrel` */
 
-insert  into `vtiger_productcurrencyrel`(`productid`,`currencyid`,`converted_price`,`actual_price`) values (109,1,150.00000000,150.00000000);
-insert  into `vtiger_productcurrencyrel`(`productid`,`currencyid`,`converted_price`,`actual_price`) values (110,1,230.00000000,230.00000000);
-
 /*Data for the table `vtiger_products` */
-
-insert  into `vtiger_products`(`productid`,`product_no`,`productname`,`productcode`,`pscategory`,`manufacturer`,`qty_per_unit`,`unit_price`,`weight`,`pack_size`,`sales_start_date`,`sales_end_date`,`start_date`,`expiry_date`,`cost_factor`,`commissionrate`,`commissionmethod`,`discontinued`,`usageunit`,`reorderlevel`,`website`,`taxclass`,`mfr_part_no`,`vendor_part_no`,`serialno`,`qtyinstock`,`productsheet`,`qtyindemand`,`glacct`,`vendor_id`,`imagename`,`currency_id`,`ean`) values (109,'PRO1','produkt 1','','','',0.00,150.00000000,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.000,NULL,1,'',0,'','','','','',0.000,'',0,'',0,'',1,'11');
-insert  into `vtiger_products`(`productid`,`product_no`,`productname`,`productcode`,`pscategory`,`manufacturer`,`qty_per_unit`,`unit_price`,`weight`,`pack_size`,`sales_start_date`,`sales_end_date`,`start_date`,`expiry_date`,`cost_factor`,`commissionrate`,`commissionmethod`,`discontinued`,`usageunit`,`reorderlevel`,`website`,`taxclass`,`mfr_part_no`,`vendor_part_no`,`serialno`,`qtyinstock`,`productsheet`,`qtyindemand`,`glacct`,`vendor_id`,`imagename`,`currency_id`,`ean`) values (110,'PRO2','produkt 2','','','',0.00,230.00000000,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0.000,NULL,1,'',0,'','','','','',0.000,'',0,'',0,'',1,'22');
 
 /*Data for the table `vtiger_producttaxrel` */
 

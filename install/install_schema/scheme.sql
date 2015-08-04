@@ -1606,7 +1606,7 @@ CREATE TABLE `vtiger_convertleadmapping` (
   `potentialfid` int(19) DEFAULT NULL,
   `editable` int(19) DEFAULT '1',
   PRIMARY KEY (`cfmid`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `vtiger_crmentity` */
 
@@ -2960,7 +2960,7 @@ CREATE TABLE `vtiger_inventoryproductrel` (
   PRIMARY KEY (`lineitem_id`),
   KEY `inventoryproductrel_id_idx` (`id`),
   KEY `inventoryproductrel_productid_idx` (`productid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `vtiger_inventoryproductrel_seq` */
 
@@ -3517,7 +3517,7 @@ CREATE TABLE `vtiger_loginhistory` (
   `unblock` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`login_id`),
   KEY `user_name` (`user_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `vtiger_lout_dimensions` */
 
