@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v11.5 (64 bit)
+SQLyog Ultimate v12.12 (64 bit)
 MySQL - 5.6.17 : Database - yetiforce
 *********************************************************************
 */
@@ -21,6 +21,8 @@ insert  into `a_yf_discounts_config`(`param`,`value`) values ('discounts','0,1,2
 /*Data for the table `a_yf_discounts_global` */
 
 /*Data for the table `a_yf_inventory_limits` */
+
+/*Data for the table `a_yf_pdf` */
 
 /*Data for the table `a_yf_taxes_config` */
 
@@ -44,8 +46,8 @@ insert  into `a_yf_taxes_config`(`param`,`value`) values ('taxs','0,1,2,3');
 
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (1,'VTEmailTask','Send Mail','VTEmailTask','modules/com_vtiger_workflow/tasks/VTEmailTask.inc','com_vtiger_workflow/taskforms/VTEmailTask.tpl','{\"include\":[],\"exclude\":[]}','');
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (2,'VTEntityMethodTask','Invoke Custom Function','VTEntityMethodTask','modules/com_vtiger_workflow/tasks/VTEntityMethodTask.inc','com_vtiger_workflow/taskforms/VTEntityMethodTask.tpl','{\"include\":[],\"exclude\":[]}','');
-insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (3,'VTCreateTodoTask','Create Todo','VTCreateTodoTask','modules/com_vtiger_workflow/tasks/VTCreateTodoTask.inc','com_vtiger_workflow/taskforms/VTCreateTodoTask.tpl','{\"include\":[\"Leads\",\"Accounts\",\"Potentials\",\"Contacts\",\"HelpDesk\",\"Campaigns\",\"Quotes\",\"PurchaseOrder\",\"SalesOrder\",\"Invoice\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}','');
-insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (4,'VTCreateEventTask','Create Event','VTCreateEventTask','modules/com_vtiger_workflow/tasks/VTCreateEventTask.inc','com_vtiger_workflow/taskforms/VTCreateEventTask.tpl','{\"include\":[\"Leads\",\"Accounts\",\"Potentials\",\"Contacts\",\"HelpDesk\",\"Campaigns\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}','');
+insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (3,'VTCreateTodoTask','Create Todo','VTCreateTodoTask','modules/com_vtiger_workflow/tasks/VTCreateTodoTask.inc','com_vtiger_workflow/taskforms/VTCreateTodoTask.tpl','{\"include\":[\"Accounts\",\"Contacts\",\"Leads\",\"OSSEmployees\",\"Vendors\",\"Campaigns\",\"HelpDesk\",\"Potentials\",\"Project\",\"ServiceContracts\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}','');
+insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (4,'VTCreateEventTask','Create Event','VTCreateEventTask','modules/com_vtiger_workflow/tasks/VTCreateEventTask.inc','com_vtiger_workflow/taskforms/VTCreateEventTask.tpl','{\"include\":[\"Accounts\",\"Contacts\",\"Leads\",\"OSSEmployees\",\"Vendors\",\"Campaigns\",\"HelpDesk\",\"Potentials\",\"Project\",\"ServiceContracts\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}','');
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (5,'VTUpdateFieldsTask','Update Fields','VTUpdateFieldsTask','modules/com_vtiger_workflow/tasks/VTUpdateFieldsTask.inc','com_vtiger_workflow/taskforms/VTUpdateFieldsTask.tpl','{\"include\":[],\"exclude\":[]}','');
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (6,'VTCreateEntityTask','Create Entity','VTCreateEntityTask','modules/com_vtiger_workflow/tasks/VTCreateEntityTask.inc','com_vtiger_workflow/taskforms/VTCreateEntityTask.tpl','{\"include\":[],\"exclude\":[]}','');
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (7,'VTSMSTask','SMS Task','VTSMSTask','modules/com_vtiger_workflow/tasks/VTSMSTask.inc','com_vtiger_workflow/taskforms/VTSMSTask.tpl','{\"include\":[],\"exclude\":[]}','SMSNotifier');
@@ -54,7 +56,7 @@ insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classn
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (10,'VTUpdateClosedTime','Update Closed Time','VTUpdateClosedTime','modules/com_vtiger_workflow/tasks/VTUpdateClosedTime.inc','com_vtiger_workflow/taskforms/VTUpdateClosedTime.tpl','{\"include\":[],\"exclude\":[]}',NULL);
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (11,'VTSendNotificationTask','Send Notification','VTSendNotificationTask','modules/com_vtiger_workflow/tasks/VTSendNotificationTask.inc','com_vtiger_workflow/taskforms/VTSendNotificationTask.tpl','{\"include\":[\"Calendar\",\"Events\"],\"exclude\":[]}',NULL);
 insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (12,'VTAddressBookTask','Create Address Book','VTAddressBookTask','modules/com_vtiger_workflow/tasks/VTAddressBookTask.inc','com_vtiger_workflow/taskforms/VTAddressBookTask.tpl','{\"include\":[\"Contacts\",\"OSSEmployees\",\"Accounts\",\"Leads\",\"Vendors\"],\"exclude\":[]}',NULL);
-insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (13,'VTUpdateCalendarDates','LBL_UPDATE_DATES_CREATED_EVENTS_AUTOMATICALLY','VTUpdateCalendarDates','modules/com_vtiger_workflow/tasks/VTUpdateCalendarDates.inc','com_vtiger_workflow/taskforms/VTUpdateCalendarDates.tpl','{\"include\":[\"Leads\",\"Accounts\",\"Potentials\",\"Contacts\",\"HelpDesk\",\"Campaigns\",\"Quotes\",\"PurchaseOrder\",\"SalesOrder\",\"Invoice\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}',NULL);
+insert  into `com_vtiger_workflow_tasktypes`(`id`,`tasktypename`,`label`,`classname`,`classpath`,`templatepath`,`modules`,`sourcemodule`) values (13,'VTUpdateCalendarDates','LBL_UPDATE_DATES_CREATED_EVENTS_AUTOMATICALLY','VTUpdateCalendarDates','modules/com_vtiger_workflow/tasks/VTUpdateCalendarDates.inc','com_vtiger_workflow/taskforms/VTUpdateCalendarDates.tpl','{\"include\":[\"Accounts\",\"Contacts\",\"Leads\",\"OSSEmployees\",\"Vendors\",\"Campaigns\",\"HelpDesk\",\"Potentials\",\"Project\",\"ServiceContracts\"],\"exclude\":[\"Calendar\",\"FAQ\",\"Events\"]}',NULL);
 
 /*Data for the table `com_vtiger_workflow_tasktypes_seq` */
 
@@ -96,10 +98,9 @@ insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (53,'Contacts','Send Customer Login Details','[{\"fieldname\":\"emailoptout\",\"operation\":\"is\",\"value\":\"1\",\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"portal\",\"operation\":\"has changed\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"portal\",\"operation\":\"is\",\"value\":\"1\",\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',4,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (54,'HelpDesk','Update Closed Time','[{\"fieldname\":\"ticketstatus\",\"operation\":\"is\",\"value\":\"Rejected\",\"valuetype\":\"rawtext\",\"joincondition\":\"or\",\"groupjoin\":null,\"groupid\":\"1\"},{\"fieldname\":\"ticketstatus\",\"operation\":\"is\",\"value\":\"Closed\",\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":null,\"groupid\":\"1\"}]',2,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (55,'Contacts','Generate mail address book','[]',3,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
-insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (56,'ModComments','New comment added to ticket from portal','[{\"fieldname\":\"(related_to : (HelpDesk) from_portal)\",\"operation\":\"is\",\"value\":\"1\",\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
-insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (57,'ModComments','New comment added to ticket - contact person','[{\"fieldname\":\"customer\",\"operation\":\"is empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"(related_to : (HelpDesk) contact_id)\",\"operation\":\"is not empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
-insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (58,'ModComments','New comment added to ticket - account','[{\"fieldname\":\"customer\",\"operation\":\"is empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"(related_to : (Accounts) accountname)\",\"operation\":\"is not empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"(related_to : (Contacts) emailoptout)\",\"operation\":\"is\",\"value\":\"1\",\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
-insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (59,'ModComments','New comment added to ticket - contact','[{\"fieldname\":\"customer\",\"operation\":\"is empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"(related_to : (Contacts) lastname)\",\"operation\":\"is not empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"and\",\"groupjoin\":\"and\",\"groupid\":\"0\"},{\"fieldname\":\"(related_to : (Contacts) emailoptout)\",\"operation\":\"is\",\"value\":\"1\",\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (57,'ModComments','New comment added to ticket - Owner','[{\"fieldname\":\"customer\",\"operation\":\"is not empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (58,'ModComments','New comment added to ticket - account','[{\"fieldname\":\"customer\",\"operation\":\"is empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (59,'ModComments','New comment added to ticket - contact','[{\"fieldname\":\"customer\",\"operation\":\"is empty\",\"value\":null,\"valuetype\":\"rawtext\",\"joincondition\":\"\",\"groupjoin\":\"and\",\"groupid\":\"0\"}]',1,NULL,'basic',6,NULL,NULL,NULL,NULL,NULL,NULL);
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (60,'PaymentsIn','PaymentsIn - UpdateBalance','[]',3,0,'basic',5,NULL,NULL,NULL,NULL,NULL,NULL);
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (61,'Invoice','Invoice - UpdateBalance','[]',3,0,'basic',5,NULL,NULL,NULL,NULL,NULL,NULL);
 insert  into `com_vtiger_workflows`(`workflow_id`,`module_name`,`summary`,`test`,`execution_condition`,`defaultworkflow`,`type`,`filtersavedinnew`,`schtypeid`,`schdayofmonth`,`schdayofweek`,`schannualdates`,`schtime`,`nexttrigger_time`) values (62,'PaymentsOut','PaymentsOut - UpdateBalance','[]',3,0,'basic',5,NULL,NULL,NULL,NULL,NULL,NULL);
@@ -192,24 +193,23 @@ insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (121,54,'Update Closed Time','O:18:\"VTUpdateClosedTime\":6:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"54\";s:7:\"summary\";s:18:\"Update Closed Time\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:2:\"id\";i:121;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (122,13,'Send invitations','O:22:\"VTSendNotificationTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"13\";s:7:\"summary\";s:16:\"Send invitations\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:8:\"template\";s:2:\"45\";s:2:\"id\";i:122;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (123,55,'Generate mail address book','O:17:\"VTAddressBookTask\":7:{s:18:\"executeImmediately\";b:0;s:10:\"workflowId\";s:2:\"55\";s:7:\"summary\";s:26:\"Generate mail address book\";s:6:\"active\";b:1;s:7:\"trigger\";N;s:4:\"test\";s:0:\"\";s:2:\"id\";i:123;}');
-insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (124,56,'Send e-mail to user','O:19:\"VTEmailTemplateTask\":10:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"56\";s:7:\"summary\";s:19:\"Send e-mail to user\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:8:\"template\";s:3:\"105\";s:11:\"attachments\";s:0:\"\";s:5:\"email\";s:28:\"created_user_id=Users=email1\";s:10:\"copy_email\";s:0:\"\";s:2:\"id\";i:124;}');
-insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (125,57,'Send e-mail to contact person','O:19:\"VTEmailTemplateTask\":10:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"57\";s:7:\"summary\";s:29:\"Send e-mail to contact person\";s:6:\"active\";b:1;s:7:\"trigger\";N;s:8:\"template\";s:3:\"106\";s:11:\"attachments\";s:0:\"\";s:5:\"email\";s:23:\"customer=Contacts=email\";s:10:\"copy_email\";s:0:\"\";s:2:\"id\";i:125;}');
-insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (126,58,'Send e-mail to account','O:19:\"VTEmailTemplateTask\":10:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"58\";s:7:\"summary\";s:22:\"Send e-mail to account\";s:6:\"active\";b:1;s:7:\"trigger\";N;s:8:\"template\";s:3:\"106\";s:11:\"attachments\";s:0:\"\";s:5:\"email\";s:26:\"related_to=Accounts=email1\";s:10:\"copy_email\";s:0:\"\";s:2:\"id\";i:126;}');
-insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (127,59,'Send e-mail to contact','O:19:\"VTEmailTemplateTask\":10:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"59\";s:7:\"summary\";s:22:\"Send e-mail to contact\";s:6:\"active\";b:1;s:7:\"trigger\";N;s:8:\"template\";s:3:\"106\";s:11:\"attachments\";s:0:\"\";s:5:\"email\";s:25:\"related_to=Contacts=email\";s:10:\"copy_email\";s:0:\"\";s:2:\"id\";i:127;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (128,53,'Mark portal users password as sent.','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"53\";s:7:\"summary\";s:35:\"Mark portal users password as sent.\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:16:\"MarkPasswordSent\";s:2:\"id\";i:128;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (129,60,'UpdateBalance','O:18:\"VTEntityMethodTask\":6:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:60;s:7:\"summary\";s:13:\"UpdateBalance\";s:6:\"active\";b:1;s:10:\"methodName\";s:13:\"UpdateBalance\";s:2:\"id\";i:129;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (130,61,'UpdateBalance','O:18:\"VTEntityMethodTask\":6:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:61;s:7:\"summary\";s:13:\"UpdateBalance\";s:6:\"active\";b:1;s:10:\"methodName\";s:13:\"UpdateBalance\";s:2:\"id\";i:130;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (131,62,'UpdateBalance','O:18:\"VTEntityMethodTask\":6:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:62;s:7:\"summary\";s:13:\"UpdateBalance\";s:6:\"active\";b:1;s:10:\"methodName\";s:13:\"UpdateBalance\";s:2:\"id\";i:131;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (133,26,'Notify Contact On Ticket Change','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"26\";s:7:\"summary\";s:31:\"Notify Contact On Ticket Change\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:28:\"HeldDeskChangeNotifyContacts\";s:2:\"id\";i:133;}');
 insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (134,29,'Notify contacts about closing of ticket.','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";s:2:\"29\";s:7:\"summary\";s:40:\"Notify contacts about closing of ticket.\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:28:\"HeldDeskClosedNotifyContacts\";s:2:\"id\";i:134;}');
+insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (135,59,'Notify Contact On New comment added to ticket','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:59;s:7:\"summary\";s:45:\"Notify Contact On New comment added to ticket\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:26:\"HeldDeskNewCommentContacts\";s:2:\"id\";i:135;}');
+insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (136,58,'Notify Account On New comment added to ticket','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:58;s:7:\"summary\";s:45:\"Notify Account On New comment added to ticket\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:25:\"HeldDeskNewCommentAccount\";s:2:\"id\";i:136;}');
+insert  into `com_vtiger_workflowtasks`(`task_id`,`workflow_id`,`summary`,`task`) values (137,57,'Notify Owner On new comment added to ticket from portal','O:18:\"VTEntityMethodTask\":7:{s:18:\"executeImmediately\";b:1;s:10:\"workflowId\";i:57;s:7:\"summary\";s:55:\"Notify Owner On new comment added to ticket from portal\";s:6:\"active\";b:0;s:7:\"trigger\";N;s:10:\"methodName\";s:23:\"HeldDeskNewCommentOwner\";s:2:\"id\";i:137;}');
 
 /*Data for the table `com_vtiger_workflowtasks_entitymethod` */
 
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (1,'SalesOrder','UpdateInventory','modules/Inventory/handlers/InventoryHandler.php','handleInventoryProductRel');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (2,'Invoice','UpdateInventory','modules/Inventory/handlers/InventoryHandler.php','handleInventoryProductRel');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (3,'Contacts','CreatePortalLoginDetails','modules/Contacts/handlers/ContactsHandler.php','Contacts_createPortalLoginDetails');
-insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (8,'ModComments','CustomerCommentFromPortal','modules/ModComments/handlers/ModCommentsHandler.php','CustomerCommentFromPortal');
-insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (9,'ModComments','TicketOwnerComments','modules/ModComments/handlers/ModCommentsHandler.php','TicketOwnerComments');
+insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (8,'ModComments','HeldDeskNewCommentAccount','modules/HelpDesk/workflows/HelpDeskWorkflow.php','HeldDeskNewCommentAccount');
+insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (9,'ModComments','HeldDeskNewCommentContacts','modules/HelpDesk/workflows/HelpDeskWorkflow.php','HeldDeskNewCommentContacts');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (10,'PurchaseOrder','UpdateInventory','modules/Inventory/handlers/InventoryHandler.php','handleInventoryProductRel');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (11,'Contacts','MarkPasswordSent','modules/Contacts/handlers/ContactsHandler.php','Contacts_markPasswordSent');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (12,'PaymentsIn','UpdateBalance','modules/PaymentsIn/workflow/UpdateBalance.php','UpdateBalance');
@@ -217,14 +217,15 @@ insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (14,'PaymentsOut','UpdateBalance','modules/PaymentsIn/workflow/UpdateBalance.php','UpdateBalance');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (15,'HelpDesk','HeldDeskChangeNotifyContacts','modules/HelpDesk/workflows/HelpDeskWorkflow.php','HeldDeskChangeNotifyContacts');
 insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (16,'HelpDesk','HeldDeskClosedNotifyContacts','modules/HelpDesk/workflows/HelpDeskWorkflow.php','HeldDeskClosedNotifyContacts');
+insert  into `com_vtiger_workflowtasks_entitymethod`(`workflowtasks_entitymethod_id`,`module_name`,`method_name`,`function_path`,`function_name`) values (17,'ModComments','HeldDeskNewCommentOwner','modules/HelpDesk/workflows/HelpDeskWorkflow.php','HeldDeskNewCommentOwner');
 
 /*Data for the table `com_vtiger_workflowtasks_entitymethod_seq` */
 
-insert  into `com_vtiger_workflowtasks_entitymethod_seq`(`id`) values (16);
+insert  into `com_vtiger_workflowtasks_entitymethod_seq`(`id`) values (17);
 
 /*Data for the table `com_vtiger_workflowtasks_seq` */
 
-insert  into `com_vtiger_workflowtasks_seq`(`id`) values (134);
+insert  into `com_vtiger_workflowtasks_seq`(`id`) values (137);
 
 /*Data for the table `com_vtiger_workflowtemplates` */
 
@@ -249,6 +250,12 @@ insert  into `com_vtiger_workflowtasks_seq`(`id`) values (134);
 /*Data for the table `dav_schedulingobjects` */
 
 /*Data for the table `dav_users` */
+
+/*Data for the table `l_yf_access_to_record` */
+
+/*Data for the table `l_yf_sqltime` */
+
+/*Data for the table `l_yf_switch_users` */
 
 /*Data for the table `roundcube_cache` */
 
@@ -282,7 +289,7 @@ insert  into `roundcube_system`(`name`,`value`) values ('roundcube-version','201
 
 /*Data for the table `roundcube_users_autologin` */
 
-/*Data for the table `s_yf_accesstorecord` */
+/*Data for the table `s_yf_multireference` */
 
 /*Data for the table `vtiger_account` */
 
@@ -352,6 +359,11 @@ insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) val
 insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (28,'QuickExportToExcel',0);
 insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (29,'TagCloud',1);
 insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (30,'DetailTransferOwnership',0);
+insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (31,'ActivityPostponed',0);
+insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (32,'ActivityCancel',0);
+insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (33,'ActivityComplete',0);
+insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (34,'ExportPdf',0);
+insert  into `vtiger_actionmapping`(`actionid`,`actionname`,`securitycheck`) values (35,'PrintMail',0);
 
 /*Data for the table `vtiger_activity` */
 
@@ -375,6 +387,19 @@ insert  into `vtiger_activity_view_seq`(`id`) values (4);
 /*Data for the table `vtiger_activitycf` */
 
 /*Data for the table `vtiger_activityproductrel` */
+
+/*Data for the table `vtiger_activitystatus` */
+
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (1,'PLL_PLANNED',0,173,0);
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (2,'PLL_IN_REALIZATION',0,174,1);
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (3,'PLL_OVERDUE',0,175,2);
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (4,'PLL_POSTPONED',0,176,3);
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (5,'PLL_CANCELLED',0,177,4);
+insert  into `vtiger_activitystatus`(`activitystatusid`,`activitystatus`,`presence`,`picklist_valueid`,`sortorderid`) values (6,'PLL_COMPLETED',0,178,5);
+
+/*Data for the table `vtiger_activitystatus_seq` */
+
+insert  into `vtiger_activitystatus_seq`(`id`) values (6);
 
 /*Data for the table `vtiger_activitytype` */
 
@@ -932,8 +957,8 @@ insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`m
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (36,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:51:21','2014-11-24 10:48:00',NULL,NULL,NULL,0,1,0,'Notify Account On Ticket Change','Notify Account On Ticket Change',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (37,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:53:15','2014-11-24 10:48:41',NULL,NULL,NULL,0,1,0,'Notify Contact On Ticket Closed','Notify Contact On Ticket Closed',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (38,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:55:03','2014-11-24 10:49:00',NULL,NULL,NULL,0,1,0,'Notify Account On Ticket Closed','Notify Account On Ticket Closed',NULL);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (39,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:57:26','2014-11-24 10:49:19',NULL,NULL,NULL,0,1,0,'Notify Contact On Ticket Create','Notify Contact On Ticket Create',NULL);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (40,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:58:38','2014-11-24 10:49:39',NULL,NULL,NULL,0,1,0,'Notify Account On Ticket Create','Notify Account On Ticket Create',NULL);
+insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (39,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:57:26','2015-10-23 08:32:59','2015-10-23 08:33:00',NULL,NULL,0,1,0,'Notify Contact On Ticket Create','Notify Contact On Ticket Create',0);
+insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (40,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-22 23:58:38','2014-11-24 10:49:39','2015-10-23 08:26:04',NULL,NULL,0,1,0,'Notify Account On Ticket Create','Notify Account On Ticket Create',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (41,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-23 00:05:38','2014-11-24 10:50:53',NULL,NULL,NULL,0,1,0,'Notify Contact On Ticket Change','Notify Contact On Ticket Change',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (42,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-23 00:06:31','2014-11-24 10:51:36',NULL,NULL,NULL,0,1,0,'Notify Owner On Ticket Closed','Notify Owner On Ticket Closed',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (43,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2014-09-23 00:07:37','2014-11-24 10:51:59',NULL,NULL,NULL,0,1,0,'Notify Owner On Ticket Create','Notify Owner On Ticket Create',NULL);
@@ -950,14 +975,15 @@ insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`m
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (100,1,1,'',1,'OSSPdf',NULL,NULL,'2014-09-29 10:07:35','2015-07-20 11:59:53','2015-07-20 11:59:58',NULL,NULL,0,1,0,'Calculation PDF','Calculation PDF',0);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (103,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-01-24 11:33:24','2015-01-24 11:33:24','2015-02-12 08:37:31',NULL,NULL,0,1,0,'ForgotPassword','ForgotPassword',NULL);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (104,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-12 09:08:42','2015-02-12 09:26:02','2015-02-12 09:26:03',NULL,NULL,0,1,0,'Customer Portal - ForgotPassword','Customer Portal - ForgotPassword',0);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (105,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-17 10:11:08','2015-02-17 10:11:08','2015-02-18 08:35:02',NULL,NULL,0,1,0,'New comment added to ticket from portal','New comment added to ticket from portal',0);
-insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (106,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-18 08:35:26','2015-02-18 08:35:26','2015-02-18 08:35:27',NULL,NULL,0,1,0,'New comment added to ticket','New comment added to ticket',0);
+insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (105,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-17 10:11:08','2015-10-23 08:35:22','2015-10-23 08:35:22',NULL,NULL,0,1,0,'Notify Owner On new comment added to ticket from portal','Notify Owner On new comment added to ticket from portal',0);
+insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (106,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-18 08:35:26','2015-10-23 08:34:38','2015-10-23 08:34:38',NULL,NULL,0,1,0,'Notify Contact On New comment added to ticket','Notify Contact On New comment added to ticket',0);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (107,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-02-26 09:59:53','2015-02-26 09:59:53','2015-02-26 09:59:53',NULL,NULL,0,1,0,'Security risk has been detected - Brute Force','Security risk has been detected - Brute Force',0);
 insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (108,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-03-12 07:44:12','2015-03-12 07:44:12','2015-03-12 07:44:13',NULL,NULL,0,1,0,'Backup has been made','Backup has been made',0);
+insert  into `vtiger_crmentity`(`crmid`,`smcreatorid`,`smownerid`,`shownerid`,`modifiedby`,`setype`,`description`,`attention`,`createdtime`,`modifiedtime`,`viewedtime`,`closedtime`,`status`,`version`,`presence`,`deleted`,`label`,`searchlabel`,`was_read`) values (109,1,1,'',1,'OSSMailTemplates',NULL,NULL,'2015-10-23 08:16:58','2015-10-23 08:34:54','2015-10-23 08:34:54',NULL,NULL,0,1,0,'Notify Account On New comment added to ticket','Notify Account On New comment added to ticket',0);
 
 /*Data for the table `vtiger_crmentity_seq` */
 
-insert  into `vtiger_crmentity_seq`(`id`) values (108);
+insert  into `vtiger_crmentity_seq`(`id`) values (109);
 
 /*Data for the table `vtiger_crmentityrel` */
 
@@ -975,6 +1001,8 @@ insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststar
 insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststart`,`lastend`,`status`,`module`,`sequence`,`description`) values (13,'Backup','cron/backup.service',43200,NULL,NULL,0,'BackUp',11,NULL);
 insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststart`,`lastend`,`status`,`module`,`sequence`,`description`) values (14,'CardDav','modules/API/cron/CardDav.php',300,NULL,NULL,1,'Contacts',12,NULL);
 insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststart`,`lastend`,`status`,`module`,`sequence`,`description`) values (15,'CalDav','modules/API/cron/CalDav.php',300,NULL,NULL,1,'Calendar',13,NULL);
+insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststart`,`lastend`,`status`,`module`,`sequence`,`description`) values (16,'Activity state','modules/Calendar/cron/ActivityState.php',1800,NULL,NULL,1,'Calendar',14,'');
+insert  into `vtiger_cron_task`(`id`,`name`,`handler_file`,`frequency`,`laststart`,`lastend`,`status`,`module`,`sequence`,`description`) values (17,'LBL_MULTI_REFERENCE_VALUE','cron/MultiReference.service',900,NULL,NULL,1,'com_vtiger_workflow',15,NULL);
 
 /*Data for the table `vtiger_currencies` */
 
@@ -1115,10 +1143,11 @@ insert  into `vtiger_currencies`(`currencyid`,`currency_name`,`currency_code`,`c
 insert  into `vtiger_currencies`(`currencyid`,`currency_name`,`currency_code`,`currency_symbol`) values (135,'CFA Franc BEAC','XAF','CFA');
 insert  into `vtiger_currencies`(`currencyid`,`currency_name`,`currency_code`,`currency_symbol`) values (136,'Haiti, Gourde','HTG','G');
 insert  into `vtiger_currencies`(`currencyid`,`currency_name`,`currency_code`,`currency_symbol`) values (137,'Libya, Dinar','LYD','LYD');
+insert  into `vtiger_currencies`(`currencyid`,`currency_name`,`currency_code`,`currency_symbol`) values (138,'CFP Franc','XPF','F');
 
 /*Data for the table `vtiger_currencies_seq` */
 
-insert  into `vtiger_currencies_seq`(`id`) values (137);
+insert  into `vtiger_currencies_seq`(`id`) values (138);
 
 /*Data for the table `vtiger_currency` */
 
@@ -1225,7 +1254,6 @@ insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`en
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (13,'All',1,0,'HelpDesk',0,1,0);
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (16,'All',1,0,'Quotes',0,1,0);
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (19,'All',1,0,'Calendar',0,1,0);
-insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (20,'All',1,0,'Emails',0,1,0);
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (21,'All',1,0,'Invoice',0,1,0);
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (22,'All',1,0,'Documents',0,1,0);
 insert  into `vtiger_customview`(`cvid`,`viewname`,`setdefault`,`setmetrics`,`entitytype`,`status`,`userid`,`privileges`) values (23,'All',1,0,'PriceBooks',0,1,0);
@@ -1320,9 +1348,6 @@ insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (19
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (19,4,'vtiger_activity:date_start:date_start:Calendar_Start_Date:D');
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (19,5,'vtiger_activity:due_date:due_date:Calendar_End_Date:D');
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (19,6,'vtiger_crmentity:smownerid:assigned_user_id:Calendar_Assigned_To:V');
-insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (20,0,'vtiger_activity:subject:subject:Emails_Subject:V');
-insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (20,1,'vtiger_emaildetails:to_email:saved_toid:Emails_To:V');
-insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (20,2,'vtiger_activity:date_start:date_start:Emails_Date_Sent:D');
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (21,1,'vtiger_invoice:subject:subject:Invoice_Subject:V');
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (21,2,'vtiger_invoice:salesorderid:salesorder_id:Invoice_Sales_Order:V');
 insert  into `vtiger_cvcolumnlist`(`cvid`,`columnindex`,`columnname`) values (21,3,'vtiger_invoice:invoicestatus:invoicestatus:Invoice_Status:V');
@@ -1571,7 +1596,7 @@ insert  into `vtiger_dataaccess`(`dataaccessid`,`module_name`,`summary`,`data`) 
 /*Data for the table `vtiger_dataaccess_cnd` */
 
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (37,1,'ticketstatus','has changed','Open',1,'picklist');
-insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (38,2,'taskstatus','has changed','Not Started',1,'picklist');
+insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (38,2,'activitystatus','has changed','PLL_PLANNED',1,'picklist');
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (39,3,'projecttaskstatus','has changed','Open',1,'picklist');
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (42,5,'projectmilestoneid','is not empty','',1,'reference');
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (46,7,'leadstatus','is','LBL_LEAD_ACQUIRED',1,'picklist');
@@ -1580,7 +1605,7 @@ insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldnam
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (49,8,'accountname','is not empty','',1,'string');
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (50,10,'ticketstatus','is','Rejected',0,'picklist');
 insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (51,10,'ticketstatus','is','Closed',0,'picklist');
-insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (52,11,'eventstatus','has changed','Held',1,'picklist');
+insert  into `vtiger_dataaccess_cnd`(`dataaccess_cndid`,`dataaccessid`,`fieldname`,`comparator`,`val`,`required`,`field_type`) values (52,11,'activitystatus','has changed','PLL_COMPLETED',1,'picklist');
 
 /*Data for the table `vtiger_datashare_grp2grp` */
 
@@ -1839,7 +1864,6 @@ insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) valu
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,237,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,238,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,239,0,0);
-insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,240,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,241,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,242,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,243,0,0);
@@ -2994,6 +3018,9 @@ insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) valu
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (14,1759,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (77,1760,0,0);
 insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (16,1761,0,0);
+insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (9,1762,0,0);
+insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (15,1763,0,0);
+insert  into `vtiger_def_org_field`(`tabid`,`fieldid`,`visible`,`readonly`) values (19,1764,0,0);
 
 /*Data for the table `vtiger_def_org_share` */
 
@@ -3261,10 +3288,14 @@ insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path
 insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (41,'vtiger.entity.link.after','modules/ModTracker/handlers/ModTrackerHandler.php','ModTrackerHandler','',1,'[]');
 insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (42,'vtiger.entity.unlink.after','modules/ModTracker/handlers/ModTrackerHandler.php','ModTrackerHandler','',1,'[]');
 insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (43,'user.logout.before','modules/Users/handlers/LogoutHandler.php','LogoutHandler','',1,'[]');
+insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (44,'vtiger.entity.beforesave','modules/Calendar/handlers/CalendarHandler.php','CalendarHandler','',1,'[]');
+insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (45,'vtiger.entity.link.after','modules/Vtiger/handlers/MultiReferenceUpdater.php','Vtiger_MultiReferenceUpdater_Handler','',1,'[]');
+insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (46,'vtiger.entity.unlink.after','modules/Vtiger/handlers/MultiReferenceUpdater.php','Vtiger_MultiReferenceUpdater_Handler','',1,'[]');
+insert  into `vtiger_eventhandlers`(`eventhandler_id`,`event_name`,`handler_path`,`handler_class`,`cond`,`is_active`,`dependent_on`) values (47,'vtiger.entity.aftersave.final','modules/Vtiger/handlers/MultiReferenceUpdater.php','Vtiger_MultiReferenceUpdater_Handler','',1,'[]');
 
 /*Data for the table `vtiger_eventhandlers_seq` */
 
-insert  into `vtiger_eventhandlers_seq`(`id`) values (43);
+insert  into `vtiger_eventhandlers_seq`(`id`) values (47);
 
 /*Data for the table `vtiger_eventstatus` */
 
@@ -3501,8 +3532,7 @@ insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generate
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,236,'due_date','vtiger_activity',1,'23','due_date','Due Date',1,0,'',100,5,19,1,'D~M~OTH~GE~date_start~Start Date & Time',1,4,'BAS',1,'',1,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,237,'process','vtiger_activity',1,'66','process','Process',1,0,'',100,7,19,1,'I~O',2,9,'BAS',1,'',1,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,238,'link','vtiger_activity',1,'67','link','Relation',1,0,'',100,8,19,1,'I~O',2,5,'BAS',1,'',1,'');
-insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,239,'status','vtiger_activity',1,'15','taskstatus','Status',1,0,'Not Started',100,9,19,1,'V~M',0,2,'BAS',1,'',0,'');
-insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,240,'eventstatus','vtiger_activity',1,'15','eventstatus','Status',1,0,'',100,9,19,3,'V~O',1,NULL,'BAS',1,'',0,'');
+insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,239,'status','vtiger_activity',1,'15','activitystatus','Status',1,0,'PLL_PLANNED',100,9,19,10,'V~O',0,2,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,241,'priority','vtiger_activity',1,'15','taskpriority','Priority',1,0,'Low',100,10,19,1,'V~O',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,242,'sendnotification','vtiger_activity',1,'56','sendnotification','Send Notification',1,0,'',100,11,19,1,'C~O',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,243,'createdtime','vtiger_crmentity',1,'70','createdtime','Created Time',1,0,'',100,14,19,2,'DT~O',3,NULL,'BAS',0,'',0,'');
@@ -3527,7 +3557,7 @@ insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generate
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,262,'duration_hours','vtiger_activity',1,'63','duration_hours','Duration',1,0,'',100,7,39,3,'I~M',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,263,'duration_minutes','vtiger_activity',1,'16','duration_minutes','Duration Minutes',1,0,'',100,8,39,3,'O~O',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,264,'process','vtiger_activity',1,'66','process','Process',1,0,'',100,9,119,1,'I~O',2,9,'BAS',1,'',1,'');
-insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,265,'eventstatus','vtiger_activity',1,'15','eventstatus','Status',1,0,'',100,7,39,1,'V~M',0,7,'BAS',1,'',0,'');
+insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,265,'status','vtiger_activity',1,'15','activitystatus','Status',1,0,'PLL_PLANNED',100,7,39,10,'V~O',0,7,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,266,'sendnotification','vtiger_activity',1,'56','sendnotification','Send Notification',1,0,'',100,11,39,1,'C~O',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,267,'activitytype','vtiger_activity',1,'15','activitytype','Activity Type',1,0,'',100,9,39,1,'V~M',0,5,'BAS',1,'',1,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,268,'location','vtiger_activity',1,'1','location','Location',1,0,'',100,13,39,1,'V~O',1,NULL,'BAS',1,'',0,'');
@@ -4688,10 +4718,13 @@ insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generate
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (14,1759,'taxes','vtiger_products',1,'303','taxes','LBL_TAXES',1,2,'',100,5,32,1,'V~I',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (77,1760,'shownerid','vtiger_crmentity',1,'120','shownerid','Share with users',1,2,'',100,3,244,1,'V~O',1,NULL,'BAS',1,'',0,'');
 insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (16,1761,'followup','vtiger_activity',2,'10','followup','LBL_FOLLOWUP',1,2,'',100,25,39,1,'V~O',1,NULL,'BAS',1,'',0,'');
+insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (9,1762,'followup','vtiger_activity',2,'10','followup','LBL_FOLLOWUP',1,2,'',100,27,19,1,'V~O',1,NULL,'BAS',1,'',0,'');
+insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (15,1763,'smownerid','vtiger_crmentity',1,'53','assigned_user_id','Assigned To',1,0,'',100,12,37,1,'V~M',0,2,'BAS',1,'',1,'');
+insert  into `vtiger_field`(`tabid`,`fieldid`,`columnname`,`tablename`,`generatedtype`,`uitype`,`fieldname`,`fieldlabel`,`readonly`,`presence`,`defaultvalue`,`maximumlength`,`sequence`,`block`,`displaytype`,`typeofdata`,`quickcreate`,`quickcreatesequence`,`info_type`,`masseditable`,`helpinfo`,`summaryfield`,`fieldparams`) values (19,1764,'smownerid','vtiger_crmentity',1,'53','assigned_user_id','Assigned To',1,0,'',100,10,46,1,'V~M',0,2,'BAS',1,'',1,'');
 
 /*Data for the table `vtiger_field_seq` */
 
-insert  into `vtiger_field_seq`(`id`) values (1761);
+insert  into `vtiger_field_seq`(`id`) values (1764);
 
 /*Data for the table `vtiger_fieldmodulerel` */
 
@@ -4842,6 +4875,7 @@ insert  into `vtiger_fieldmodulerel`(`fieldid`,`module`,`relmodule`,`status`,`se
 insert  into `vtiger_fieldmodulerel`(`fieldid`,`module`,`relmodule`,`status`,`sequence`) values (157,'HelpDesk','Vendors',NULL,NULL);
 insert  into `vtiger_fieldmodulerel`(`fieldid`,`module`,`relmodule`,`status`,`sequence`) values (635,'Project','Vendors',NULL,NULL);
 insert  into `vtiger_fieldmodulerel`(`fieldid`,`module`,`relmodule`,`status`,`sequence`) values (1761,'Events','Calendar',NULL,NULL);
+insert  into `vtiger_fieldmodulerel`(`fieldid`,`module`,`relmodule`,`status`,`sequence`) values (1762,'Calendar','Calendar',NULL,NULL);
 
 /*Data for the table `vtiger_form_payment` */
 
@@ -5093,6 +5127,8 @@ insert  into `vtiger_language`(`id`,`name`,`prefix`,`label`,`lastupdated`,`seque
 /*Data for the table `vtiger_language_seq` */
 
 insert  into `vtiger_language_seq`(`id`) values (6);
+
+/*Data for the table `vtiger_layout` */
 
 /*Data for the table `vtiger_lead_view` */
 
@@ -5408,13 +5444,13 @@ insert  into `vtiger_links`(`linkid`,`tabid`,`linktype`,`linklabel`,`linkurl`,`l
 insert  into `vtiger_links`(`linkid`,`tabid`,`linktype`,`linklabel`,`linkurl`,`linkicon`,`sequence`,`handler_path`,`handler_class`,`handler`) values (230,3,'DASHBOARDWIDGET','Calculations','index.php?module=Calculations&view=ShowWidget&name=Calculations','',0,NULL,NULL,NULL);
 insert  into `vtiger_links`(`linkid`,`tabid`,`linktype`,`linklabel`,`linkurl`,`linkicon`,`sequence`,`handler_path`,`handler_class`,`handler`) values (231,3,'DASHBOARDWIDGET','PotentialsList','index.php?module=Potentials&view=ShowWidget&name=PotentialsList','',0,NULL,NULL,NULL);
 insert  into `vtiger_links`(`linkid`,`tabid`,`linktype`,`linklabel`,`linkurl`,`linkicon`,`sequence`,`handler_path`,`handler_class`,`handler`) values (232,3,'DASHBOARDWIDGET','LBL_CREATED_BY_ME_BUT_NOT_MINE_ACTIVITIES','index.php?module=Home&view=ShowWidget&name=CreatedNotMineActivities','',0,NULL,NULL,NULL);
+insert  into `vtiger_links`(`linkid`,`tabid`,`linktype`,`linklabel`,`linkurl`,`linkicon`,`sequence`,`handler_path`,`handler_class`,`handler`) values (233,51,'DETAILVIEWBASIC','View History','javascript:ModTrackerCommon.showhistory(\'$RECORD$\')','',0,'modules/ModTracker/ModTracker.php','ModTracker','isViewPermitted');
 
 /*Data for the table `vtiger_links_seq` */
 
-insert  into `vtiger_links_seq`(`id`) values (232);
+insert  into `vtiger_links_seq`(`id`) values (233);
 
 /*Data for the table `vtiger_loginhistory` */
-
 
 /*Data for the table `vtiger_lout_dimensions` */
 
@@ -5591,6 +5627,7 @@ insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (41,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (42,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (43,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (45,1);
+insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (51,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (54,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (60,1);
 insert  into `vtiger_modtracker_tabs`(`tabid`,`visible`) values (70,1);
@@ -5867,7 +5904,7 @@ insert  into `vtiger_org_share_action_mapping`(`share_action_id`,`share_action_n
 
 /*Data for the table `vtiger_organizationdetails` */
 
-insert  into `vtiger_organizationdetails`(`organization_id`,`organizationname`,`address`,`city`,`state`,`country`,`code`,`phone`,`fax`,`website`,`panellogoname`,`height_panellogo`,`panellogo`,`logoname`,`logo`,`vatid`,`regon`,`krs`,`email`) values (1,'YetiForce','ul. Marszałkowska 111','Warszawa','Mazowieckie','Poland','00-102','+48 22 415 49 34','','yetiforce.com','logo_yetiforce.png',192,'','serwis_logo_yetiforce.png',NULL,'PL5272638357','','','');
+insert  into `vtiger_organizationdetails`(`organization_id`,`organizationname`,`address`,`city`,`state`,`country`,`code`,`phone`,`fax`,`website`,`panellogoname`,`height_panellogo`,`panellogo`,`logoname`,`logo`,`vatid`,`id1`,`id2`,`email`) values (1,'YetiForce','ul. Marszałkowska 111','Warszawa','Mazowieckie','Poland','00-102','+48 22 415 49 34','','yetiforce.com',NULL,NULL,NULL,'logo_yetiforce.png',NULL,'PL5272638357',NULL,NULL,NULL);
 
 /*Data for the table `vtiger_organizationdetails_seq` */
 
@@ -5940,27 +5977,28 @@ insert  into `vtiger_ossmailscanner_config`(`conf_type`,`parameter`,`value`) val
 
 /*Data for the table `vtiger_ossmailtemplates` */
 
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (35,'Notify Owner On Ticket Change','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (36,'Notify Account On Ticket Change','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (37,'Notify Contact On Ticket Closed','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (38,'Notify Account On Ticket Closed','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (39,'Notify Contact On Ticket Create','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (40,'Notify Account On Ticket Create','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (41,'Notify Contact On Ticket Change','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (42,'Notify Owner On Ticket Closed','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (43,'Notify Owner On Ticket Create','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (44,'Customer Portal Login Details','Contacts','Customer Portal Login Details','<p>#s#LogoImage#sEnd# </p><p>Dear #a#67#aEnd#  #a#70#aEnd#</p><p>Created for your account in the customer portal, below sending data access.</p><p>Login: #a#80#aEnd#<br />Password: #s#ContactsPortalPass#sEnd#</p><p>Regards</p>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (45,'Send invitations','Events','#a#267#aEnd#:  #a#255#aEnd#','<table border=\"0\" cellpadding=\"8\" cellspacing=\"0\" style=\"width:100%;font-family:Arial, \'Sans-serif\';border:1px solid #ccc;border-width:1px 2px 2px 1px;background-color:#fff;\" summary=\"\"><tbody><tr><td style=\"background-color:#f6f6f6;color:#888;border-bottom:1px solid #ccc;font-family:Arial, \'Sans-serif\';font-size:11px;\">\r\n			<h3 style=\"padding:0 0 6px 0;margin:0;font-family:Arial, \'Sans-serif\';font-size:16px;font-weight:bold;color:#222;\"><span>#a#255#aEnd#</span></h3>\r\n			</td>\r\n		</tr><tr><td>\r\n			<div style=\"padding:2px;\">\r\n			<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#257#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#257#aEnd# #a#258#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#259#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#259#aEnd# #a#260#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#264#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#264#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#277#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#277#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#267#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#267#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#271#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#271#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#268#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\"><span><span>#a#268#aEnd#</span><span dir=\"ltr\"> (<a href=\"https://maps.google.pl/maps?q=%23a%23268%23aEnd%23\" style=\"color:#20c;white-space:nowrap;\">mapa</a>)</span></span></td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#265#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#265#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#275#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#275#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#256#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#256#aEnd#</td>\r\n					</tr></tbody></table></div>\r\n			</td>\r\n		</tr><tr><td style=\"background-color:#f6f6f6;color:#888;border-top:1px solid #ccc;font-family:Arial, \'Sans-serif\';font-size:11px;\">\r\n			<p>YetiForce CRM - Notification activities on the calendar</p>\r\n			</td>\r\n		</tr></tbody></table>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (46,'Send Notification Email to Record Owner','Calendar','Task :  #a#231#aEnd#','#a#232#aEnd#<br /><br />Activity Notification Details:<br />Subject : #a#231#aEnd#<br />Start date and time : #a#233#aEnd# #a#234#aEnd#<br />End date and time : #a#235#aEnd# #a#236#aEnd#<br />Status : #a#239#aEnd#<br />Priority : #a#241#aEnd#<br />Related To : #a#237#aEnd#<br />Contacts List : #a#238#aEnd#<br />Location : #a#250#aEnd#<br />Description : #a#247#aEnd#','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (93,'Activity Reminder Notification','Calendar','Reminder:  #a#231#aEnd#','This is a reminder notification for the Activity:<br />Subject: #a#231#aEnd#<br />Date & Time: #a#233#aEnd# #a#234#aEnd#<br /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Contact Name: </span>#a#238#aEnd#<br style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\" /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Related To: </span>#a#237#aEnd#<br style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\" /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Description: </span>#a#247#aEnd#','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (94,'Activity Reminder Notification','Events','Reminder: #a#255#aEnd#','<span style=\"line-height:20.7999992370605px;\">This is a reminder notification for the Activity:</span><br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;\">Subject:</span>#a#255#aEnd#<br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;\">Date & Time: </span>#a#257#aEnd# #a#258#aEnd#<br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Contact Name: </span>#a#277#aEnd#<br style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Related To: </span>#a#264#aEnd#<br style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Description: </span>#a#275#aEnd#','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (95,'Test mail about the mail server configuration.','Users','Test mail about the mail server configuration.','<span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Dear </span>#a#478#aEnd# #a#479#aEnd#<span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">, </span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><b style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">This is a test mail sent to confirm if a mail is actually being sent through the smtp server that you have configured. </b><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Feel free to delete this mail. </span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Thanks and Regards,</span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Team YetiForce</span>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (103,'ForgotPassword','Users','Request: ForgotPassword','Dear user,<br /><br />\\r\\nYou recently requested a password reset for your YetiForce CRM.<br />\\r\\nTo create a new password, click on the link #s#LinkToForgotPassword#sEnd#.<br /><br />\\r\\nThis request was made on #s#CurrentDateTime#sEnd# and will expire in next 24 hours.<br /><br />\\r\\nRegards,<br />\\r\\nYetiForce CRM Support Team.','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (104,'Customer Portal - ForgotPassword','Contacts','Request: ForgotPassword','Dear #a#67#aEnd# #a#70#aEnd#,<br /><br />\r\nYou recently requested a reminder of your access data for the YetiForce Portal.<br /><br />\r\nYou can login by entering the following data:<br /><br />\r\nYour username: #a#80#aEnd#<br />\r\nYour password: #s#ContactsPortalPass#sEnd#<br /><br /><br />\r\nRegards,<br />\r\nYetiForce CRM Support Team.','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (105,'New comment added to ticket from portal','ModComments','New comment added to ticket from portal','Dear User,<br />\r\nA new comment has been added to the ticket.<br />\r\n#b#597#bEnd# #a#597#aEnd#<br /><br />\r\n ','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (106,'New comment added to ticket','ModComments','New comment added to ticket','<span class=\"value\">Dear User,<br />\r\nA new comment has been added to the ticket.<br />\r\n#b#597#bEnd# #a#597#aEnd#</span>','PLL_RECORD');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (107,'Security risk has been detected - Brute Force','Contacts','Security risk has been detected','<span class=\"value\">Dear user,<br />\r\nFailed login attempts have been detected. </span>','PLL_MODULE');
-insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (108,'Backup has been made','Contacts','Backup has been made notification','Dear User,<br />\r\nBackup has been made.','PLL_MODULE');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (35,'Notify Owner On Ticket Change','','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (36,'Notify Account On Ticket Change','','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (37,'Notify Contact On Ticket Closed','NotifyContactOnTicketClosed','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (38,'Notify Account On Ticket Closed','','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (39,'Notify Contact On Ticket Create','NotifyContactOnTicketCreate','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# (#t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (40,'Notify Account On Ticket Create','','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (41,'Notify Contact On Ticket Change','NotifyContactOnTicketChange','HelpDesk','#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_UPDATED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToPortalRecord%23sEnd%23\">#t#LBL_NOTICE_MODIFICATION#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (42,'Notify Owner On Ticket Closed','','HelpDesk','#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3><span>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></span></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CLOSED#tEnd# #a#168#aEnd#). #s#ChangesList#sEnd#\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_CLOSE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /> #b#171#bEnd#: #a#171#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (43,'Notify Owner On Ticket Create','','HelpDesk','#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#SINGLE_HelpDesk#tEnd# #a#155#aEnd# #t#LBL_NOTICE_CREATED#tEnd# #a#168#aEnd#).\r\n\r\n<hr /><h1><a href=\"%23s%23LinkToCRMRecord%23sEnd%23\">#t#LBL_NOTICE_CREATE#tEnd# #a#155#aEnd#: #a#169#aEnd#</a></h1>\r\n\r\n<ul><li>#b#161#bEnd#: #a#161#aEnd#</li>\r\n	<li>#b#158#bEnd#: #a#158#aEnd#</li>\r\n	<li>#b#156#bEnd#: #a#156#aEnd#</li>\r\n	<li>#b#157#bEnd#: #a#157#aEnd#</li>\r\n</ul><hr /> #b#170#bEnd#: #a#170#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (44,'Customer Portal Login Details','','Contacts','Customer Portal Login Details','<p>#s#LogoImage#sEnd# </p><p>Dear #a#67#aEnd#  #a#70#aEnd#</p><p>Created for your account in the customer portal, below sending data access.</p><p>Login: #a#80#aEnd#<br />Password: #s#ContactsPortalPass#sEnd#</p><p>Regards</p>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (45,'Send invitations','','Events','#a#267#aEnd#:  #a#255#aEnd#','<table border=\"0\" cellpadding=\"8\" cellspacing=\"0\" style=\"width:100%;font-family:Arial, \'Sans-serif\';border:1px solid #ccc;border-width:1px 2px 2px 1px;background-color:#fff;\" summary=\"\"><tbody><tr><td style=\"background-color:#f6f6f6;color:#888;border-bottom:1px solid #ccc;font-family:Arial, \'Sans-serif\';font-size:11px;\">\r\n			<h3 style=\"padding:0 0 6px 0;margin:0;font-family:Arial, \'Sans-serif\';font-size:16px;font-weight:bold;color:#222;\"><span>#a#255#aEnd#</span></h3>\r\n			</td>\r\n		</tr><tr><td>\r\n			<div style=\"padding:2px;\">\r\n			<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#257#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#257#aEnd# #a#258#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#259#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#259#aEnd# #a#260#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#264#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#264#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#277#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#277#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#267#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#267#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#271#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#271#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#268#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\"><span><span>#a#268#aEnd#</span><span dir=\"ltr\"> (<a href=\"https://maps.google.pl/maps?q=%23a%23268%23aEnd%23\" style=\"color:#20c;white-space:nowrap;\">mapa</a>)</span></span></td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#265#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#265#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#275#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#275#aEnd#</td>\r\n					</tr><tr><td style=\"padding:0 1em 10px 0;font-family:Arial, \'Sans-serif\';font-size:13px;color:#888;white-space:nowrap;\" valign=\"top\">\r\n						<div><i style=\"font-style:normal;\">#b#256#bEnd#</i></div>\r\n						</td>\r\n						<td style=\"padding-bottom:10px;font-family:Arial, \'Sans-serif\';font-size:13px;color:#222;\" valign=\"top\">#a#256#aEnd#</td>\r\n					</tr></tbody></table></div>\r\n			</td>\r\n		</tr><tr><td style=\"background-color:#f6f6f6;color:#888;border-top:1px solid #ccc;font-family:Arial, \'Sans-serif\';font-size:11px;\">\r\n			<p>YetiForce CRM - Notification activities on the calendar</p>\r\n			</td>\r\n		</tr></tbody></table>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (46,'Send Notification Email to Record Owner','','Calendar','Task :  #a#231#aEnd#','#a#232#aEnd#<br /><br />Activity Notification Details:<br />Subject : #a#231#aEnd#<br />Start date and time : #a#233#aEnd# #a#234#aEnd#<br />End date and time : #a#235#aEnd# #a#236#aEnd#<br />Status : #a#239#aEnd#<br />Priority : #a#241#aEnd#<br />Related To : #a#237#aEnd#<br />Contacts List : #a#238#aEnd#<br />Location : #a#250#aEnd#<br />Description : #a#247#aEnd#','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (93,'Activity Reminder Notification','ActivityReminderNotificationTask','Calendar','Reminder:  #a#231#aEnd#','This is a reminder notification for the Activity:<br />Subject: #a#231#aEnd#<br />Date & Time: #a#233#aEnd# #a#234#aEnd#<br /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Contact Name: </span>#a#238#aEnd#<br style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\" /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Related To: </span>#a#237#aEnd#<br style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\" /><span style=\"color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;line-height:20.7999992370605px;\">Description: </span>#a#247#aEnd#','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (94,'Activity Reminder Notification','ActivityReminderNotificationEvents','Events','Reminder: #a#255#aEnd#','<span style=\"line-height:20.7999992370605px;\">This is a reminder notification for the Activity:</span><br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;\">Subject:</span>#a#255#aEnd#<br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;\">Date & Time: </span>#a#257#aEnd# #a#258#aEnd#<br style=\"line-height:20.7999992370605px;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Contact Name: </span>#a#277#aEnd#<br style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Related To: </span>#a#264#aEnd#<br style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\" /><span style=\"line-height:20.7999992370605px;color:rgb(43,43,43);font-family:\'Helvetica Neue\', Helvetica, Arial, sans-serif;\">Description: </span>#a#275#aEnd#','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (95,'Test mail about the mail server configuration.','TestMailAboutTheMailServerConfiguration','Users','Test mail about the mail server configuration.','<span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Dear </span>#a#478#aEnd# #a#479#aEnd#<span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">, </span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><b style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">This is a test mail sent to confirm if a mail is actually being sent through the smtp server that you have configured. </b><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Feel free to delete this mail. </span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Thanks and Regards,</span><br style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\" /><span style=\"color:rgb(0,0,0);font-family:arial, sans-serif;line-height:normal;\">Team YetiForce</span>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (103,'ForgotPassword','UsersForgotPassword','Users','Request: ForgotPassword','Dear user,<br /><br />\\r\\nYou recently requested a password reset for your YetiForce CRM.<br />\\r\\nTo create a new password, click on the link #s#LinkToForgotPassword#sEnd#.<br /><br />\\r\\nThis request was made on #s#CurrentDateTime#sEnd# and will expire in next 24 hours.<br /><br />\\r\\nRegards,<br />\\r\\nYetiForce CRM Support Team.','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (104,'Customer Portal - ForgotPassword','YetiPortalForgotPassword','Contacts','Request: ForgotPassword','Dear #a#67#aEnd# #a#70#aEnd#,<br /><br />\r\nYou recently requested a reminder of your access data for the YetiForce Portal.<br /><br />\r\nYou can login by entering the following data:<br /><br />\r\nYour username: #a#80#aEnd#<br />\r\nYour password: #s#ContactsPortalPass#sEnd#<br /><br /><br />\r\nRegards,<br />\r\nYetiForce CRM Support Team.','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (105,'Notify Owner On new comment added to ticket from portal','NewCommentAddedToTicketOwner','ModComments','#t#LBL_ADDED_COMMENT_TO_TICKET#tEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#LBL_NEW_COMMENT_FOR_TICKET#tEnd# (#t#LBL_NOTICE_CREATED#tEnd# #a#691#aEnd#).\r\n\r\n<hr /> #b#597#bEnd#: #a#597#aEnd#\r\n</div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (106,'Notify Contact On New comment added to ticket','NewCommentAddedToTicketContact','ModComments','#t#LBL_ADDED_COMMENT_TO_TICKET#tEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#LBL_NEW_COMMENT_FOR_TICKET#tEnd# (#t#LBL_NOTICE_CREATED#tEnd# #a#745#aEnd#).\r\n\r\n<hr /> #b#597#bEnd#: #a#597#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (107,'Security risk has been detected - Brute Force','BruteForceSecurityRiskHasBeenDetected','Contacts','Security risk has been detected','<span class=\"value\">Dear user,<br />\r\nFailed login attempts have been detected. </span>','PLL_MODULE');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (108,'Backup has been made','BackupHasBeenMade','Contacts','Backup has been made notification','Dear User,<br />\r\nBackup has been made.','PLL_MODULE');
+insert  into `vtiger_ossmailtemplates`(`ossmailtemplatesid`,`name`,`sysname`,`oss_module_list`,`subject`,`content`,`ossmailtemplates_type`) values (109,'Notify Account On New comment added to ticket','NewCommentAddedToTicketAccount','ModComments','#t#LBL_ADDED_COMMENT_TO_TICKET#tEnd#','<div>\r\n<h3>#t#LBL_NOTICE_WELCOME#tEnd# <strong>YetiForce Sp. z o.o.</strong></h3>\r\n#t#LBL_NEW_COMMENT_FOR_TICKET#tEnd# (#t#LBL_NOTICE_CREATED#tEnd# #a#745#aEnd#).\r\n\r\n<hr /> #b#597#bEnd#: #a#597#aEnd#\r\n<hr /><span><em>#t#LBL_NOTICE_FOOTER#tEnd#</em></span></div>','PLL_RECORD');
 
 /*Data for the table `vtiger_ossmailtemplates_type` */
 
@@ -5996,6 +6034,7 @@ insert  into `vtiger_ossmailtemplatescf`(`ossmailtemplatesid`) values (105);
 insert  into `vtiger_ossmailtemplatescf`(`ossmailtemplatesid`) values (106);
 insert  into `vtiger_ossmailtemplatescf`(`ossmailtemplatesid`) values (107);
 insert  into `vtiger_ossmailtemplatescf`(`ossmailtemplatesid`) values (108);
+insert  into `vtiger_ossmailtemplatescf`(`ossmailtemplatesid`) values (109);
 
 /*Data for the table `vtiger_ossmailview` */
 
@@ -6283,6 +6322,7 @@ insert  into `vtiger_paymentsout_status_seq`(`id`) values (3);
 /*Data for the table `vtiger_picklist` */
 
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (1,'accounttype');
+insert  into `vtiger_picklist`(`picklistid`,`name`) values (25,'activitystatus');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (2,'activitytype');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (37,'assetstatus');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (67,'calculationsstatus');
@@ -6352,7 +6392,6 @@ insert  into `vtiger_picklist`(`picklistid`,`name`) values (23,'sostatus');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (63,'ssservicesstatus');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (48,'start_hour');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (24,'taskpriority');
-insert  into `vtiger_picklist`(`picklistid`,`name`) values (25,'taskstatus');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (26,'ticketcategories');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (27,'ticketpriorities');
 insert  into `vtiger_picklist`(`picklistid`,`name`) values (28,'ticketseverities');
@@ -6624,7 +6663,6 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,237,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,238,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,239,0,0);
-insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,240,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,241,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,242,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,243,0,1);
@@ -7779,6 +7817,9 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,14,1759,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,77,1760,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,16,1761,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,9,1762,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,15,1763,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (1,19,1764,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,6,1,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,6,2,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,6,3,0,0);
@@ -7966,7 +8007,6 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,237,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,238,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,239,0,0);
-insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,240,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,241,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,242,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,243,0,1);
@@ -9121,6 +9161,9 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,14,1759,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,77,1760,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,16,1761,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,9,1762,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,15,1763,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (2,19,1764,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,6,1,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,6,2,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,6,3,0,0);
@@ -9308,7 +9351,6 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,237,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,238,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,239,0,0);
-insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,240,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,241,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,242,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,243,0,1);
@@ -10463,6 +10505,9 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,14,1759,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,77,1760,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,16,1761,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,9,1762,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,15,1763,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (3,19,1764,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,6,1,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,6,2,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,6,3,0,0);
@@ -10650,7 +10695,6 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,237,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,238,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,239,0,0);
-insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,240,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,241,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,242,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,243,0,1);
@@ -11805,6 +11849,9 @@ insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`rea
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,14,1759,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,77,1760,0,0);
 insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,16,1761,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,9,1762,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,15,1763,0,0);
+insert  into `vtiger_profile2field`(`profileid`,`tabid`,`fieldid`,`visible`,`readonly`) values (4,19,1764,0,0);
 
 /*Data for the table `vtiger_profile2globalpermissions` */
 
@@ -13109,6 +13156,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,2,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,2,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,2,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,2,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,8,0);
@@ -13128,6 +13176,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,4,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,8,0);
@@ -13147,6 +13196,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,6,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,8,0);
@@ -13167,6 +13217,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,7,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,15,0);
@@ -13182,6 +13233,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,8,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,14,0);
@@ -13197,6 +13249,10 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,31,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,32,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,33,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,9,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,8,0);
@@ -13214,6 +13270,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,13,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,10,0);
@@ -13230,6 +13287,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,14,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,15,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,17,0);
@@ -13243,6 +13301,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,15,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,16,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,16,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,16,15,0);
@@ -13264,6 +13323,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,18,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,18,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,18,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,18,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,10,0);
@@ -13279,6 +13339,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,19,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,14,0);
@@ -13294,6 +13355,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,20,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,14,0);
@@ -13309,6 +13371,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,21,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,14,0);
@@ -13324,6 +13387,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,22,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,14,0);
@@ -13339,6 +13403,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,23,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,25,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,25,13,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,26,14,0);
@@ -13354,6 +13419,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,26,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,26,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,26,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,26,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,33,11,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,33,12,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,34,5,0);
@@ -13372,6 +13438,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,34,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,34,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,34,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,34,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,10,0);
@@ -13388,6 +13455,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,35,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,10,0);
@@ -13404,6 +13472,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,37,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,40,16,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,6,0);
@@ -13421,6 +13490,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,41,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,10,0);
@@ -13437,6 +13507,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,42,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,10,0);
@@ -13453,6 +13524,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,43,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,8,1);
@@ -13469,6 +13541,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,47,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,8,0);
@@ -13485,6 +13558,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,49,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,8,0);
@@ -13501,6 +13575,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,51,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,10,1);
@@ -13512,6 +13587,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,22,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,26,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,27,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,54,35,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,8,0);
@@ -13528,6 +13604,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,57,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,8,0);
@@ -13544,6 +13621,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,58,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,8,1);
@@ -13560,6 +13638,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,59,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,10,0);
@@ -13576,6 +13655,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,60,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,8,0);
@@ -13592,6 +13672,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,61,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,10,0);
@@ -13608,6 +13689,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,70,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,10,0);
@@ -13624,6 +13706,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,71,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,74,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,74,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,74,8,0);
@@ -13647,6 +13730,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,75,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,75,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,75,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,75,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,8,0);
@@ -13661,6 +13745,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,76,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,8,0);
@@ -13675,6 +13760,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,77,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,8,0);
@@ -13689,6 +13775,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,78,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,8,0);
@@ -13703,6 +13790,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,79,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,8,1);
@@ -13717,6 +13805,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,80,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,8,0);
@@ -13731,6 +13820,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,81,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,8,0);
@@ -13745,6 +13835,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,82,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,8,0);
@@ -13759,6 +13850,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,83,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,8,0);
@@ -13775,6 +13867,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (1,84,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,10,0);
@@ -13791,6 +13884,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,2,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,8,0);
@@ -13810,6 +13904,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,4,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,8,0);
@@ -13829,6 +13924,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,6,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,8,0);
@@ -13849,6 +13945,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,7,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,15,0);
@@ -13864,6 +13961,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,8,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,14,0);
@@ -13879,6 +13977,10 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,31,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,32,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,33,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,9,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,8,0);
@@ -13896,6 +13998,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,13,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,10,0);
@@ -13912,6 +14015,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,14,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,15,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,17,0);
@@ -13925,6 +14029,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,15,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,16,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,16,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,16,15,0);
@@ -13946,6 +14051,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,18,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,18,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,18,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,18,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,10,0);
@@ -13961,6 +14067,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,19,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,14,0);
@@ -13976,6 +14083,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,20,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,14,0);
@@ -13991,6 +14099,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,21,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,14,0);
@@ -14006,6 +14115,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,22,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,14,0);
@@ -14021,6 +14131,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,23,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,25,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,25,13,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,26,14,0);
@@ -14036,6 +14147,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,26,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,26,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,26,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,26,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,33,11,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,33,12,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,34,5,0);
@@ -14054,6 +14166,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,34,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,34,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,34,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,34,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,10,0);
@@ -14070,6 +14183,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,35,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,10,0);
@@ -14086,6 +14200,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,37,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,40,16,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,6,0);
@@ -14103,6 +14218,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,41,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,10,0);
@@ -14119,6 +14235,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,42,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,10,0);
@@ -14135,6 +14252,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,43,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,8,1);
@@ -14151,6 +14269,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,47,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,8,0);
@@ -14167,6 +14286,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,49,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,8,0);
@@ -14183,6 +14303,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,51,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,10,1);
@@ -14194,6 +14315,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,22,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,26,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,27,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,54,35,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,8,0);
@@ -14210,6 +14332,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,57,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,8,0);
@@ -14226,6 +14349,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,58,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,8,1);
@@ -14242,6 +14366,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,59,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,10,0);
@@ -14258,6 +14383,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,60,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,8,0);
@@ -14274,6 +14400,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,61,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,10,0);
@@ -14290,6 +14417,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,70,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,10,0);
@@ -14306,6 +14434,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,71,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,74,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,74,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,74,8,0);
@@ -14329,6 +14458,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,75,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,75,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,75,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,75,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,8,0);
@@ -14343,6 +14473,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,76,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,8,0);
@@ -14357,6 +14488,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,77,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,8,0);
@@ -14371,6 +14503,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,78,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,8,0);
@@ -14385,6 +14518,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,79,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,8,1);
@@ -14399,6 +14533,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,80,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,8,0);
@@ -14413,6 +14548,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,81,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,8,0);
@@ -14427,6 +14563,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,82,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,8,0);
@@ -14441,6 +14578,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,83,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,8,0);
@@ -14457,6 +14595,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (2,84,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,10,0);
@@ -14473,6 +14612,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,2,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,8,0);
@@ -14492,6 +14632,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,4,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,8,0);
@@ -14511,6 +14652,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,6,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,8,0);
@@ -14531,6 +14673,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,7,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,15,0);
@@ -14546,6 +14689,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,8,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,14,0);
@@ -14561,6 +14705,10 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,31,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,32,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,33,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,9,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,8,0);
@@ -14578,6 +14726,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,13,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,10,0);
@@ -14594,6 +14743,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,14,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,15,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,17,0);
@@ -14607,6 +14757,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,15,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,16,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,16,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,16,15,0);
@@ -14628,6 +14779,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,18,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,18,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,18,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,18,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,10,0);
@@ -14643,6 +14795,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,19,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,14,0);
@@ -14658,6 +14811,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,20,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,14,0);
@@ -14673,6 +14827,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,21,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,14,0);
@@ -14688,6 +14843,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,22,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,14,0);
@@ -14703,6 +14859,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,23,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,25,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,25,13,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,26,14,0);
@@ -14718,6 +14875,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,26,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,26,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,26,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,26,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,33,11,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,33,12,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,34,5,0);
@@ -14736,6 +14894,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,34,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,34,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,34,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,34,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,10,0);
@@ -14752,6 +14911,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,35,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,10,0);
@@ -14768,6 +14928,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,37,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,40,16,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,6,0);
@@ -14785,6 +14946,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,41,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,10,0);
@@ -14801,6 +14963,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,42,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,10,0);
@@ -14817,6 +14980,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,43,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,8,1);
@@ -14833,6 +14997,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,47,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,8,0);
@@ -14849,6 +15014,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,49,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,8,0);
@@ -14865,6 +15031,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,51,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,10,1);
@@ -14876,6 +15043,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,22,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,26,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,27,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,54,35,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,8,0);
@@ -14892,6 +15060,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,57,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,8,0);
@@ -14908,6 +15077,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,58,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,8,1);
@@ -14924,6 +15094,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,59,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,10,0);
@@ -14940,6 +15111,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,60,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,8,0);
@@ -14956,6 +15128,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,61,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,10,0);
@@ -14972,6 +15145,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,70,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,10,0);
@@ -14988,6 +15162,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,71,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,74,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,74,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,74,8,0);
@@ -15011,6 +15186,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,75,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,75,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,75,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,75,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,8,0);
@@ -15025,6 +15201,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,76,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,8,0);
@@ -15039,6 +15216,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,77,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,8,0);
@@ -15053,6 +15231,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,78,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,8,0);
@@ -15067,6 +15246,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,79,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,8,1);
@@ -15081,6 +15261,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,80,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,8,0);
@@ -15095,6 +15276,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,81,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,8,0);
@@ -15109,6 +15291,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,82,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,8,0);
@@ -15123,6 +15306,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,83,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,8,0);
@@ -15139,6 +15323,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (3,84,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,10,0);
@@ -15155,6 +15340,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,2,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,8,1);
@@ -15174,6 +15360,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,4,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,8,1);
@@ -15193,6 +15380,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,6,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,8,1);
@@ -15213,6 +15401,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,7,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,15,0);
@@ -15228,6 +15417,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,8,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,14,0);
@@ -15243,6 +15433,10 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,31,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,32,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,33,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,9,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,8,1);
@@ -15260,6 +15454,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,13,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,10,0);
@@ -15276,6 +15471,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,14,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,14,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,15,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,17,0);
@@ -15289,6 +15485,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,15,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,16,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,16,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,16,15,0);
@@ -15310,6 +15507,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,18,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,18,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,18,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,18,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,10,0);
@@ -15325,6 +15523,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,19,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,14,0);
@@ -15340,6 +15539,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,20,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,14,0);
@@ -15355,6 +15555,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,21,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,14,0);
@@ -15370,6 +15571,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,22,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,14,0);
@@ -15385,6 +15587,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,23,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,25,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,25,13,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,26,14,0);
@@ -15400,6 +15603,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,26,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,26,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,26,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,26,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,33,11,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,33,12,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,34,5,0);
@@ -15418,6 +15622,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,34,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,34,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,34,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,34,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,10,0);
@@ -15434,6 +15639,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,35,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,10,0);
@@ -15450,6 +15656,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,37,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,40,16,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,6,0);
@@ -15467,6 +15674,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,41,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,10,0);
@@ -15483,6 +15691,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,42,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,10,0);
@@ -15499,6 +15708,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,43,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,8,1);
@@ -15515,6 +15725,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,47,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,8,0);
@@ -15531,6 +15742,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,49,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,8,0);
@@ -15547,6 +15759,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,51,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,10,1);
@@ -15558,6 +15771,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,22,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,26,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,27,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,54,35,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,8,0);
@@ -15574,6 +15788,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,57,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,8,0);
@@ -15590,6 +15805,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,58,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,8,1);
@@ -15606,6 +15822,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,59,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,10,0);
@@ -15622,6 +15839,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,60,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,8,0);
@@ -15638,6 +15856,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,61,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,10,0);
@@ -15654,6 +15873,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,70,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,10,0);
@@ -15670,6 +15890,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,71,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,74,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,74,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,74,8,0);
@@ -15693,6 +15914,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,75,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,75,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,75,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,75,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,8,0);
@@ -15707,6 +15929,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,76,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,8,0);
@@ -15721,6 +15944,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,77,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,8,0);
@@ -15735,6 +15959,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,78,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,8,0);
@@ -15749,6 +15974,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,79,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,5,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,6,1);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,8,1);
@@ -15763,6 +15989,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,80,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,8,0);
@@ -15777,6 +16004,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,81,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,8,0);
@@ -15791,6 +16019,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,82,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,8,0);
@@ -15805,6 +16034,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,83,34,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,5,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,6,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,8,0);
@@ -15821,6 +16051,7 @@ insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permissi
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,28,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,29,0);
 insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,30,0);
+insert  into `vtiger_profile2utility`(`profileid`,`tabid`,`activityid`,`permission`) values (4,84,34,0);
 
 /*Data for the table `vtiger_profile_seq` */
 
@@ -16431,17 +16662,17 @@ insert  into `vtiger_reservations_status_seq`(`id`) values (2);
 
 /*Data for the table `vtiger_role` */
 
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H1','Organization','H1',0,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H10','Sales Department','H1::H2::H10',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H14','Logistics Department','H1::H2::H14',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H18','Project Management Department','H1::H2::H18',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H2','Board of Management','H1::H2',1,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H22','Help Desk Department','H1::H2::H22',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H26','Human Resources Department','H1::H2::H26',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H3','Secretary\'s Office','H1::H2::H3',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H30','Financial Department','H1::H2::H30',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H34','Production Department','H1::H2::H34',2,1,1,NULL,1,0,0,0,0);
-insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`) values ('H6','Marketing Department','H1::H2::H6',2,1,1,NULL,1,0,0,0,0);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H1','Organization','H1',0,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H10','Sales Department','H1::H2::H10',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H14','Logistics Department','H1::H2::H14',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H18','Project Management Department','H1::H2::H18',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H2','Board of Management','H1::H2',1,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H22','Help Desk Department','H1::H2::H22',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H26','Human Resources Department','H1::H2::H26',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H3','Secretary\'s Office','H1::H2::H3',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H30','Financial Department','H1::H2::H30',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H34','Production Department','H1::H2::H34',2,1,1,NULL,1,0,0,0,0,1);
+insert  into `vtiger_role`(`roleid`,`rolename`,`parentrole`,`depth`,`allowassignedrecordsto`,`changeowner`,`searchunpriv`,`clendarallorecords`,`listrelatedrecord`,`previewrelatedrecord`,`editrelatedrecord`,`permissionsrelatedfield`,`globalsearchadv`) values ('H6','Marketing Department','H1::H2::H6',2,1,1,NULL,1,0,0,0,0,1);
 
 /*Data for the table `vtiger_role2picklist` */
 
@@ -21420,9 +21651,11 @@ insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`desc
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (9,2,'LBL_PICKLIST_EDITOR','adminIcon-fields-picklists','LBL_PICKLIST_DESCRIPTION','index.php?parent=Settings&module=Picklist&view=Index',9,0,1);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (10,2,'LBL_PICKLIST_DEPENDENCY_SETUP','adminIcon-fields-picklists-relations','LBL_PICKLIST_DEPENDENCY_DESCRIPTION','index.php?parent=Settings&module=PickListDependency&view=List',10,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (12,3,'NOTIFICATIONSCHEDULERS','','LBL_NOTIF_SCHED_DESCRIPTION','index.php?module=Settings&view=listnotificationschedulers&parenttab=Settings',4,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (13,3,'INVENTORYNOTIFICATION','','LBL_INV_NOTIF_DESCRIPTION','index.php?module=Settings&view=listinventorynotifications&parenttab=Settings',1,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (13,4,'INVENTORYNOTIFICATION','','LBL_INV_NOTIF_DESCRIPTION','index.php?module=Settings&view=listinventorynotifications&parenttab=Settings',1,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (14,3,'LBL_COMPANY_DETAILS','adminIcon-company-detlis','LBL_COMPANY_DESCRIPTION','index.php?parent=Settings&module=Vtiger&view=CompanyDetails',2,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (15,8,'LBL_MAIL_SERVER_SETTINGS','adminIcon-mail-configuration','LBL_MAIL_SERVER_DESCRIPTION','index.php?parent=Settings&module=Vtiger&view=OutgoingServerDetail',5,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (16,4,'LBL_CURRENCY_SETTINGS','','LBL_CURRENCY_DESCRIPTION','index.php?parent=Settings&module=Currency&view=List',4,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (17,4,'LBL_SWITCH_USERS','','LBL_SWITCH_USERS_DESCRIPTION','index.php?module=Users&view=SwitchUsers&parent=Settings',34,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (18,4,'LBL_SYSTEM_INFO','adminIcon-server-configuration','LBL_SYSTEM_DESCRIPTION','index.php?module=Settings&submodule=Server&view=ProxyConfig',6,1,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (19,4,'LBL_ANNOUNCEMENT','adminIcon-company-information','LBL_ANNOUNCEMENT_DESCRIPTION','index.php?parent=Settings&module=Vtiger&view=AnnouncementEdit',2,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (20,4,'LBL_DEFAULT_MODULE_VIEW','adminIcon-standard-modules','LBL_DEFAULT_MODULE_VIEW_DESC','index.php?module=Settings&action=DefModuleView&parenttab=Settings',2,0,0);
@@ -21433,14 +21666,17 @@ insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`desc
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (26,15,'Scheduler','adminIcon-cron','LBL_SCHEDULER_DESCRIPTION','index.php?module=CronTasks&parent=Settings&view=List',3,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (27,15,'LBL_WORKFLOW_LIST','adminIcon-workflow','LBL_AVAILABLE_WORKLIST_LIST','index.php?module=com_vtiger_workflow&action=workflowlist',1,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (28,4,'ModTracker','adminIcon-modules-track-chanegs','LBL_MODTRACKER_DESCRIPTION','index.php?module=ModTracker&action=BasicSettings&parenttab=Settings&formodule=ModTracker',9,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (29,5,'LBL_PBXMANAGER','','LBL_PBXMANAGER_DESCRIPTION','index.php?module=PBXManager&parent=Settings&view=Index',22,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (30,5,'LBL_CUSTOMER_PORTAL','adminIcon-customer-portal','PORTAL_EXTENSION_DESCRIPTION','index.php?module=CustomerPortal&action=index&parenttab=Settings',3,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (31,5,'Webforms','adminIcon-online-forms','LBL_WEBFORMS_DESCRIPTION','index.php?module=Webforms&action=index&parenttab=Settings',4,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (33,2,'LBL_EDIT_FIELDS','adminIcon-modules-fields','LBL_LAYOUT_EDITOR_DESCRIPTION','index.php?module=LayoutEditor&parent=Settings&view=Index',2,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (35,4,'LBL_PDF','adminIcon-modules-pdf-templates','LBL_PDF_DESCRIPTION','index.php?module=PDF&parent=Settings&view=List',27,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (38,7,'LBL_PASSWORD_CONF','adminIcon-passwords-configuration','LBL_PASSWORD_DESCRIPTION','index.php?module=Password&parent=Settings&view=Index',1,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (40,2,'LBL_MENU_BUILDER','adminIcon-menu-configuration','LBL_MENU_BUILDER_DESCRIPTION','index.php?module=Menu&view=Index&parent=Settings',14,0,1);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (41,2,'LBL_ARRANGE_RELATED_TABS','adminIcon-modules-relations','LBL_ARRANGE_RELATED_TABS','index.php?module=LayoutEditor&parent=Settings&view=Index&mode=showRelatedListLayout',4,0,1);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (44,8,'Mail Scanner','adminIcon-mail-scanner','LBL_MAIL_SCANNER_DESCRIPTION','index.php?module=OSSMailScanner&parent=Settings&view=Index',3,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (45,14,'Mail Logs','adminIcon-mail-download-history','LBL_MAIL_LOGS_DESCRIPTION','index.php?module=OSSMailScanner&parent=Settings&view=logs',4,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (46,8,'Mail View','','LBL_MAIL_VIEW_DESCRIPTION','index.php?module=OSSMailView&parent=Settings&view=index',21,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (47,15,'Document Control','adminIcon-workflow','LBL_DOCUMENT_CONTROL_DESCRIPTION','index.php?module=OSSDocumentControl&parent=Settings&view=Index',4,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (48,15,'Project Templates','adminIcon-document-templates','LBL_PROJECT_TEMPLATES_DESCRIPTION','index.php?module=OSSProjectTemplates&parent=Settings&view=Index',5,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (49,9,'License','adminIcon-license','LBL_LICENSE_DESCRIPTION','index.php?module=Vtiger&parent=Settings&view=License',4,0,0);
@@ -21479,18 +21715,16 @@ insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`desc
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (86,6,'LBL_TIMECONTROL_PROCESSES','adminIcon-logistics','LBL_TIMECONTROL_PROCESSES_DESCRIPTION','index.php?module=TimeControlProcesses&parent=Settings&view=Index',7,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (87,2,'LBL_CUSTOM_FIELD_MAPPING','adminIcon-filed-mapping','LBL_CUSTOM_FIELD_MAPPING_DESCRIPTION','index.php?parent=Settings&module=Leads&view=MappingDetail',13,0,0);
 insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (88,5,'LBL_CURRENCY_UPDATE','adminIcon-currency','LBL_CURRENCY_UPDATE_DESCRIPTION','index.php?module=CurrencyUpdate&view=Index&parent=Settings',2,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (89,2,'LBL_PDF_TEMPLATES','adminIcon-modules-pdf-templates','LBL_PDF_TEMPLATES_DESCRIPTION','',7,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (90,11,'LBL_CREDITLIMITS','adminIcon-credit-limit-base_2','LBL_CREDITLIMITS_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=CreditLimits',5,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (91,11,'LBL_TAXES','adminIcon-taxes-rates','LBL_TAXES_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=Taxes',1,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (92,11,'LBL_DISCOUNTS','adminIcon-discount-base','LBL_DISCOUNTS_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=Discounts',3,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (93,11,'LBL_TAXCONFIGURATION','adminIcon-taxes-caonfiguration','LBL_TAXCONFIGURATION_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=TaxConfiguration',4,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (94,11,'LBL_DISCOUNTCONFIGURATION','adminIcon-discount-configuration','LBL_DISCOUNTCONFIGURATION_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=DiscountConfiguration',2,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (95,6,'LBL_LOGISTICS','adminIcon-logistics','LBL_LOGISTICS_DESCRIPTION','',4,0,0);
-insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (98,8,'Mail','adminIcon-mail-download-history','LBL_OSSMAIL_DESCRIPTION','index.php?module=OSSMail&parent=Settings&view=index',2,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (89,11,'LBL_CREDITLIMITS','adminIcon-credit-limit-base_2','LBL_CREDITLIMITS_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=CreditLimits',5,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (90,11,'LBL_TAXES','adminIcon-taxes-rates','LBL_TAXES_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=Taxes',1,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (91,11,'LBL_DISCOUNTS','adminIcon-discount-base','LBL_DISCOUNTS_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=Discounts',3,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (92,11,'LBL_TAXCONFIGURATION','adminIcon-taxes-caonfiguration','LBL_TAXCONFIGURATION_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=TaxConfiguration',4,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (93,11,'LBL_DISCOUNTCONFIGURATION','adminIcon-discount-configuration','LBL_DISCOUNTCONFIGURATION_DESCRIPTION','index.php?module=Inventory&parent=Settings&view=DiscountConfiguration',2,0,0);
+insert  into `vtiger_settings_field`(`fieldid`,`blockid`,`name`,`iconpath`,`description`,`linkto`,`sequence`,`active`,`pinned`) values (94,8,'Mail','adminIcon-mail-download-history','LBL_OSSMAIL_DESCRIPTION','index.php?module=OSSMail&parent=Settings&view=index',2,0,0);
 
 /*Data for the table `vtiger_settings_field_seq` */
 
-insert  into `vtiger_settings_field_seq`(`id`) values (98);
+insert  into `vtiger_settings_field_seq`(`id`) values (94);
 
 /*Data for the table `vtiger_sharedcalendar` */
 
@@ -21520,8 +21754,6 @@ insert  into `vtiger_sostatus`(`sostatusid`,`sostatus`,`presence`,`picklist_valu
 insert  into `vtiger_sostatus_seq`(`id`) values (4);
 
 /*Data for the table `vtiger_sostatushistory` */
-
-/*Data for the table `vtiger_sqltimelog` */
 
 /*Data for the table `vtiger_ssservicesstatus` */
 
@@ -21667,7 +21899,7 @@ insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`mo
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (30,'Import',0,-1,'Import',NULL,NULL,1,0,0,'1.7','',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (31,'Mobile',0,-1,'Mobile',NULL,NULL,1,0,0,'2.0','',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (32,'ModTracker',0,-1,'ModTracker',NULL,NULL,0,0,0,'1.2','',NULL,0,0);
-insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (33,'PBXManager',0,-1,'PBXManager',NULL,NULL,1,0,1,'2.1','Tools',NULL,0,0);
+insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (33,'PBXManager',0,-1,'PBXManager',NULL,NULL,0,0,1,'2.1','Tools',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (34,'ServiceContracts',0,-1,'Service Contracts',NULL,NULL,0,0,1,'2.4','Support',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (35,'Services',0,-1,'Services',NULL,NULL,0,0,1,'2.6','Inventory',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (36,'WSAPP',0,-1,'WSAPP',NULL,NULL,1,0,0,'3.4.4','',NULL,0,0);
@@ -21698,7 +21930,7 @@ insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`mo
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (71,'OSSCosts',0,-1,'OSSCosts',NULL,NULL,0,0,1,'1.0.2','Sales',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (72,'AJAXChat',0,-1,'AJAXChat',NULL,NULL,0,0,0,'1.00','',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (73,'ApiAddress',0,-1,'Api Address',NULL,NULL,0,0,0,'0.1','',NULL,0,0);
-insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (74,'CallHistory',0,-1,'CallHistory',NULL,NULL,1,0,1,'0','0',NULL,0,0);
+insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (74,'CallHistory',0,-1,'CallHistory',NULL,NULL,0,0,1,'0','0',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (75,'Ideas',0,-1,'Ideas',NULL,NULL,0,0,1,'0','0',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (76,'RequirementCards',0,-1,'RequirementCards',NULL,NULL,0,0,1,'0','0',NULL,0,0);
 insert  into `vtiger_tab`(`tabid`,`name`,`presence`,`tabsequence`,`tablabel`,`modifiedby`,`modifiedtime`,`customized`,`ownedby`,`isentitytype`,`version`,`parent`,`color`,`coloractive`,`type`) values (77,'QuotesEnquires',0,-1,'QuotesEnquires',NULL,NULL,0,0,1,'0','0',NULL,0,0);
@@ -21792,19 +22024,6 @@ insert  into `vtiger_taskpriority`(`taskpriorityid`,`taskpriority`,`presence`,`p
 /*Data for the table `vtiger_taskpriority_seq` */
 
 insert  into `vtiger_taskpriority_seq`(`id`) values (3);
-
-/*Data for the table `vtiger_taskstatus` */
-
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (1,'Not Started',0,173,0);
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (2,'In Progress',0,174,1);
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (3,'Completed',0,175,5);
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (4,'Pending Input',0,176,2);
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (5,'Deferred',0,177,3);
-insert  into `vtiger_taskstatus`(`taskstatusid`,`taskstatus`,`presence`,`picklist_valueid`,`sortorderid`) values (6,'Cancelled',0,178,4);
-
-/*Data for the table `vtiger_taskstatus_seq` */
-
-insert  into `vtiger_taskstatus_seq`(`id`) values (6);
 
 /*Data for the table `vtiger_taxclass` */
 
@@ -21957,11 +22176,12 @@ insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presenc
 insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (89,'Asia/Vladivostok',88,1);
 insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (90,'Pacific/Guam',89,1);
 insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (91,'Asia/Yakutsk',90,1);
-insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (92,'Pacific/Fiji',91,1);
-insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (93,'Asia/Kamchatka',92,1);
-insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (94,'Pacific/Auckland',93,1);
-insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (95,'Asia/Magadan',94,1);
-insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (96,'Pacific/Tongatapu',95,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (92,'Pacific/Fiji',92,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (93,'Asia/Kamchatka',93,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (94,'Pacific/Auckland',94,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (95,'Asia/Magadan',95,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (96,'Pacific/Tongatapu',96,1);
+insert  into `vtiger_time_zone`(`time_zoneid`,`time_zone`,`sortorderid`,`presence`) values (97,'Etc/GMT-11',91,1);
 
 /*Data for the table `vtiger_time_zone_seq` */
 
@@ -21969,9 +22189,9 @@ insert  into `vtiger_time_zone_seq`(`id`) values (96);
 
 /*Data for the table `vtiger_timecontrol_type` */
 
-insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`) values (1,'PLL_WORKING_TIME',1,1);
-insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`) values (2,'PLL_BREAK_TIME',2,1);
-insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`) values (3,'PLL_HOLIDAY',3,1);
+insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`,`color`) values (1,'PLL_WORKING_TIME',1,1,'#EDC240');
+insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`,`color`) values (2,'PLL_BREAK_TIME',2,1,'#AFD8F8');
+insert  into `vtiger_timecontrol_type`(`timecontrol_typeid`,`timecontrol_type`,`sortorderid`,`presence`,`color`) values (3,'PLL_HOLIDAY',3,1,'#CB4B4B');
 
 /*Data for the table `vtiger_timecontrol_type_seq` */
 
@@ -22127,7 +22347,7 @@ insert  into `vtiger_verification_seq`(`id`) values (6);
 
 /*Data for the table `vtiger_version` */
 
-insert  into `vtiger_version`(`id`,`old_version`,`current_version`) values (1,'2.0.0','2.0.0');
+insert  into `vtiger_version`(`id`,`old_version`,`current_version`) values (1,'2.2.0','2.2.0');
 
 /*Data for the table `vtiger_version_seq` */
 
@@ -22357,6 +22577,9 @@ insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (4
 insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (41,'120','sharedOwner');
 insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (42,'301','modules');
 insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (43,'302','tree');
+insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (44,'303','taxes');
+insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (45,'304','inventoryLimit');
+insert  into `vtiger_ws_fieldtype`(`fieldtypeid`,`uitype`,`fieldtype`) values (46,'305','multiReferenceValue');
 
 /*Data for the table `vtiger_ws_operation` */
 
@@ -22536,75 +22759,75 @@ insert  into `yetiforce_mail_config`(`type`,`name`,`value`) values ('signature',
 
 /*Data for the table `yetiforce_menu` */
 
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (44,0,0,2,1,NULL,'MEN_VIRTUAL_DESK',0,NULL,0,'userIcon-virtual-desk',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (45,0,44,0,0,3,NULL,0,NULL,0,'userIcon-my-home-page',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (46,0,44,0,1,9,NULL,0,NULL,0,'userIcon-calendar',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (47,0,0,2,2,NULL,'MEN_COMPANIES_CONTACTS',0,NULL,0,'userIcon-compaines-and-contacts',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (48,0,47,0,0,7,NULL,0,NULL,0,'userIcon-leads',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (49,0,47,0,1,4,NULL,0,NULL,0,'userIcon-contacts',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (50,0,47,0,2,18,NULL,0,NULL,0,'userIcon-vendors',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (51,0,47,0,3,6,NULL,0,NULL,0,'userIcon-accounts',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (52,0,0,2,3,NULL,'MEN_SALES',0,NULL,0,'userIcon-sales',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (54,0,52,0,0,26,NULL,0,NULL,0,'userIcon-campaigns',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (55,0,52,0,1,2,NULL,0,NULL,0,'userIcon-opportunities',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (56,0,52,0,2,77,NULL,0,NULL,0,'userIcon-quotes-enquires',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (57,0,52,0,3,76,NULL,0,NULL,0,'userIcon-requirement-cards',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (58,0,52,0,4,70,NULL,0,NULL,0,'userIcon-calculations',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (59,0,52,0,5,20,NULL,0,NULL,0,'userIcon-quotes',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (60,0,52,0,6,22,NULL,0,NULL,0,'userIcon-sales-order',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (61,0,52,0,7,21,NULL,0,NULL,0,'userIcon-purchase-order',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (62,0,52,0,8,19,NULL,0,NULL,0,'userIcon-price-books',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (63,0,0,2,5,NULL,'MEN_SUPPORT',0,NULL,0,'userIcon-support',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (64,0,63,0,0,13,NULL,0,NULL,0,'userIcon-tickets',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (65,0,63,0,1,34,NULL,0,NULL,0,'userIcon-service-contracts',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (66,0,63,0,2,15,NULL,0,NULL,0,'userIcon-faq',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (67,0,0,2,4,NULL,'MEN_PROJECTS',0,NULL,0,'userIcon-projects',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (68,0,67,0,0,43,NULL,0,NULL,0,'userIcon-projects2',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (69,0,67,0,1,41,NULL,0,NULL,0,'userIcon-project_milestones',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (70,0,67,0,2,42,NULL,0,NULL,0,'userIcon-project-task',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (71,0,0,2,6,NULL,'MEN_BOOKKEEPING',0,NULL,0,'userIcon-bookkeeping',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (72,0,71,0,3,79,NULL,0,NULL,0,'userIcon-payments-in',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (73,0,71,0,2,80,NULL,0,NULL,0,'userIcon-payments-out',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (74,0,71,0,1,23,NULL,0,NULL,0,'userIcon-invoices',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (75,0,71,0,0,71,NULL,0,NULL,0,'userIcon-costs',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (76,0,0,2,7,NULL,'MEN_HUMAN_RESOURCES',0,NULL,0,'userIcon-human-resources',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (77,0,76,0,0,61,NULL,0,NULL,0,'userIcon-employees',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (78,0,76,0,1,51,NULL,0,NULL,0,'userIcon-time-control',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (79,0,76,0,2,78,NULL,0,NULL,0,'userIcon-annual-holiday-entitlement',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (80,0,0,2,8,NULL,'MEN_SECRETARY',0,NULL,0,'userIcon-secretary',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (81,0,80,0,0,81,NULL,0,NULL,0,'userIcon-letters-incoming',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (82,0,80,0,1,82,NULL,0,NULL,0,'userIcon-letters-outgoing',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (83,0,80,0,2,84,NULL,0,NULL,0,'userIcon-reservations',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (84,0,0,2,9,NULL,'MEN_DATABESES',0,NULL,0,'userIcon-database',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (85,0,84,2,0,NULL,'MEN_PRODUCTBASE',0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (86,0,84,0,1,14,NULL,0,NULL,0,'userIcon-products',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (87,0,84,0,2,59,NULL,0,NULL,0,'userIcon-outsourced-products',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (88,0,84,0,3,37,NULL,0,NULL,0,'userIcon-assets',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (89,0,84,3,4,NULL,NULL,0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (90,0,84,2,5,NULL,'MEN_SERVICESBASE',0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (91,0,84,0,6,35,NULL,0,NULL,0,'userIcon-services',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (92,0,84,0,7,57,NULL,0,NULL,0,'userIcon-outsourced-services',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (93,0,84,0,8,58,NULL,0,NULL,0,'userIcon-sold-services',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (94,0,84,3,9,NULL,NULL,0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (95,0,84,2,10,NULL,'MEN_LISTS',0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (96,0,84,0,11,54,NULL,0,NULL,0,'userIcon-corporate-emails',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (97,0,84,0,12,45,NULL,0,NULL,0,'userIcon-text-messages',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (98,0,84,0,13,33,NULL,0,NULL,0,'userIcon-list-of-calls',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (99,0,84,0,14,49,NULL,0,NULL,0,'userIcon-mail-templates',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (100,0,84,0,15,8,NULL,0,NULL,0,'userIcon-documents',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (102,0,84,0,16,47,NULL,0,NULL,0,'userIcon-pdf',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (106,0,84,0,18,74,NULL,0,NULL,0,'userIcon-call-history',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (107,0,84,3,19,NULL,NULL,0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (108,0,84,0,24,83,NULL,0,NULL,0,'userIcon-new-orders',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (109,0,84,0,17,60,NULL,0,NULL,0,'userIcon-user-access-control',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (110,0,0,2,10,NULL,'MEN_TEAMWORK',0,NULL,0,'userIcon-team-work',NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (111,0,110,0,0,75,NULL,0,NULL,0,'userIcon-ideas',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (112,0,0,6,0,3,NULL,0,NULL,0,NULL,NULL,NULL);
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (113,0,44,0,2,48,NULL,0,NULL,0,'userIcon-my-mailbox',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (114,0,84,0,23,25,NULL,0,NULL,0,'userIcon-reports',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (115,0,84,0,20,24,NULL,0,NULL,0,'userIcon-rss',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (116,0,84,0,21,27,NULL,0,NULL,0,'userIcon-our-sites',NULL,'');
-insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`) values (117,0,84,3,22,NULL,NULL,0,NULL,0,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (44,0,0,2,1,NULL,'MEN_VIRTUAL_DESK',0,NULL,0,'userIcon-virtual-desk',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (45,0,44,0,0,3,NULL,0,NULL,0,'userIcon-my-home-page',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (46,0,44,0,1,9,NULL,0,NULL,0,'userIcon-calendar',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (47,0,0,2,2,NULL,'MEN_COMPANIES_CONTACTS',0,NULL,0,'userIcon-compaines-and-contacts',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (48,0,47,0,0,7,NULL,0,NULL,0,'userIcon-leads',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (49,0,47,0,1,4,NULL,0,NULL,0,'userIcon-contacts',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (50,0,47,0,2,18,NULL,0,NULL,0,'userIcon-vendors',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (51,0,47,0,3,6,NULL,0,NULL,0,'userIcon-accounts',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (52,0,0,2,3,NULL,'MEN_SALES',0,NULL,0,'userIcon-sales',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (54,0,52,0,0,26,NULL,0,NULL,0,'userIcon-campaigns',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (55,0,52,0,1,2,NULL,0,NULL,0,'userIcon-opportunities',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (56,0,52,0,2,77,NULL,0,NULL,0,'userIcon-quotes-enquires',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (57,0,52,0,3,76,NULL,0,NULL,0,'userIcon-requirement-cards',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (58,0,52,0,4,70,NULL,0,NULL,0,'userIcon-calculations',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (59,0,52,0,5,20,NULL,0,NULL,0,'userIcon-quotes',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (60,0,52,0,6,22,NULL,0,NULL,0,'userIcon-sales-order',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (61,0,52,0,7,21,NULL,0,NULL,0,'userIcon-purchase-order',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (62,0,52,0,8,19,NULL,0,NULL,0,'userIcon-price-books',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (63,0,0,2,5,NULL,'MEN_SUPPORT',0,NULL,0,'userIcon-support',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (64,0,63,0,0,13,NULL,0,NULL,0,'userIcon-tickets',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (65,0,63,0,1,34,NULL,0,NULL,0,'userIcon-service-contracts',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (66,0,63,0,2,15,NULL,0,NULL,0,'userIcon-faq',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (67,0,0,2,4,NULL,'MEN_PROJECTS',0,NULL,0,'userIcon-projects',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (68,0,67,0,0,43,NULL,0,NULL,0,'userIcon-projects2',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (69,0,67,0,1,41,NULL,0,NULL,0,'userIcon-project_milestones',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (70,0,67,0,2,42,NULL,0,NULL,0,'userIcon-project-task',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (71,0,0,2,6,NULL,'MEN_BOOKKEEPING',0,NULL,0,'userIcon-bookkeeping',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (72,0,71,0,3,79,NULL,0,NULL,0,'userIcon-payments-in',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (73,0,71,0,2,80,NULL,0,NULL,0,'userIcon-payments-out',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (74,0,71,0,1,23,NULL,0,NULL,0,'userIcon-invoices',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (75,0,71,0,0,71,NULL,0,NULL,0,'userIcon-costs',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (76,0,0,2,7,NULL,'MEN_HUMAN_RESOURCES',0,NULL,0,'userIcon-human-resources',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (77,0,76,0,0,61,NULL,0,NULL,0,'userIcon-employees',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (78,0,76,0,1,51,NULL,0,NULL,0,'userIcon-time-control',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (79,0,76,0,2,78,NULL,0,NULL,0,'userIcon-annual-holiday-entitlement',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (80,0,0,2,8,NULL,'MEN_SECRETARY',0,NULL,0,'userIcon-secretary',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (81,0,80,0,0,81,NULL,0,NULL,0,'userIcon-letters-incoming',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (82,0,80,0,1,82,NULL,0,NULL,0,'userIcon-letters-outgoing',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (83,0,80,0,2,84,NULL,0,NULL,0,'userIcon-reservations',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (84,0,0,2,9,NULL,'MEN_DATABESES',0,NULL,0,'userIcon-database',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (85,0,84,2,0,NULL,'MEN_PRODUCTBASE',0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (86,0,84,0,1,14,NULL,0,NULL,0,'userIcon-products',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (87,0,84,0,2,59,NULL,0,NULL,0,'userIcon-outsourced-products',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (88,0,84,0,3,37,NULL,0,NULL,0,'userIcon-assets',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (89,0,84,3,4,NULL,NULL,0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (90,0,84,2,5,NULL,'MEN_SERVICESBASE',0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (91,0,84,0,6,35,NULL,0,NULL,0,'userIcon-services',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (92,0,84,0,7,57,NULL,0,NULL,0,'userIcon-outsourced-services',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (93,0,84,0,8,58,NULL,0,NULL,0,'userIcon-sold-services',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (94,0,84,3,9,NULL,NULL,0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (95,0,84,2,10,NULL,'MEN_LISTS',0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (96,0,84,0,11,54,NULL,0,NULL,0,'userIcon-corporate-emails',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (97,0,84,0,12,45,NULL,0,NULL,0,'userIcon-text-messages',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (98,0,84,0,13,33,NULL,0,NULL,0,'userIcon-list-of-calls',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (99,0,84,0,14,49,NULL,0,NULL,0,'userIcon-mail-templates',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (100,0,84,0,15,8,NULL,0,NULL,0,'userIcon-documents',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (102,0,84,0,16,47,NULL,0,NULL,0,'userIcon-pdf',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (106,0,84,0,18,74,NULL,0,NULL,0,'userIcon-call-history',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (107,0,84,3,19,NULL,NULL,0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (108,0,84,0,24,83,NULL,0,NULL,0,'userIcon-new-orders',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (109,0,84,0,17,60,NULL,0,NULL,0,'userIcon-user-access-control',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (110,0,0,2,10,NULL,'MEN_TEAMWORK',0,NULL,0,'userIcon-team-work',NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (111,0,110,0,0,75,NULL,0,NULL,0,'userIcon-ideas',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (112,0,0,6,0,3,NULL,0,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (113,0,44,0,2,48,NULL,0,NULL,0,'userIcon-my-mailbox',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (114,0,84,0,23,25,NULL,0,NULL,0,'userIcon-reports',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (115,0,84,0,20,24,NULL,0,NULL,0,'userIcon-rss',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (116,0,84,0,21,27,NULL,0,NULL,0,'userIcon-our-sites',NULL,'',NULL);
+insert  into `yetiforce_menu`(`id`,`role`,`parentid`,`type`,`sequence`,`module`,`label`,`newwindow`,`dataurl`,`showicon`,`icon`,`sizeicon`,`hotkey`,`filters`) values (117,0,84,3,22,NULL,NULL,0,NULL,0,NULL,NULL,NULL,NULL);
 
 /*Data for the table `yetiforce_mobile_keys` */
 
@@ -22624,15 +22847,22 @@ insert  into `yetiforce_proc_marketing`(`type`,`param`,`value`) values ('convers
 
 insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('popup','limit_product_service','false');
 insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('popup','update_shared_permissions','false');
-insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('calculation','calculationsstatus','');
+insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('scalculations','statuses_close','');
 insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('potential','salesstage','');
 insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('asset','assetstatus','');
 insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('potential','add_potential','false');
+insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('squoteenquiries','statuses_close','');
+insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('ssalesorder','statuses_close','');
+insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('squotes','statuses_close','');
+insert  into `yetiforce_proc_sales`(`type`,`param`,`value`) values ('srequirementscard','statuses_close','');
 
 /*Data for the table `yetiforce_proc_tc` */
 
 insert  into `yetiforce_proc_tc`(`type`,`param`,`value`) values ('general','oneDay','false');
 insert  into `yetiforce_proc_tc`(`type`,`param`,`value`) values ('general','timeOverlap','false');
+insert  into `yetiforce_proc_tc`(`type`,`param`,`value`) values ('timeControlWidget','holidays','true');
+insert  into `yetiforce_proc_tc`(`type`,`param`,`value`) values ('timeControlWidget','workingDays','true');
+insert  into `yetiforce_proc_tc`(`type`,`param`,`value`) values ('timeControlWidget','workingTime','true');
 
 /*Data for the table `yetiforce_updates` */
 

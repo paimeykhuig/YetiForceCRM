@@ -102,16 +102,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							{foreach from=$BLOCKED item=foo}
-								<tr>
-									<td width="23%"><label class="marginRight5px" >{$foo.ip}</label></td>
-									<td width="23%"><label class="marginRight5px" >{$foo.date}</label></td>
-									<td width="23%"><label class="marginRight5px" >{$foo.users}</label></td>
-									<td width="23%"><label class="marginRight5px" >{$foo.browsers}</label></td>
-									<td width="23%"><label class="marginRight5px" >
-											<button data-ip="{$foo.ip}" class="btn btn-success" type="button" id='unblock' title="Zapisz"><strong>{vtranslate('Unblock', $MODULE)}</strong></button></label></td>
-								</tr>
-							{/foreach}
+						{foreach from=$BLOCKED item=ITEM}
+							<tr>
+								<td width="23%"><label class="marginRight5px" >{$ITEM['user_ip']}</label></td>
+								<td width="23%"><label class="marginRight5px" >{$ITEM['login_time']}</label></td>
+								<td width="23%"><label class="marginRight5px" >{$ITEM['usersName']}</label></td>
+								<td width="23%"><label class="marginRight5px" >{$ITEM['browsers']}</label></td>
+								<td width="23%">
+									<label class="marginRight5px" >
+										<button data-ip="{$ITEM['user_ip']}" class="btn btn-success" type="button" id='unblock' title="{vtranslate('LBL_SAVE', $MODULE)}">
+											<strong>{vtranslate('Unblock', $MODULE)}</strong>
+										</button>
+									</label>
+								</td>
+							</tr>
+						{/foreach}
 						</tbody>
 					</table>
 				</div>

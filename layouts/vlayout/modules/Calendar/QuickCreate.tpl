@@ -107,9 +107,6 @@
 										</td>
 									{/foreach}
 									</tr>
-									{if $smarty.request.contact_id neq ''}
-										<input type="hidden" name="contact_id" value="{$smarty.request.contact_id}" />
-									{/if}
 								</table>
 								<div class="row" style="margin-top: 5px;">
 									<div class="col-md-4" id="prev_events">
@@ -134,6 +131,11 @@
 					{/foreach}
 				</div>
 				</div>
+				{if !empty($SOURCE_RELATED_FIELD)}
+					{foreach key=RELATED_FIELD_NAME item=RELATED_FIELD_VALUE from=$SOURCE_RELATED_FIELD}
+						<input type="hidden" name="{$RELATED_FIELD_NAME}" value='{$RELATED_FIELD_VALUE}' />
+					{/foreach}
+				{/if}
 			</form>
 		</div>
 	</div>

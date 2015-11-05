@@ -67,22 +67,38 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	weekDaysArray: {Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5, Saturday: 6},
 	registerCalendar: function () {
 		var thisInstance = this;
+
+		var eventLimit = jQuery('#eventLimit').val();
+		if (eventLimit == 'true') {
+			eventLimit = true;
+		}
+		else if (eventLimit == 'false') {
+			eventLimit = false;
+		} else {
+			eventLimit = parseInt(eventLimit) + 1;
+		}
+		var weekView = jQuery('#weekView').val();
+		var dayView = jQuery('#dayView').val();
+
 		//User preferred default view
 		var userDefaultActivityView = jQuery('#activity_view').val();
 		if (userDefaultActivityView == 'Today') {
-			userDefaultActivityView = 'agendaDay';
+			userDefaultActivityView = dayView;
 		} else if (userDefaultActivityView == 'This Week') {
-			userDefaultActivityView = 'agendaWeek';
+			userDefaultActivityView = weekView;
 		} else {
 			userDefaultActivityView = 'month';
 		}
 
 		//Default time format
 		var userDefaultTimeFormat = jQuery('#time_format').val();
+		var popoverTimeFormat;
 		if (userDefaultTimeFormat == 24) {
-			userDefaultTimeFormat = 'H(:mm)';
+			userDefaultTimeFormat = 'H:mm';
+			popoverTimeFormat = 'HH:MM';
 		} else {
-			userDefaultTimeFormat = 'h(:mm)tt';
+			userDefaultTimeFormat = 'h:mmt';
+			popoverTimeFormat = 'hh:mm A';
 		}
 
 		//Default first day of the week
@@ -94,7 +110,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 
 		thisInstance.getCalendarView().fullCalendar({
 			header: {
-				left: 'month,agendaWeek,agendaDay',
+				left: 'month,' + weekView + ',' + dayView,
 				center: 'title today',
 				right: 'prev,next'
 			},
@@ -108,9 +124,14 @@ jQuery.Class("Calendar_CalendarView_Js", {
 			defaultEventMinutes: 0,
 			forceEventDuration: true,
 			defaultTimedEventDuration: '01:00:00',
-			eventLimit: true,
+			eventLimit: eventLimit,
 			selectable: true,
 			selectHelper: true,
+			views: {
+				basic: {
+					eventLimit: false,
+				}
+			},
 			select: function (start, end) {
 				thisInstance.selectDays(start, end);
 				thisInstance.getCalendarView().fullCalendar('unselect');
@@ -122,15 +143,44 @@ jQuery.Class("Calendar_CalendarView_Js", {
 				thisInstance.updateEvent(event, delta, revertFunc);
 			},
 			eventRender: function (event, element) {
-				element.find('.fc-info').popover({
+				element.find('.fc-content').popover({
+					trigger: 'hover',
+					delay: 500,
 					title: event.title,
-					placement: 'top',
+					container: 'body',
 					html: true,
-					content: '<i class="glyphicon glyphicon-time"></i> ' + app.vtranslate('JS_START_DATE') + ': ' + event.start.format('YYYY-MM-DD HH:mm') + '<br /><i class="glyphicon glyphicon-time"></i> ' + app.vtranslate('JS_END_DATE') + ': ' + event.end.format('YYYY-MM-DD HH:mm') + '<br />' +
-							(event.lok != '' ? '<i class="icon-globe"></i> ' + app.vtranslate('JS_LOCATION') + ': ' + event.lok + '<br />' : '') + (event.pri ? '<i class="icon-warning-sign"></i> ' + app.vtranslate('JS_PRIORITY') + ': ' + app.vtranslate('JS_' + event.pri) + '<br />' : '') +
-							'<i class="icon-question-sign"></i> ' + app.vtranslate('JS_STATUS') + ': ' + app.vtranslate('JS_' + event.sta) + '<br />' + (event.accname ? '<i class="calIcon modIcon_Accounts"></i> ' + app.vtranslate('JS_ACCOUNTS') + ': ' + event.accname + '<br />' : '') +
-							(event.linkl ? '<i class="calIcon modIcon_' + event.linkm + '"></i> ' + app.vtranslate('JS_RELATION') + ': ' + event.linkl + '<br />' : '') + (event.procl ? '<i class="calIcon modIcon_' + event.procm + '"></i> ' + app.vtranslate('JS_PROCESS') + ': ' + event.procl + '<br />' : '') +
-							(event.state ? '<i class="icon-star-empty"></i> ' + app.vtranslate('JS_STATE') + ': ' + app.vtranslate(event.state) + '<br />' : '') + '<i class="glyphicon glyphicon-eye-open"></i> ' + app.vtranslate('JS_VISIBILITY') + ': ' + app.vtranslate('JS_' + event.vis) + '<br />'
+					template: '<div class="popover calendarPopover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+					content: '<div><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <label>' + app.vtranslate('JS_START_DATE') + '</label>: ' + event.start.format('YYYY-MM-DD ' + popoverTimeFormat) + '</div>' +
+							'<div><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <label>' + app.vtranslate('JS_END_DATE') + '</label>: ' + event.end.format('YYYY-MM-DD ' + popoverTimeFormat) + '</div>' +
+							(event.lok ? '<div><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <label>' + app.vtranslate('JS_LOCATION') + '</label>: ' + event.lok + '</div>' : '') +
+							(event.pri ? '<div><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <label>' + app.vtranslate('JS_PRIORITY') + '</label>: ' + app.vtranslate('JS_' + event.pri) + '</div>' : '') +
+							'<div><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> <label>' + app.vtranslate('JS_STATUS') + '</label>: ' + app.vtranslate('JS_' + event.sta) + '</div>' +
+							(event.accname ? '<div><span class="calIcon modIcon_Accounts" aria-hidden="true"></span> <label>' + app.vtranslate('JS_ACCOUNTS') + '</label>: ' + event.accname + '</div>' : '') +
+							(event.linkl ? '<div><span class="calIcon calIcon modIcon_' + event.linkm + '" aria-hidden="true"></span> <label>' + app.vtranslate('JS_RELATION') + '</label>: ' + event.linkl + '</div>' : '') +
+							(event.procl ? '<div><span class="glyphicon calIcon modIcon_' + event.procm + '" aria-hidden="true"></span> <label>' + app.vtranslate('JS_PROCESS') + '</label>: ' + event.procl + '</div>' : '') +
+							(event.state ? '<div><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <label>' + app.vtranslate('JS_STATE') + '</label>: ' + app.vtranslate(event.state) + '</div>' : '') +
+							'<div><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> <label>' + app.vtranslate('JS_VISIBILITY') + '</label>: ' + app.vtranslate('JS_' + event.vis) + '</div>' + 
+							(event.smownerid ? '<div><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <label>' + app.vtranslate('JS_ASSIGNED_TO') + '</label>: ' + event.smownerid + '</div>' : '')
+				});
+				element.find('.fc-content').click(function () {
+					var progressIndicatorElement = jQuery.progressIndicator({
+						position: 'html',
+						blockInfo: {
+							'enabled': true
+						}
+					});
+					var event = $(this).closest('.fc-event');
+					var url = 'index.php?module=Calendar&view=ActivityStateModal&record=' + event.data('id');
+					var callbackFunction = function (data) {
+						progressIndicatorElement.progressIndicator({
+							'mode': 'hide'
+						})
+					}
+					var modalWindowParams = {
+						url: url,
+						cb: callbackFunction,
+					}
+					app.showModalWindow(modalWindowParams);
 				});
 			},
 			monthNames: [app.vtranslate('JS_JANUARY'), app.vtranslate('JS_FEBRUARY'), app.vtranslate('JS_MARCH'),
@@ -301,13 +351,8 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	addCalendarEvent: function (calendarDetails) {
 		var state = $('.fc-toolbar input.switchBtn').bootstrapSwitch('state');
 		var eventObject = {};
-		if (calendarDetails.activitytype.value == 'Task') {
-			eventObject.status = calendarDetails.taskstatus.value;
-		} else {
-			eventObject.status = calendarDetails.eventstatus.value;
-		}
 
-		var taskstatus = $.inArray(eventObject.status, ['Held', 'Completed', 'Deferred']);
+		var taskstatus = $.inArray(calendarDetails.activitystatus, ['PLL_POSTPONED', 'PLL_CANCELLED', 'PLL_COMPLETED']);
 		if (state == true && taskstatus >= 0) {
 			return false;
 		}
@@ -331,12 +376,7 @@ jQuery.Class("Calendar_CalendarView_Js", {
 			eventObject.allDay = false;
 		eventObject.state = calendarDetails.state.value;
 		eventObject.vis = calendarDetails.visibility.value;
-		if (calendarDetails.status) {
-			eventObject.sta = calendarDetails.status.value;
-		}
-		if (calendarDetails.eventstatus) {
-			eventObject.sta = calendarDetails.eventstatus.value;
-		}
+		eventObject.sta = calendarDetails.activitystatus.value;
 		eventObject.className = 'userCol_' + calendarDetails.assigned_user_id.value + ' calCol_' + calendarDetails.activitytype.value;
 		this.getCalendarView().fullCalendar('renderEvent', eventObject);
 	},
@@ -391,9 +431,6 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	createAddButton: function () {
 		var thisInstance = this;
 		var calendarview = this.getCalendarView();
-		var listViewMassActions = jQuery('.listViewMassActions').clone(true, true);
-		listViewMassActions.removeClass('hide');
-		listViewMassActions.prependTo(calendarview.find('.fc-toolbar .fc-left'));
 		jQuery('<span class=""><button class="btn btn-default fc-button fc-state-default addButton">' + app.vtranslate('JS_ADD_EVENT_TASK') + '</button></span>')
 				.prependTo(calendarview.find('.fc-toolbar .fc-right')).on('click', 'button', function (e) {
 			thisInstance.getCalendarCreateView().then(function (data) {
@@ -407,6 +444,9 @@ jQuery.Class("Calendar_CalendarView_Js", {
 	createAddSwitch: function () {
 		var thisInstance = this;
 		var calendarview = this.getCalendarView();
+		var listViewMassActions = jQuery('.listViewMassActions').clone(true,true);
+		listViewMassActions.removeClass('hide');
+		listViewMassActions.prependTo(calendarview.find('.fc-toolbar .fc-left'));
 		var switchBtn = jQuery('<span class=""><input class="switchBtn" type="checkbox" title="' + app.vtranslate('JS_CHANGE_ACTIVITY_TIME') + '" checked data-size="small" data-handle-width="90" data-label-width="5" data-on-text="' + app.vtranslate('JS_TO_REALIZE') + '" data-off-text="' + app.vtranslate('JS_HISTORY') + '"></span>')
 				.prependTo(calendarview.find('.fc-toolbar .fc-right'))
 				.on('switchChange.bootstrapSwitch', function (e, state) {

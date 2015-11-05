@@ -45,7 +45,7 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller
 	 * Function to get the list of Header Links
 	 * @return <Array> - List of Vtiger_Link_Model instances
 	 */
-	function getHeaderLinks(Vtiger_Request $request)
+	public function getHeaderLinks(Vtiger_Request $request)
 	{
 		$userModel = Users_Record_Model::getCurrentUserModel();
 		$headerLinks = [];
@@ -66,12 +66,73 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller
 				];
 			}
 		}
+		//TODO To remove in the future
+		if (SysSecurity::getBoolean('SHOW_MY_PREFERENCES')) {
+			$headerLinks[] = [
+				'linktype' => 'HEADERLINK',
+				'linklabel' => 'LBL_MY_PREFERENCES',
+				'linkurl' => $userModel->getPreferenceDetailViewUrl(),
+				'glyphicon' => 'glyphicon glyphicon-tasks',
+			];
+		}
+		
 		$headerLinks[] = [
 			'linktype' => 'HEADERLINK',
 			'linklabel' => 'LBL_SIGN_OUT',
 			'linkurl' => 'index.php?module=Users&parent=Settings&action=Logout',
 			'glyphicon' => 'glyphicon glyphicon-off',
 		];
+
+		require('user_privileges/switchUsers.php');
+		$baseUserId = $userModel->getId();
+		if (Vtiger_Session::has('baseUserId') && Vtiger_Session::get('baseUserId') != '') {
+			$baseUserId = Vtiger_Session::get('baseUserId');
+		}
+
+		if (key_exists($baseUserId, $switchUsers)) {
+			$childlinks = [];
+			if (Vtiger_Session::has('baseUserId') && Vtiger_Session::get('baseUserId') != '') {
+				$entityData = Vtiger_Functions::getEntityModuleInfo('Users');
+				$user = new Users();
+				$currentUser = $user->retrieveCurrentUserInfoFromFile($baseUserId);
+				$colums = [];
+				foreach (explode(',', $entityData['fieldname']) as &$fieldname) {
+					$colums[] = $currentUser->column_fields[$fieldname];
+				}
+				$userName = implode(' ', $colums);
+				$childlinks[] = [
+					'linktype' => 'HEADERLINK',
+					'linklabel' => $userName,
+					'linkurl' => '?module=Users&action=SwitchUsers&id=' . $baseUserId,
+					'linkicon' => '',
+				];
+				$childlinks[] = [
+					'linktype' => 'HEADERLINK',
+					'linklabel' => NULL,
+				];
+			}
+			foreach ($switchUsers[$baseUserId] as $userid => $userName) {
+				if ($userid != $baseUserId) {
+					$childlinks[] = [
+						'linktype' => 'HEADERLINK',
+						'linklabel' => $userName,
+						'linkurl' => '?module=Users&action=SwitchUsers&id=' . $userid,
+						'linkicon' => '',
+					];
+				}
+			}
+			$customHeaderLinks = [
+				'linktype' => 'HEADERLINK',
+				'linklabel' => 'SwitchUsers',
+				'linkurl' => '',
+				'linkicon' => 'glyphicon glyphicon-transfer',
+				'nocaret' => true,
+				'childlinks' => $childlinks
+			];
+			if(count($childlinks)){
+				array_push($headerLinks, $customHeaderLinks);
+			}
+		}
 		$headerLinkInstances = [];
 		foreach ($headerLinks as $headerLink) {
 			$headerLinkInstance = Vtiger_Link_Model::getInstanceFromValues($headerLink);
@@ -82,7 +143,7 @@ abstract class Vtiger_Header_View extends Vtiger_View_Controller
 			}
 			$headerLinkInstances[] = $headerLinkInstance;
 		}
-		$headerLinks = Vtiger_Link_Model::getAllByType(Vtiger_Link::IGNORE_MODULE, array('HEADERLINK'));
+		$headerLinks = Vtiger_Link_Model::getAllByType(Vtiger_Link::IGNORE_MODULE, ['HEADERLINK']);
 		foreach ($headerLinks as $headerType => $headerLinks) {
 			foreach ($headerLinks as $headerLink) {
 				$headerLinkInstances[] = Vtiger_Link_Model::getInstanceFromLinkObject($headerLink);

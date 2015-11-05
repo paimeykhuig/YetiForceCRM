@@ -32,7 +32,7 @@ $USE_RTE = 'true';
 // url for customer portal (Example: https://portal.yetiforce.com/)
 $PORTAL_URL = 'https://portal.yetiforce.com';
 
-// helpdesk support email id and support name (Example: 'support@vtiger.com' and 'vtiger support')
+// helpdesk support email id and support name (Example: 'support@yetiforce.com' and 'yetiforce support')
 $HELPDESK_SUPPORT_EMAIL_ID = '_USER_SUPPORT_EMAIL_';
 $HELPDESK_SUPPORT_NAME = 'your-support name';
 $HELPDESK_SUPPORT_EMAIL_REPLY_ID = $HELPDESK_SUPPORT_EMAIL_ID;
@@ -237,7 +237,6 @@ $encryptBackup = false;
 
 // autocomplete global search - Whether or not automated search should be turned on"
 $gsAutocomplete = 1; // 0 or 1
-
 // autocomplete global search - The minimum number of characters a user must type before a search is performed. 
 $gsMinLength = 3;
 
@@ -252,6 +251,12 @@ $unblockedTimeoutCronTasks = true;
 
 // The maximum time of executing a cron. Recommended same as the max_exacution_time parameter value.
 $maxExecutionCronTime = 3600;
+
+// System's language selection in the login window (true/false).
+$langInLoginView = false;
+
+// Set the default layout 
+$defaultLayout = 'vlayout';
 
 // Logo is visible in footer.
 $isVisibleLogoInFooter = true;

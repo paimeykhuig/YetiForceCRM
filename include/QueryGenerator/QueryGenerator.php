@@ -171,12 +171,12 @@ class QueryGenerator
 	{
 		$this->sourceRecord = $sourceRecord;
 	}
-	
+
 	public function getSourceRecord()
 	{
 		return $this->sourceRecord;
 	}
-	
+
 	public function getOwnerFieldList()
 	{
 		return $this->ownerFields;
@@ -466,21 +466,13 @@ class QueryGenerator
 			$columns[] = $sql;
 
 			//To merge date and time fields
-			if ($this->meta->getEntityName() == 'Calendar' && ($field == 'date_start' || $field == 'due_date' || $field == 'taskstatus' || $field == 'eventstatus')) {
+			if ($this->meta->getEntityName() == 'Calendar' && ($field == 'date_start' || $field == 'due_date')) {
 				if ($field == 'date_start') {
 					$timeField = 'time_start';
 					$sql = $this->getSQLColumn($timeField);
 				} else if ($field == 'due_date') {
 					$timeField = 'time_end';
 					$sql = $this->getSQLColumn($timeField);
-				} else if ($field == 'taskstatus' || $field == 'eventstatus') {
-					//In calendar list view, Status value = Planned is not displaying
-					$sql = "CASE WHEN (vtiger_activity.status not like '') THEN vtiger_activity.status ELSE vtiger_activity.eventstatus END AS ";
-					if ($field == 'taskstatus') {
-						$sql .= 'status';
-					} else {
-						$sql .= $field;
-					}
 				}
 				$columns[] = $sql;
 			}
@@ -721,6 +713,11 @@ class QueryGenerator
 		foreach ($this->conditionals as $index => $conditionInfo) {
 			$fieldName = $conditionInfo['name'];
 			$field = $moduleFieldList[$fieldName];
+			if ($fieldName == 'id') {
+				$sqlOperator = $this->getSqlOperator($conditionInfo['operator']);
+				$fieldSqlList[$index] = $baseTable . '.' . $baseTableIndex . $sqlOperator . $conditionInfo['value'];
+				continue;
+			}
 			if (empty($field) || $conditionInfo['operator'] == 'None') {
 				continue;
 			}
@@ -820,6 +817,8 @@ class QueryGenerator
 					} else {
 						$fieldSql .= $fieldGlue . ' ' . $valueSql;
 					}
+				} elseif ($fieldName == 'date_start' && $conditionInfo['operator'] == 'ir') {
+					$fieldSql .= "$fieldGlue vtiger_activity.date_start <= $valueSql AND vtiger_activity.due_date >= $valueSql";
 				} elseif ($field->getFieldDataType() == 'date' && ($baseModule == 'Events' || $baseModule == 'Calendar') && ($fieldName == 'date_start' || $fieldName == 'due_date')) {
 					$value = $conditionInfo['value'];
 					$operator = $conditionInfo['operator'];
@@ -872,11 +871,8 @@ class QueryGenerator
 							$fieldSql .= "$fieldGlue " . $field->getTableName() . '.' . $field->getColumnName() . ' ' . $valueSql;
 						}
 					}
-				} else if (($baseModule == 'Events' || $baseModule == 'Calendar') && ($field->getColumnName() == 'status' || $field->getColumnName() == 'eventstatus')) {
-					$otherFieldName = 'eventstatus';
-					if ($field->getColumnName() == 'eventstatus') {
-						$otherFieldName = 'taskstatus';
-					}
+				} else if (($baseModule == 'Events' || $baseModule == 'Calendar') && ($field->getColumnName() == 'status')) {
+					$otherFieldName = 'activitystatus';
 					$otherField = $moduleFieldList[$otherFieldName];
 
 					$specialCondition = '';
@@ -948,7 +944,7 @@ class QueryGenerator
 		}
 
 		foreach ($this->whereClauseCustom as $where) {
-			$fieldSqlList[] = '(' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
+			$sql .= ' ' . $where['glue'] . ' ' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
 		}
 
 		// This is needed as there can be condition in different order and there is an assumption in makeGroupSqlReplacements API
@@ -982,22 +978,27 @@ class QueryGenerator
 		$inEqualityFieldTypes = ['currency', 'percentage', 'double', 'integer', 'number'];
 
 		if (is_string($value) && $this->ignoreComma == false) {
-			$commaSeparatedFieldTypes = array('picklist', 'multipicklist', 'owner', 'date', 'datetime', 'time', 'tree', 'sharedOwner');
+			$commaSeparatedFieldTypes = ['picklist', 'multipicklist', 'owner', 'date', 'datetime', 'time', 'tree', 'sharedOwner', 'sharedOwner'];
 			if (in_array($field->getFieldDataType(), $commaSeparatedFieldTypes)) {
 				$valueArray = explode(',', $value);
-				if ($field->getFieldDataType() == 'multipicklist' && in_array($operator, array('e', 'n'))) {
+				if ($field->getFieldDataType() == 'multipicklist' && in_array($operator, ['e', 'n'])) {
 					$valueArray = getCombinations($valueArray);
 					foreach ($valueArray as $key => $value) {
 						$valueArray[$key] = ltrim($value, ' |##| ');
 					}
 				}
+			} else if ($field->getFieldDataType() == 'multiReferenceValue') {
+				$valueArray = explode(',', $value);
+				foreach ($valueArray as $key => $value) {
+					$valueArray[$key] = '|#|' . $value . '|#|';
+				}
 			} else {
-				$valueArray = array($value);
+				$valueArray = [$value];
 			}
 		} elseif (is_array($value)) {
 			$valueArray = $value;
 		} else {
-			$valueArray = array($value);
+			$valueArray = [$value];
 		}
 		$sql = array();
 		if ($operator == 'between' || $operator == 'bw' || $operator == 'notequal') {
@@ -1104,10 +1105,14 @@ class QueryGenerator
 					}
 				}
 			} else if (in_array($field->getFieldDataType(), $inEqualityFieldTypes)) {
-				if ($operator == 'g' || $operator == 'l') {
-					$value = substr($value, 4);
-				} else if ($operator == 'h' || $operator == 'm') {
-					$value = substr($value, 5);
+				$table = get_html_translation_table(HTML_ENTITIES, ENT_COMPAT, vglobal('default_charset'));
+				$chars = implode('', array_keys($table));
+				if (preg_match("/[{$chars}]+/", $value) === 1) {
+					if ($operator == 'g' || $operator == 'l') {
+						$value = substr($value, 4);
+					} else if ($operator == 'h' || $operator == 'm') {
+						$value = substr($value, 5);
+					}
 				}
 			} else if ($field->getFieldDataType() === 'currency') {
 				$uiType = $field->getUIType();
@@ -1125,6 +1130,14 @@ class QueryGenerator
 				$value = $db->sql_escape_string($value, true);
 			}
 
+			if ($field->getFieldDataType() == 'multiReferenceValue' && in_array($operator, ['e', 's', 'ew', 'c'])) {
+				$sql[] = "LIKE '%$value%'";
+				continue;
+			} else if ($field->getFieldDataType() == 'multiReferenceValue' && in_array($operator, ['n', 'k'])) {
+				$sql[] = "NOT LIKE '%$value%'";
+				continue;
+			}
+
 			if (trim($value) == '' && ($operator == 's' || $operator == 'ew' || $operator == 'c') && ($this->isStringType($field->getFieldDataType()) ||
 				$field->getFieldDataType() == 'picklist' ||
 				$field->getFieldDataType() == 'multipicklist')) {
@@ -1139,9 +1152,9 @@ class QueryGenerator
 				if ($operator == 'om') {
 					$sql[] = 'FIND_IN_SET(' . Users_Record_Model::getCurrentUserModel()->get('id') . ',' . $this->getSQLColumn($field->getFieldName()) . ')';
 				} else if (in_array($operator, ['e', 's', 'ew', 'c'])) {
-					$sql[] = 'FIND_IN_SET(' . $value . ',' . $this->getSQLColumn($field->getFieldName()) . ')';
+					$sql[] = 'FIND_IN_SET(' ."' $value '". ',' . $this->getSQLColumn($field->getFieldName()) . ')';
 				} else if (in_array($operator, ['n', 'k'])) {
-					$sql[] = 'NOT FIND_IN_SET(' . $value . ',' . $this->getSQLColumn($field->getFieldName()) . ')';
+					$sql[] = 'NOT FIND_IN_SET(' ."' $value '". ',' . $this->getSQLColumn($field->getFieldName()) . ')';
 				}
 				continue;
 			}
@@ -1150,37 +1163,10 @@ class QueryGenerator
 				$sql[] = "NOT LIKE ''";
 				continue;
 			}
+			$sqlOperatorData = $this->getSqlOperator($operator, $value);
+			$sqlOperator = $sqlOperatorData[0];
+			$value = $sqlOperatorData[1];
 
-			switch ($operator) {
-				case 'e': $sqlOperator = "=";
-					break;
-				case 'n': $sqlOperator = "<>";
-					break;
-				case 's': $sqlOperator = "LIKE";
-					$value = "$value%";
-					break;
-				case 'ew': $sqlOperator = "LIKE";
-					$value = "%$value";
-					break;
-				case 'c': $sqlOperator = "LIKE";
-					$value = "%$value%";
-					break;
-				case 'k': $sqlOperator = "NOT LIKE";
-					$value = "%$value%";
-					break;
-				case 'l': $sqlOperator = "<";
-					break;
-				case 'g': $sqlOperator = ">";
-					break;
-				case 'm': $sqlOperator = "<=";
-					break;
-				case 'h': $sqlOperator = ">=";
-					break;
-				case 'a': $sqlOperator = ">";
-					break;
-				case 'b': $sqlOperator = "<";
-					break;
-			}
 			if (!$this->isNumericType($field->getFieldDataType()) &&
 				($field->getFieldName() != 'birthday' || ($field->getFieldName() == 'birthday' && $this->isRelativeSearchOperators($operator)))) {
 				$value = "'$value'";
@@ -1553,5 +1539,43 @@ class QueryGenerator
 		if (!in_array('id', $this->fields)) {
 			$this->fields[] = 'id';
 		}
+	}
+
+	public function getSqlOperator($operator, $value = false)
+	{
+		switch ($operator) {
+			case 'e': $sqlOperator = "=";
+				break;
+			case 'n': $sqlOperator = "<>";
+				break;
+			case 's': $sqlOperator = "LIKE";
+				$value = "$value%";
+				break;
+			case 'ew': $sqlOperator = "LIKE";
+				$value = "%$value";
+				break;
+			case 'c': $sqlOperator = "LIKE";
+				$value = "%$value%";
+				break;
+			case 'k': $sqlOperator = "NOT LIKE";
+				$value = "%$value%";
+				break;
+			case 'l': $sqlOperator = "<";
+				break;
+			case 'g': $sqlOperator = ">";
+				break;
+			case 'm': $sqlOperator = "<=";
+				break;
+			case 'h': $sqlOperator = ">=";
+				break;
+			case 'a': $sqlOperator = ">";
+				break;
+			case 'b': $sqlOperator = "<";
+				break;
+		}
+		if (!$value) {
+			return $sqlOperator;
+		}
+		return [$sqlOperator, $value];
 	}
 }

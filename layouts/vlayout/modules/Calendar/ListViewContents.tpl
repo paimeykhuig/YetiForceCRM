@@ -20,6 +20,7 @@
 <input type="hidden" id="alphabetValue" value="{$ALPHABET_VALUE}" />
 <input type="hidden" id="totalCount" value="{$LISTVIEW_COUNT}" />
 <input type="hidden" id="listMaxEntriesMassEdit" value="{vglobal('listMaxEntriesMassEdit')}" />
+<input type="hidden" id="autoRefreshListOnChange" value="{PerformancePrefs::getBoolean('AUTO_REFRESH_RECORD_LIST_ON_SELECT_CHANGE')}" />
 <input type='hidden' value="{$PAGE_NUMBER}" id='pageNumber'>
 <input type='hidden' value="{$PAGING_MODEL->getPageLimit()}" id='pageLimit'>
 <input type="hidden" value="{$LISTVIEW_ENTRIES_COUNT}" id="noOfEntries">
@@ -80,7 +81,7 @@
 		</thead>
         <tr>
 			<td>
-				<a class="btn btn-default" data-trigger="listSearch" href="javascript:void(0);" onclick="Vtiger_List_Js.triggerListSearch()">
+				<a class="btn btn-default" data-trigger="listSearch" href="javascript:void(0);">
 					<span class="glyphicon glyphicon-search"></span>
 				</a>
 			</td>
@@ -139,15 +140,13 @@
 					{$LISTVIEW_ENTRY->get($LISTVIEW_HEADERNAME)}
 				{/if}
 				{if $LISTVIEW_HEADER@last}
-				</td><td nowrap class="{$WIDTHTYPE}">
+				</td><td nowrap class="{$WIDTHTYPE}">		
 				<div class="actions pull-right">
 					<span class="actionImages">
-                        {if $IS_MODULE_EDITABLE && $EDIT_VIEW_URL && $LISTVIEW_ENTRY->get('taskstatus') neq 'Held' && $LISTVIEW_ENTRY->get('taskstatus') neq 'Completed'}
-                            <a class="markAsHeld"><span title="{vtranslate('LBL_MARK_AS_HELD', $MODULE)}" class="glyphicon glyphicon-ok alignMiddle"></span></a>&nbsp;
+						{assign var=CURRENT_ACTIVITY_LABELS value=Calendar_Module_Model::getComponentActivityStateLabel('current')}
+                        {if $IS_MODULE_EDITABLE && $EDIT_VIEW_URL && in_array($RAWDATA.status,$CURRENT_ACTIVITY_LABELS)}
+                            <a class="showModal" data-url="{$LISTVIEW_ENTRY->getActivityStateModalUrl()}"><span title="{vtranslate('LBL_SET_RECORD_STATUS', $MODULE)}" class="glyphicon glyphicon-ok alignMiddle"></span></a>&nbsp;
                         {/if}
-                        {if $IS_MODULE_EDITABLE && $EDIT_VIEW_URL && $LISTVIEW_ENTRY->get('taskstatus') eq 'Held'}
-							<a class="holdFollowupOn"><span title="{vtranslate('LBL_HOLD_FOLLOWUP_ON', "Events")}" class="icon-flag alignMiddle"></span></a>&nbsp;
-						{/if}
 						{if $FULL_DETAIL_VIEW_URL}
 							<a href="{$FULL_DETAIL_VIEW_URL}"><span title="{vtranslate('LBL_SHOW_COMPLETE_DETAILS', $MODULE)}" class="glyphicon glyphicon-th-list alignMiddle"></span></a>&nbsp;
 						{/if}

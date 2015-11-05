@@ -49,7 +49,6 @@
 			</tbody>
 		</table>
 	</div>
-
 	<div class="modal editColorContainer fade" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">

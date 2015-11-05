@@ -66,6 +66,10 @@ class Settings_WidgetsManagement_Module_Model extends Settings_Vtiger_Module_Mod
 		elseif (in_array('groups', $owners['available'])) {
 			$user = key($accessibleGroups);
 		}
+		if (empty($user) && $owners['available']) {
+			reset($owners['available']);
+			$user = current($owners['available']);
+		}
 		if (empty($user))
 			$user = false;
 		$log->debug("Exiting Settings_WidgetsManagement_Module_Model::getDefaultUserId() method ...");
@@ -139,7 +143,7 @@ class Settings_WidgetsManagement_Module_Model extends Settings_Vtiger_Module_Mod
 				INNER JOIN `vtiger_tab`
 					ON vtiger_links.`tabid` = vtiger_tab.`tabid`
 				WHERE linktype = ? AND vtiger_tab.`presence` = 0';
-		
+
 		$params = array('DASHBOARDWIDGET');
 
 		$result = $db->pquery($sql, $params);
@@ -292,15 +296,15 @@ class Settings_WidgetsManagement_Module_Model extends Settings_Vtiger_Module_Mod
 		return $data;
 	}
 
-	public function getBlocksFromModule($moduleName, $authorized = '')
+	public static function getBlocksFromModule($moduleName, $authorized = '')
 	{
 		$log = vglobal('log');
 		$log->debug("Entering Settings_WidgetsManagement_Module_Model::getBlocksFromModule(" . $moduleName . ", " . $authorized . ") method ...");
 		$adb = PearDatabase::getInstance();
 		$tabId = getTabid($moduleName);
-		$data = array();
+		$data = [];
 		$query = 'SELECT * FROM `vtiger_module_dashboard_blocks` WHERE `tabid` = ?';
-		$params = array($tabId);
+		$params = [$tabId];
 		if ($authorized) {
 			$query .= ' AND `authorized` = ? ;';
 			$params[] = $authorized;
@@ -313,7 +317,7 @@ class Settings_WidgetsManagement_Module_Model extends Settings_Vtiger_Module_Mod
 		return $data;
 	}
 
-	public function getSpecialWidgets($moduleName)
+	public static function getSpecialWidgets($moduleName)
 	{
 		$log = vglobal('log');
 		$log->debug("Entering Settings_WidgetsManagement_Module_Model::getSpecialWidgets($moduleName) method ...");

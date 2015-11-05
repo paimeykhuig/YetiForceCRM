@@ -311,7 +311,13 @@ $languageStrings = [
 	'LBL_SAVE_COLOR' => 'Farbe gesichert',
 	'LBL_EMAIL' => 'E-Mail',
 	'LBL_SPACE' => 'Space',
-	'Account Owner' => 'Account Owner',
+	'Account Owner' => 'Konteninhaber',
+	'PLL_PLANNED' => 'Geplant',
+	'PLL_IN_REALIZATION' => 'Zu realisieren',
+	'PLL_OVERDUE' => 'Überfällig',
+	'PLL_POSTPONED' => 'Zurückgestellt',
+	'PLL_CANCELLED' => 'Abgebrichen',
+	'PLL_COMPLETED' => 'Komplett',
 ];
 
 $jsLanguageStrings = [

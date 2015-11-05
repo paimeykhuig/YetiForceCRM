@@ -148,6 +148,7 @@ $languageStrings = [
 	'LBL_WORKFLOWS_RUN_TIME' => 'Data i czas uruchomienia obiegu informacji',
 	'Sales stage - Negotiations' => 'Proces sprzedażowy - Negocjacje',
 	'LBL_UPDATE_DATES_BASE_DATE_CHANGES' => 'Aktualizuj daty wygenrowaneych wydarzeń kiedy data bazowa ulegnia zmianie',
+	'LBL_CURRENT_USER' => 'Aktualnie zalogowany użytkownik',
 	//workflow task
 	'EmailTempleteList' => 'Wybierz szablon maila który ma zostać wysłany',
 	'Do you send all attachments' => 'Czy wysłać wszystkie załączniki ?',
@@ -180,8 +181,12 @@ $languageStrings = [
 	'Invoice Date' => 'Data faktury',
 	'Start Date & Time' => 'Czas rozpoczęcia',
 	'End Date & Time' => 'Czas zakończenia',
+	'ON_DELETE' => 'Podczas usuwania',
+	'TRIGGER' => 'Ręczne wywołanie',
+	'BLOCK_EDIT' => 'Blokada edycji',
+	'UpdateBalance' => 'Zaktualizuj saldo',
+	'UpdateInventory' => 'Zaktualizuj inwentarz',
 ];
-
 $jsLanguageStrings = [
 	'JS_SAME_FIELDS_SELECTED_MORE_THAN_ONCE' => 'Te same pola zaznaczono więcej niż jedej raz',
 	'JS_STATUS_CHANGED_SUCCESSFULLY' => 'Status zmieniono poprawnie',

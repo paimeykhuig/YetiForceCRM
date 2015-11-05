@@ -175,7 +175,7 @@ class Settings_BackUp_Module_Model extends Vtiger_Base_Model
 				$numRows = $offset;
 
 				$contentResult = $db->query('SELECT * FROM ' . $tableName . $sqlLimit);
-				$numFields = $db->num_fields($contentResult);
+				$numFields = $db->getFieldsCount($contentResult);
 				$fields = $db->getFieldsArray($contentResult);
 				$fieldsList = '';
 
@@ -240,7 +240,7 @@ class Settings_BackUp_Module_Model extends Vtiger_Base_Model
 	{
 		if (@isset($str)) {
 			$sqlstr = addslashes($str);
-			$sqlstr = ereg_replace("\n", "\\n", $sqlstr);
+			$sqlstr = preg_replace("/\n/", "\\n", $sqlstr);
 			$sqlstr = preg_replace("/\r\n/", "\\r\\n", $sqlstr);
 			return $sqlstr;
 		} else {
@@ -584,11 +584,11 @@ class Settings_BackUp_Module_Model extends Vtiger_Base_Model
 				$emails[] = $userEmail;
 			}
 			$emailsList = implode(',', $emails);
-			$data = array(
-				'id' => 108,
+			$data = [
+				'sysname' => 'BackupHasBeenMade',
 				'to_email' => $emailsList,
 				'module' => 'Contacts',
-			);
+			];
 			$recordModel = Vtiger_Record_Model::getCleanInstance('OSSMailTemplates');
 			$mail_status = $recordModel->sendMailFromTemplate($data);
 

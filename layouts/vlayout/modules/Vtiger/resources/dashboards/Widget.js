@@ -168,27 +168,24 @@ jQuery.Class('Vtiger_Widget_Js', {
 			var currentElement = jQuery(e.currentTarget);
 			var drefresh = container.find('a[name="drefresh"]');
 			var url = drefresh.data('url');
-			var urlparams = currentElement.data('urlparams');
-			if (urlparams != '') {
-				url = url.replace('&sortorder=desc');
-				url = url.replace('&sortorder=asc');
-				url += '&sortorder=';
-				var sort = currentElement.data('sort');
-				var sortorder = 'desc';
-				var icon = 'glyphicon-sort-by-attributes-alt';
-				if (sort == 'desc') {
-					sortorder = 'asc';
-					icon = 'glyphicon-sort-by-attributes';
-				}
-				currentElement.data('sort', sortorder);
-				currentElement.attr('title', currentElement.data(sortorder));
-				currentElement.attr('alt', currentElement.data(sortorder));
-				url += sortorder;
-				var glyphicon = currentElement.find('.glyphicon');
-				glyphicon.removeClass().addClass('glyphicon').addClass(icon);
-				drefresh.data('url', url);
-				drefresh.click();
+			url = url.replace('&sortorder=desc','');
+			url = url.replace('&sortorder=asc','');
+			url += '&sortorder=';
+			var sort = currentElement.data('sort');
+			var sortorder = 'desc';
+			var icon = 'glyphicon-sort-by-attributes-alt';
+			if (sort == 'desc') {
+				sortorder = 'asc';
+				icon = 'glyphicon-sort-by-attributes';
 			}
+			currentElement.data('sort', sortorder);
+			currentElement.attr('title', currentElement.data(sortorder));
+			currentElement.attr('alt', currentElement.data(sortorder));
+			url += sortorder;
+			var glyphicon = currentElement.find('.glyphicon');
+			glyphicon.removeClass().addClass('glyphicon').addClass(icon);
+			drefresh.data('url', url);
+			drefresh.click();
 		});
 	},
 	registerWidgetSwitch: function () {
@@ -956,7 +953,7 @@ Vtiger_Widget_Js('YetiForce_Calendar_Widget_Js', {}, {
 		if (userDefaultTimeFormat == 24) {
 			userDefaultTimeFormat = 'H(:mm)';
 		} else {
-			userDefaultTimeFormat = 'h(:mm)tt';
+			userDefaultTimeFormat = 'h(:mm) A';
 		}
 
 		//Default first day of the week
@@ -1039,6 +1036,10 @@ Vtiger_Widget_Js('YetiForce_Calendar_Widget_Js', {}, {
 		if (user == 'all') {
 			user = '';
 		}
+		var status = parent.find('.status').val();
+		if (status == 'all') {
+			status = '';
+		}
 		var params = {
 			module: 'Calendar',
 			action: 'Calendar',
@@ -1046,6 +1047,7 @@ Vtiger_Widget_Js('YetiForce_Calendar_Widget_Js', {}, {
 			start: start_date,
 			end: end_date,
 			user: user,
+			activitystatus: status,
 			widget: true
 		}
 		AppConnector.request(params).then(function (events) {
@@ -1060,7 +1062,14 @@ Vtiger_Widget_Js('YetiForce_Calendar_Widget_Js', {}, {
 					);
 			thisInstance.getCalendarView().find(".fc-event-container a").click(function () {
 				var container = thisInstance.getContainer();
-				window.location.href = 'index.php?module=Calendar&view=List&search_params=[[["assigned_user_id","c","' + container.find('.widgetFilter.owner option:selected').data('name') + '"],["activitytype","e","' + $(this).data('type') + '"],["date_start","bw","' + $(this).data('date') + ',' + $(this).data('date') + '"]]]';
+				var url = 'index.php?module=Calendar&view=List&search_params=[[';
+				if (container.find('.widgetFilter.owner option:selected').val() != 'all') {
+					url += '["assigned_user_id","c","' + container.find('.widgetFilter.owner option:selected').data('name') + '"],';
+				}
+				if (status) {
+					url += '["activitystatus","e","' + container.find('select.widgetFilter.status').val() + '"],';
+				}
+				window.location.href = url + '["activitytype","e","' + $(this).data('type') + '"],["date_start","ir","' + $(this).data('date') + '"]]]';
 			});
 		});
 	},
@@ -1110,4 +1119,53 @@ Vtiger_Widget_Js('YetiForce_Calendar_Widget_Js', {}, {
 		refreshContainer.progressIndicator({'mode': 'hide'});
 	},
 });
+Vtiger_Widget_Js('YetiForce_Calendaractivities_Widget_Js', {}, {
+	modalView: false,
+	postLoadWidget: function () {
+		this._super();
+		this.registerActivityChange();
+		this.registerListViewButton();
+	},
+	postRefreshWidget: function () {
+		this._super();
+		this.registerActivityChange();
+	},
+	registerActivityChange: function () {
+		var thisInstance = this;
+		var refreshContainer = this.getContainer().find('.dashboardWidgetContent');
+		refreshContainer.find('.changeActivity').on('click', function (e) {
+			if (jQuery(e.target).is('a') || thisInstance.modalView) {
+				return;
+			}
+			var url = jQuery(this).data('url');
+			if (typeof url != 'undefined') {
+				var callbackFunction = function () {
+					thisInstance.modalView = false;
+				};
+				thisInstance.modalView = true;
+				app.showModalWindow(null, url, callbackFunction);
+			}
+		})
+	},
+	registerListViewButton: function () {
+		var thisInstance = this;
+		var container = thisInstance.getContainer();
+		container.find('.goToListView').on('click', function () {
+			var status = container.find('.status').prop('checked');
+			if (container.data('name') == 'OverdueActivities') {
+				status = 'PLL_OVERDUE';
+			} else if (status) {
+				status = 'PLL_IN_REALIZATION';
+			} else {
+				status = 'PLL_PLANNED';
+			}
+			window.location.href = 'index.php?module=Calendar&view=List&search_params=[[["assigned_user_id","c","' + container.find('.widgetFilter.owner option:selected').data('name') + '"],["activitystatus","e","' + status + '"]]]';
+			;
+		});
+	}
+});
+YetiForce_Calendaractivities_Widget_Js('YetiForce_Assignedupcomingcalendartasks_Widget_Js', {}, {});
+YetiForce_Calendaractivities_Widget_Js('YetiForce_Creatednotmineactivities_Widget_Js', {}, {});
+YetiForce_Calendaractivities_Widget_Js('YetiForce_Overdueactivities_Widget_Js', {}, {});
+YetiForce_Calendaractivities_Widget_Js('YetiForce_Assignedoverduecalendartasks_Widget_Js', {}, {});
 

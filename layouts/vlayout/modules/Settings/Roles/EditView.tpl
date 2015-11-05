@@ -8,7 +8,7 @@
 *************************************************************************************}
 {strip}
 	<div class="">
-		<div class='widget_headerrow '>
+		<div class="widget_header row">
 			<div class="col-xsd-12">
 				{include file='BreadCrumbs.tpl'|@vtemplate_path:$MODULE}
 			</div> 
@@ -21,14 +21,13 @@
 			{assign var=RECORD_ID value=$RECORD_MODEL->getId()}
 			<input type="hidden" name="record" value="{$RECORD_ID}" />
 			<input type="hidden" name="mode" value="{$MODE}">
-			<input type="hidden" name="profile_directly_related_to_role_id" value="{$PROFILE_ID}" />
 			{assign var=HAS_PARENT value="{if $RECORD_MODEL->getParent()}true{/if}"}
 			{if $HAS_PARENT}
 				<input type="hidden" name="parent_roleid" value="{$RECORD_MODEL->getParent()->getId()}">
 			{/if}
-			<div >
+			<div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<label class=""><span class="redColor">*</span><strong>{vtranslate('LBL_NAME', $QUALIFIED_MODULE)}: </strong></label>
 					</div>
 					<div class=" col-md-7 ">
@@ -36,14 +35,14 @@
 					</div>
 				</div><br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_REPORTS_TO', $QUALIFIED_MODULE)}: </strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_REPORTS_TO', $QUALIFIED_MODULE)}: </strong></label>
 					<div class="col-md-7 fieldValue">
 						<input type="hidden" name="parent_roleid" {if $HAS_PARENT}value="{$RECORD_MODEL->getParent()->getId()}"{/if}>
 						<input type="text" class="form-control" name="parent_roleid_display" {if $HAS_PARENT}value="{vtranslate($RECORD_MODEL->getParent()->getName(), $QUALIFIED_MODULE)}"{/if} readonly>
 					</div>
 				</div><br>
                 <div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_CAN_ASSIGN_RECORDS_TO', $QUALIFIED_MODULE)}: </strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_CAN_ASSIGN_RECORDS_TO', $QUALIFIED_MODULE)}: </strong></label>
 					<div class="col-md-7 fieldValue">
 						<select id="allowassignedrecordsto" class="row select2 form-control" name="allowassignedrecordsto">
 							<option value="1" {if $RECORD_MODEL->get('allowassignedrecordsto') == '1'}selected="true"{/if}>{vtranslate('LBL_ALL_USERS', $QUALIFIED_MODULE)}</option>
@@ -52,34 +51,33 @@
 							<option value="4" {if $RECORD_MODEL->get('allowassignedrecordsto') == '4'}selected="true"{/if}>{vtranslate('LBL_JUST_ME', $QUALIFIED_MODULE)}</option>
 						</select>
 					</div>
-                </div><br>
+                </div>
+				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PRIVILEGES',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><span class="redColor">*</span><strong>{vtranslate('LBL_PROFILE',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
-						<div class="col-md-6">
-							<label for="profiledirectly2">
-								<input id="profiledirectly2" type="radio" value="0" {if $PROFILE_DIRECTLY_RELATED_TO_ROLE eq false} checked="" {/if} name="profile_directly_related_to_role" data-handler="existing" class="alignTop"/>&nbsp;<span>{vtranslate('LBL_ASSIGN_EXISTING_PRIVILEGES',$QUALIFIED_MODULE)}</span>
-							</label>
-						</div>
-						<div class="col-md-6">
-							<label for="profiledirectly1">
-								<input id="profiledirectly1" type="radio" value="1" {if $PROFILE_DIRECTLY_RELATED_TO_ROLE} checked="" {/if} name="profile_directly_related_to_role" data-handler="new" class="alignTop"/>&nbsp;<span>{vtranslate('LBL_ASSIGN_NEW_PRIVILEGES',$QUALIFIED_MODULE)}</span>
-							</label>
-						</div>
+						{assign var="ROLE_PROFILES" value=$RECORD_MODEL->getProfiles()}
+						<select class="select2" multiple="true" id="profilesList" name="profiles[]" data-placeholder="{vtranslate('LBL_CHOOSE_PROFILES',$QUALIFIED_MODULE)}" data-validation-engine="validate[required]" style="width: 800px">
+							{foreach from=$ALL_PROFILES item=PROFILE}
+								{if $PROFILE->isDirectlyRelated() eq false}
+									<option value="{$PROFILE->getId()}" {if isset($ROLE_PROFILES[$PROFILE->getId()])}selected="true"{/if}>{vtranslate($PROFILE->getName(),'Profiles')}</option>
+								{/if}
+							{/foreach}
+						</select>
 					</div>
 				</div>
 				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_POSSIBLE_CHANGE_OWNER_OF_RECORD',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_POSSIBLE_CHANGE_OWNER_OF_RECORD',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<div class="pull-left">
 							<input type="checkbox" value="1" {if $RECORD_MODEL->get('changeowner')} checked="" {/if} name="change_owner" class="alignTop"/>
 						</div>
 					</div>
 				</div>
-				<br>
+				<hr/>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PERMISSIONS_TO_LIST_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_PERMISSIONS_TO_LIST_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<select id="listRelatedRecord" class="row select2 form-control" name="listRelatedRecord">
 							<option value="0" {if $RECORD_MODEL->get('listrelatedrecord') == '0'}selected="true"{/if}>{vtranslate('LBL_INACTIVE', $QUALIFIED_MODULE)}</option>
@@ -90,7 +88,7 @@
 				</div>
 				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PERMISSIONS_TO_VIEW_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_PERMISSIONS_TO_VIEW_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<select id="previewRelatedRecord" class="row select2 form-control" name="previewRelatedRecord">
 							<option value="0" {if $RECORD_MODEL->get('previewrelatedrecord') == '0'}selected="true"{/if}>{vtranslate('LBL_INACTIVE', $QUALIFIED_MODULE)}</option>
@@ -101,7 +99,7 @@
 				</div>
 				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PERMISSIONS_FIELD_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_PERMISSIONS_FIELD_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<select id="previewRelatedRecord" class="row select2 form-control" name="permissionsRelatedField">
 							<option value="0" {if $RECORD_MODEL->get('permissionsrelatedfield') == '0'}selected="true"{/if}>{vtranslate('Assigned To', $QUALIFIED_MODULE)}</option>
@@ -112,16 +110,16 @@
 				</div>
 				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PERMISSIONS_TO_EDIT_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_PERMISSIONS_TO_EDIT_RELATED_RECORDS',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<div class="pull-left">
 							<input type="checkbox" value="1" {if $RECORD_MODEL->get('editrelatedrecord')} checked="" {/if} name="editRelatedRecord" class="alignTop"/>
 						</div>
 					</div>
 				</div>
-				<br>
+				<hr/>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_SEARCH_WITHOUT_PERMISSION',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_SEARCH_WITHOUT_PERMISSION',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						{assign var="SEARCH_MODULES" value=explode(',',$RECORD_MODEL->get('searchunpriv'))}
 						<select id="modulesList" class="row modules select2 form-control" multiple="true" name="searchunpriv[]">
@@ -133,7 +131,16 @@
 				</div>
 				<br>
 				<div class="row">
-					<label class="col-md-3"><strong>{vtranslate('LBL_BROWSING_OTHER_USERS_GRAPHICAL_CALENDAR',$QUALIFIED_MODULE)}:</strong></label>
+					<label class="col-md-4"><strong>{vtranslate('LBL_SHOW_GLOBAL_SEARCH_ADVANCED',$QUALIFIED_MODULE)}:</strong></label>
+					<div class="col-md-7 fieldValue">
+						<div class="pull-left">
+							<input type="checkbox" value="1" {if $RECORD_MODEL->get('globalsearchadv')} checked="" {/if} name="globalSearchAdvanced" class="alignTop"/>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<label class="col-md-4"><strong>{vtranslate('LBL_BROWSING_OTHER_USERS_GRAPHICAL_CALENDAR',$QUALIFIED_MODULE)}:</strong></label>
 					<div class="col-md-7 fieldValue">
 						<select id="clendarallorecords" class="row select2 form-control" name="clendarallorecords">
 							<option value="1" {if $RECORD_MODEL->get('clendarallorecords') == '1'}selected="true"{/if}>{vtranslate('LBL_CLENDAR_ALLO_RECORDS_1', $QUALIFIED_MODULE)}</option>
@@ -141,30 +148,12 @@
 							<option value="3" {if $RECORD_MODEL->get('clendarallorecords') == '3'}selected="true"{/if}>{vtranslate('LBL_CLENDAR_ALLO_RECORDS_3', $QUALIFIED_MODULE)}</option>
 						</select>
 					</div>
-				</div>	
-				<br>
-				<div class="row padding20px boxSizingBorderBox contentsBackground" data-content-role="new" style="display: none">
-					<div class="fieldValue col-md-12">
-					</div>
 				</div>
-				<div class="row" data-content-role="existing" style="display: none">
-					<label class="col-md-3"><strong>{vtranslate('LBL_PROFILE',$QUALIFIED_MODULE)}:</strong></label>
-					<div class="col-md-7 fieldValue">
-						{assign var="ROLE_PROFILES" value=$RECORD_MODEL->getProfiles()}
-						<select class="select2" multiple="true" id="profilesList" name="profiles[]" data-placeholder="{vtranslate('LBL_CHOOSE_PROFILES',$QUALIFIED_MODULE)}" style="width: 800px">
-							{foreach from=$ALL_PROFILES item=PROFILE}
-								{if $PROFILE->isDirectlyRelated() eq false}
-									<option value="{$PROFILE->getId()}" {if isset($ROLE_PROFILES[$PROFILE->getId()])}selected="true"{/if}>{vtranslate($PROFILE->getName(),'Profiles')}</option>
-								{/if}
-							{/foreach}
-						</select>
-					</div>
-				</div>
-			</div>			
+			</div>
 			<div class="pull-right marginRight10px">
-				<a class="cancelLink btn btn-warning" onclick="javascript:window.history.back();" type="reset">{vtranslate('LBL_CANCEL',$MODULE)}</a>
 				<button class="btn btn-success" type="submit">{vtranslate('LBL_SAVE',$MODULE)}</button>
-			</div>			
+				<button class="cancelLink btn btn-warning" onclick="javascript:window.history.back();" type="reset">{vtranslate('LBL_CANCEL',$MODULE)}</button>
+			</div>
 			{if count($ROLE_USERS) > 0 }
 				<hr/>
 				<h4>{vtranslate('LBL_USERS_LIST',$QUALIFIED_MODULE)}</h4>

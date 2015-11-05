@@ -2,7 +2,8 @@
 // The file is published on the basis of YetiForce Public License that can be found in the following directory: licenses/License.html
 
 $languageStrings = [
-	'LBL_CURRENCY_UPDATE' => 'Currencies',
+	'CurrencyUpdate' => 'Currency Update',
+	'LBL_CURRENCY_UPDATE' => 'Currency Update',
 	'LBL_CURRENCY_UPDATE_DESCRIPTION' => 'Options for setting systems built in currency conversion rates.',
 	'LBL_SELECT_BANK' => 'Select the Bank',
 	'MSG_ONE_CURRENCY' => 'There is only one main currency set. To get currency rates for other currencies please add more currencies in CRM settings.',

@@ -41,7 +41,7 @@
 			</thead>
 			<tr class="blockHeader">
 				<th class="blockHeader" colspan="5">
-					{vtranslate($SOURCE_MODULE, $QUALIFIED_MODULE)} {vtranslate('LBL_FIELD_INFORMATION', $QUALIFIED_MODULE)} {$QUALIFIED_MODULE}
+					{vtranslate($SOURCE_MODULE, $SOURCE_MODULE)} {vtranslate('LBL_FIELD_INFORMATION', $QUALIFIED_MODULE)} {$QUALIFIED_MODULE}
 				</th>
 			</tr>
 			<tr>
@@ -59,7 +59,7 @@
 										{assign var="FIELD_INFO" value=json_encode($FIELD_MODEL->getFieldInfo())}
 											<option value="{$FIELD_MODEL->get('name')}" data-field-info='{$FIELD_INFO}' data-mandatory="{($FIELD_MODEL->isMandatory(true) eq 1) ? "true":"false"}"
 											{if (array_key_exists($FIELD_MODEL->get('name'), $SELECTED_FIELD_MODELS_LIST)) or ($FIELD_MODEL->isMandatory(true))}selected{/if}>
-												{vtranslate($FIELD_MODEL->get('label'), $QUALIFIED_MODULE)}
+												{vtranslate($FIELD_MODEL->get('label'), $SOURCE_MODULE)}
 												{if $FIELD_MODEL->isMandatory(true)}
 													<span class="redColor">*</span>
 												{/if}
@@ -109,8 +109,8 @@
 								<input type="checkbox" {if (!empty($SELECETED_FIELD_MODEL)) and ($SELECETED_FIELD_MODEL->get('hidden') eq 1)} checked="checked"{/if}
 								name="selectedFieldsData[{$FIELD_NAME}][hidden]" class="markRequired hiddenField" value="1"/>
 							</td>
-							<td class="fieldLabel" data-label="{vtranslate($FIELD_MODEL->get('label'), $QUALIFIED_MODULE)}{if $FIELD_MODEL->isMandatory(true)}*{/if}">
-								{vtranslate($FIELD_MODEL->get('label'), $QUALIFIED_MODULE)}{if $FIELD_MODEL->isMandatory(true)}<span class="redColor">*</span>{/if}
+							<td class="fieldLabel" data-label="{vtranslate($FIELD_MODEL->get('label'), $SOURCE_MODULE)}{if $FIELD_MODEL->isMandatory(true)}*{/if}">
+								{vtranslate($FIELD_MODEL->get('label'), $SOURCE_MODULE)}{if $FIELD_MODEL->isMandatory(true)}<span class="redColor">*</span>{/if}
 							</td>
 							{assign var=DATATYPEMARGINLEFT value= array("date","currency","percentage","reference")}
 							{assign var=IS_PARENT_EXISTS value=strpos($MODULE,":")}
@@ -125,7 +125,7 @@
 								{if Settings_Webforms_Record_Model::isCustomField($FIELD_MODEL->get('name'))}
 									{vtranslate('LBL_LABEL', $QUALIFIED_MODULE)} : {vtranslate($FIELD_MODEL->get('label'), $QUALIFIED_MODULE)}
 								{else}
-									{vtranslate($FIELD_MODEL->get('name'), $QUALIFIED_MODULE)}
+									{vtranslate($FIELD_MODEL->get('name'), $SOURCE_MODULE)}
 								{/if}
 								{if !$FIELD_MODEL->isMandatory(true)}
 									<div class="pull-right actions">

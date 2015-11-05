@@ -68,12 +68,12 @@ class Vtiger_Module_Model extends Vtiger_Module
 	{
 		return $this->get('type');
 	}
-	
+
 	public function isInventory()
 	{
 		return $this->getModuleType() == 1;
 	}
-	
+
 	/**
 	 * Function to get singluar label key
 	 * @return <String> - Singular module label key
@@ -162,7 +162,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 	 * Function to save a given record model of the current module
 	 * @param Vtiger_Record_Model $recordModel
 	 */
-	public function saveRecord($recordModel)
+	public function saveRecord(Vtiger_Record_Model $recordModel)
 	{
 		$moduleName = $this->get('name');
 		$focus = CRMEntity::getInstance($moduleName);
@@ -178,7 +178,8 @@ class Vtiger_Module_Model extends Vtiger_Module
 		$focus->mode = $recordModel->get('mode');
 		$focus->id = $recordModel->getId();
 		$focus->save($moduleName);
-		return $recordModel->setId($focus->id);
+		$recordModel->setData($focus->column_fields)->setId($focus->id)->setEntity($focus);
+		return $recordModel;
 	}
 
 	/**
@@ -193,6 +194,21 @@ class Vtiger_Module_Model extends Vtiger_Module
 		if (method_exists($focus, 'transferRelatedRecords')) {
 			if ($recordModel->get('transferRecordIDs'))
 				$focus->transferRelatedRecords($moduleName, $recordModel->get('transferRecordIDs'), $recordModel->getId());
+		}
+
+		vimport('~~modules/com_vtiger_workflow/include.inc');
+		vimport('~~modules/com_vtiger_workflow/VTEntityMethodManager.inc');
+		$wfs = new VTWorkflowManager(PearDatabase::getInstance());
+		$workflows = $wfs->getWorkflowsForModule($moduleName, VTWorkflowManager::$ON_DELETE);
+		if (count($workflows)) {
+			$wsId = vtws_getWebserviceEntityId($moduleName, $recordModel->getId());
+			$entityCache = new VTEntityCache(Users_Record_Model::getCurrentUserModel());
+			$entityData = $entityCache->forId($wsId);
+			foreach ($workflows as $id => $workflow) {
+				if ($workflow->evaluate($entityCache, $entityData->getId())) {
+					$workflow->performTasks($entityData);
+				}
+			}
 		}
 	}
 
@@ -232,6 +248,30 @@ class Vtiger_Module_Model extends Vtiger_Module
 	public function getListViewName()
 	{
 		return 'List';
+	}
+
+	/**
+	 * Function to get listview url with all filter
+	 * @return <string> URL
+	 */
+	public function getListViewUrlWithAllFilter()
+	{
+		return $this->getListViewUrl() . '&viewname=' . $this->getAllFilterCvidForModule();
+	}
+
+	/**
+	 * Function returns the All filter for the module
+	 * @return <Int> custom filter id
+	 */
+	public function getAllFilterCvidForModule()
+	{
+		$db = PearDatabase::getInstance();
+
+		$result = $db->pquery("SELECT cvid FROM vtiger_customview WHERE viewname = 'All' AND entitytype = ?", [$this->getName()]);
+		if ($result->rowCount()) {
+			return $db->getSingleValue($result);
+		}
+		return false;
 	}
 
 	/**
@@ -630,9 +670,10 @@ class Vtiger_Module_Model extends Vtiger_Module
 		$list_fields = $entityInstance->list_fields;
 		$relatedListFields = array();
 		foreach ($list_fields as $key => $fieldInfo) {
-			$columnName = current($fieldInfo);
-			if (array_key_exists($key, $list_fields_name)) {
-				$relatedListFields[$columnName] = $list_fields_name[$key];
+			foreach ($fieldInfo as $columnName) {
+				if (array_key_exists($key, $list_fields_name)) {
+					$relatedListFields[$columnName] = $list_fields_name[$key];
+				}
 			}
 		}
 		return $relatedListFields;
@@ -863,7 +904,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 			$row = $db->query_result_rowdata($result, $i);
 			$turnOffModules[$row['tabid']] = $row['tabid'];
 		}
-		
+
 		foreach ($entityModules as $tabid => $moduleModel) {
 			$moduleName = $moduleModel->getName();
 			if ($moduleName == 'Users' || $moduleName == 'Emails' || $moduleName == 'Events' || in_array($tabid, $turnOffModules))
@@ -1105,7 +1146,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 		if (!$user) {
 			$user = $currentUser->getId();
 		}
-
+		$currentActivityLabels = Calendar_Module_Model::getComponentActivityStateLabel('current');
 		$nowInUserFormat = Vtiger_Datetime_UIType::getDisplayDateValue(date('Y-m-d H:i:s'));
 		$nowInDBFormat = Vtiger_Datetime_UIType::getDBDateTimeValue($nowInUserFormat);
 		list($currentDate, $currentTime) = explode(' ', $nowInDBFormat);
@@ -1119,28 +1160,28 @@ class Vtiger_Module_Model extends Vtiger_Module
 					INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_activity.activityid
 					INNER JOIN vtiger_crmentity AS crmentity2 ON vtiger_activity." . $relationField . " = crmentity2.crmid AND crmentity2.deleted = 0 AND crmentity2.setype = ?
 					LEFT JOIN vtiger_groups ON vtiger_groups.groupid = vtiger_crmentity.smownerid WHERE vtiger_crmentity.deleted=0";
-		if ($recordId)
+		$params = [$this->getName()];
+		if ($recordId) {
 			$query .= ' AND vtiger_activity.' . $relationField . ' = ?';
-
+			array_push($params, $recordId);
+		}
 		if ($mode === 'current') {
-			$query .= " AND ((vtiger_activity.activitytype='Task' and vtiger_activity.status not in ('Completed','Deferred'))
-			OR (vtiger_activity.activitytype not in ('Emails','Task') and vtiger_activity.eventstatus not in ('','Held')))";
+			$query .= " AND (vtiger_activity.activitytype NOT IN ('Emails') AND vtiger_activity.status IN (" . generateQuestionMarks($currentActivityLabels) . "))";
+			$params = array_merge($params, $currentActivityLabels);
 		} elseif ($mode === 'history') {
-			$query .= " AND ((vtiger_activity.activitytype='Task' and vtiger_activity.status in ('Completed','Deferred'))
-			OR (vtiger_activity.activitytype not in ('Emails','Task') and  vtiger_activity.eventstatus in ('','Held')))";
+			$query .= " AND (vtiger_activity.activitytype NOT IN ('Emails') AND vtiger_activity.status NOT IN (" . generateQuestionMarks($currentActivityLabels) . "))";
+			$params = array_merge($params, $currentActivityLabels);
 		} elseif ($mode === 'upcoming') {
 			$query .= " AND (vtiger_activity.activitytype NOT IN ('Emails'))
-					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred'))
-					AND (vtiger_activity.eventstatus is NULL OR vtiger_activity.eventstatus NOT IN ('Held'))";
+					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred'))";
 			$query .= " AND due_date >= '$currentDate'";
 		} elseif ($mode === 'overdue') {
 			$query .= " AND (vtiger_activity.activitytype NOT IN ('Emails'))
-					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred'))
-					AND (vtiger_activity.eventstatus is NULL OR vtiger_activity.eventstatus NOT IN ('Held'))";
+					AND (vtiger_activity.status is NULL OR vtiger_activity.status NOT IN ('Completed', 'Deferred'))";
 			$query .= " AND due_date < '$currentDate'";
 		}
 
-		$params = array($this->getName());
+
 		if ($user != 'all' && $user != '') {
 			if ($user === $currentUser->id) {
 				$query .= " AND vtiger_crmentity.smownerid = ?";
@@ -1153,10 +1194,6 @@ class Vtiger_Module_Model extends Vtiger_Module
 		if ($securityParameter != '')
 			$query .= $securityParameter;
 		$query .= " ORDER BY date_start, time_start LIMIT " . $pagingModel->getStartIndex() . ", " . ($pagingModel->getPageLimit() + 1);
-
-		if ($recordId) {
-			array_push($params, $recordId);
-		}
 
 		$result = $db->pquery($query, $params);
 		$numOfRows = $db->num_rows($result);
@@ -1487,7 +1524,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 
 		$focus = CRMEntity::getInstance($this->getName());
 		$focus->id = $recordId;
-		
+
 		$result = $focus->$functionName($recordId, $this->getId(), $relatedModule->getId());
 		$query = $result['query'] . ' ' . $this->getSpecificRelationQuery($relatedModuleName);
 
@@ -1507,11 +1544,11 @@ class Vtiger_Module_Model extends Vtiger_Module
 			$queryGenerator = new QueryGenerator($relatedModuleName, $currentUser);
 			$queryGenerator->setFields($relatedListFields);
 			$selectColumnSql = $queryGenerator->getSelectClauseColumnSQL();
-			$newQuery = spliti('FROM', $query);
+			$newQuery = explode('FROM', $query);
 			$selectColumnSql = 'SELECT DISTINCT vtiger_crmentity.crmid,' . $selectColumnSql;
 			$query = $selectColumnSql . ' FROM ' . $newQuery[1];
 		}
-		
+
 		$instance = CRMEntity::getInstance($relatedModuleName);
 		$securityParameter = $instance->getUserAccessConditionsQuerySR($relatedModuleName, false, $recordId);
 		if ($securityParameter != '')
@@ -1672,6 +1709,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 		$data['HelpDesk']['projectid'] = ['Project' => ['parent_id' => ['linktoaccountscontacts']]];
 		$data['HelpDesk']['contact_id'] = ['Contacts' => ['parent_id' => ['parent_id']]];
 		$data['HelpDesk']['pssold_id'] = ['Assets' => ['product_id' => ['product', 'Products']], 'OSSSoldServices' => ['product_id' => ['serviceid', 'Services']]];
+		$data['OSSTimeControl']['projectid'] = ['Project' => ['accountid' => ['linktoaccountscontacts']]];
 
 		if (array_key_exists($moduleName, $data) && $field != false && array_key_exists($field, $data[$moduleName]))
 			return $data[$moduleName][$field];
@@ -1697,7 +1735,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 					foreach ($referenceList as $referenceModule) {
 						$fieldMap[$referenceModule] = $fieldName;
 					}
-					if (in_array($sourceModule, $referenceList)) {
+					if (in_array($sourceModule, $referenceList) && !($sourceModule == 'Accounts' && in_array('Accounts', $referenceList))) {
 						$relationField = $fieldName;
 					}
 				}
@@ -1707,7 +1745,7 @@ class Vtiger_Module_Model extends Vtiger_Module
 				if ($fieldModel->getFieldDataType() == Vtiger_Field_Model::REFERENCE_TYPE) {
 					$referenceList = $fieldModel->getReferenceList();
 					foreach ($referenceList as $referenceModule) {
-						if (isset($fieldMap[$referenceModule])) {
+						if (isset($fieldMap[$referenceModule]) && $sourceModule != $referenceModule) {
 							$fieldValue = $recordModel->get($fieldName);
 							if ($fieldValue != 0 && Vtiger_Functions::getCRMRecordType($fieldValue) == $referenceModule)
 								$data[$fieldMap[$referenceModule]] = $fieldValue;

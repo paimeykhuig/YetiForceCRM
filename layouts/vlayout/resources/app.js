@@ -227,7 +227,7 @@ var app = {
 	 */
 	showSelectizeElementView: function (selectElement, params) {
 		if (typeof params == 'undefined') {
-			params = {};
+			params = {plugins: ['remove_button']};
 		}
 		selectElement.selectize(params);
 		return selectElement;
@@ -1112,15 +1112,18 @@ var app = {
 			val = val.toString().replace('.', decimalSeparator);
 		}
 		return val;
-	},
+	}, 
 	parseNumberToFloat: function (val) {
 		var numberOfDecimal = parseInt(app.getMainParams('numberOfCurrencyDecimal'));
+		var groupingSeparator = app.getMainParams('currencyGroupingSeparator');
 		if (val == undefined) {
 			val = 0;
 		}
+		val = val.toString();
 		if (app.getMainParams('currencyDecimalSeparator') == ',') {
-			val = val.toString().replace(/\s/g, "").replace(",", ".");
+			val = val.replace(/\s/g, "").replace(",", ".");
 		}
+		val = val.split(groupingSeparator).join("");
 		return parseFloat(val);
 	},
 	errorLog: function (error, err, errorThrown) {
@@ -1128,6 +1131,29 @@ var app = {
 			error = error.responseText;
 		}
 		console.error(error);
+	},
+	registerModal: function (container) {
+		if (typeof container == 'undefined') {
+			container = jQuery('body');
+		}
+		container.find('button.showModal, a.showModal').on('click', function (e) {
+			e.preventDefault();
+			var currentElement = jQuery(e.currentTarget);
+			var url = currentElement.data('url');
+
+			if (typeof url != 'undefined') {
+				if (typeof currentElement.data('cb') != 'undefined') {
+					var modalWindowParams = {
+						url: url,
+						cb: currentElement.data('cb'),
+					}
+					app.showModalWindow(modalWindowParams);
+				} else {
+					app.showModalWindow(null, url);
+				}
+			}
+			e.stopPropagation();
+		});
 	},
 	initFooTable: function(){		
 		var container = $('.tableRWD');
@@ -1161,10 +1187,11 @@ jQuery(document).ready(function () {
 	app.showSelectizeElementView(jQuery('body').find('select.selectize'));
 	app.showPopoverElementView(jQuery('body').find('.popoverTooltip'));
 	app.showBtnSwitch(jQuery('body').find('.switchBtn'));
+	app.registerModal();
 
 	//Updating row height
 	app.updateRowHeight();
-	app.initFooTable();
+	
 	String.prototype.toCamelCase = function () {
 		var value = this.valueOf();
 		return  value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()

@@ -72,8 +72,12 @@ class Vtiger_Relation_Model extends Vtiger_Base_Model
 
 	public function getListUrl($parentRecordModel)
 	{
-		return 'module=' . $this->getParentModuleModel()->get('name') . '&relatedModule=' . $this->get('modulename') .
+		$url = 'module=' . $this->getParentModuleModel()->get('name') . '&relatedModule=' . $this->get('modulename') .
 			'&view=Detail&record=' . $parentRecordModel->getId() . '&mode=showRelatedList';
+		if ($this->get('modulename') == 'Calendar') {
+			$url .= '&time=current';
+		}
+		return $url;
 	}
 
 	public function setRelationModuleModel($relationModel)
@@ -433,5 +437,30 @@ class Vtiger_Relation_Model extends Vtiger_Base_Model
 	public function isActive()
 	{
 		return $this->get('presence') == 0 ? true : false;
+	}
+
+	public function getFields($type = false)
+	{
+		$fields = $this->get('fields');
+		if (!$fields) {
+			$fields = false;
+			$relatedModel = $this->getRelationModuleModel();
+			$relatedModelFields = $relatedModel->getFields();
+
+			foreach ($relatedModelFields as $fieldName => $fieldModel) {
+				if($fieldModel->isViewable()){
+					$fields[] = $fieldModel;
+				}
+			}
+			$this->set('fields', $fields);
+		}
+		if($type){
+			foreach ($fields as $key => $fieldModel) {
+				if ($fieldModel->getFieldDataType() != $type) {
+					unset($fields[$key]);
+				}
+			}
+		}
+		return $fields;
 	}
 }

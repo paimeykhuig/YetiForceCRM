@@ -12,16 +12,12 @@
 {strip}
 	{assign var=ALL_CONDITION_CRITERIA value=$ADVANCE_CRITERIA[1] }
 	{assign var=ANY_CONDITION_CRITERIA value=$ADVANCE_CRITERIA[2] }
-
 	{if empty($ALL_CONDITION_CRITERIA) }
 		{assign var=ALL_CONDITION_CRITERIA value=array()}
 	{/if}
-
 	{if empty($ANY_CONDITION_CRITERIA) }
 		{assign var=ANY_CONDITION_CRITERIA value=array()}
 	{/if}
-
-
 <div class="filterContainer">
 	<input type="hidden" name="date_filters" data-value='{Vtiger_Util_Helper::toSafeHTML(ZEND_JSON::encode($DATE_FILTERS))}' />
 	<input type="hidden" name="advanceFilterOpsByFieldType" data-value='{ZEND_JSON::encode($ADVANCED_FILTER_OPTIONS_BY_TYPE)}' />

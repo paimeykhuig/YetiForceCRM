@@ -94,7 +94,15 @@ $languageStrings = [
 	'LBL_REPEAT_FOR' => 'Повторять по:',
 	'LBL_RECURRING_TYPE' => 'Тип повторения',
 	'End Date' => 'Дата окончания',
-	'LBL_FOLLOWUP' => 'Follow up',
+	'LBL_FOLLOWUP' => 'Related event',
+	
+	'PLL_PLANNED' => 'Planned',
+	'PLL_IN_REALIZATION' => 'To be realized',
+	'PLL_OVERDUE' => 'Overdue',
+	'PLL_POSTPONED' => 'Postponed',
+	'PLL_CANCELLED' => 'Cancelled',
+	'PLL_COMPLETED' => 'Completed',
+
 ];
 
 $jsLanguageStrings = [

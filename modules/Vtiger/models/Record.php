@@ -16,6 +16,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 {
 
 	protected $module = false;
+	protected $inventoryData = false;
 	public $summaryRowCount = 4;
 
 	/**
@@ -199,7 +200,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 	 * @param <String> $fieldName - field name for which values need to get
 	 * @return <String>
 	 */
-	public function getDisplayValue($fieldName, $recordId = false)
+	public function getDisplayValue($fieldName, $recordId = false, $rawText = false)
 	{
 		if (empty($recordId)) {
 			$recordId = $this->getId();
@@ -222,7 +223,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 		// End
 
 		if ($fieldModel) {
-			return $fieldModel->getDisplayValue($this->get($fieldName), $recordId, $this);
+			return $fieldModel->getDisplayValue($this->get($fieldName), $recordId, $this, $rawText);
 		}
 		return false;
 	}
@@ -257,6 +258,9 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 	 */
 	public function save()
 	{
+		if ($this->getModule()->isInventory()) {
+			$this->initInventoryData();
+		}
 		$this->getModule()->saveRecord($this);
 		if ($this->getModule()->isInventory()) {
 			$this->saveInventoryData();
@@ -549,7 +553,7 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 	{
 		$log = vglobal('log');
 		$log->debug('Entering ' . __CLASS__ . '::' . __METHOD__);
-		
+
 		$module = $this->getModuleName();
 		$record = $this->getId();
 		if (empty($record)) {
@@ -575,30 +579,80 @@ class Vtiger_Record_Model extends Vtiger_Base_Model
 	/**
 	 * Save the inventory data
 	 */
+	public function initInventoryData()
+	{
+		$log = vglobal('log');
+		$log->debug('Entering ' . __CLASS__ . '::' . __METHOD__);
+		$moduleName = $this->getModuleName();
+		$inventory = Vtiger_InventoryField_Model::getInstance($moduleName);
+		$fields = $inventory->getColumns();
+		$table = $inventory->getTableName('data');
+		$summaryFields = $inventory->getSummaryFields();
+		$inventoryData = $summary = [];
+		$request = new Vtiger_Request($_REQUEST, $_REQUEST);
+		$numRow = $request->get('inventoryItemsNo');
+
+		for ($i = 1; $i <= $numRow; $i++) {
+			if (!$request->has(reset($fields)) && !$request->has(reset($fields) . $i)) {
+				continue;
+			}
+			$insertData = ['seq' => $request->get('seq' . $i)];
+			foreach ($fields as $field) {
+				$value = $insertData[$field] = $inventory->getValueForSave($request, $field, $i);
+				if (in_array($field, $summaryFields)) {
+					$summary[$field] += $value;
+				}
+			}
+			$inventoryData[] = $insertData;
+		}
+
+		foreach ($summary as $fieldName => $fieldValue) {
+			if ($this->has($fieldName)) {
+				$this->set($fieldName, CurrencyField::convertToUserFormat($fieldValue, null, true));
+			}
+		}
+
+		$this->inventoryData = $inventoryData;
+		$log->debug('Exiting ' . __CLASS__ . '::' . __METHOD__);
+	}
+
+	/**
+	 * Save the inventory data
+	 */
 	public function saveInventoryData()
 	{
+		//Event triggering code
+		require_once("include/events/include.inc");
+
 		$db = PearDatabase::getInstance();
 		$log = vglobal('log');
 		$log->debug('Entering ' . __CLASS__ . '::' . __METHOD__);
 
 		$moduleName = $this->getModuleName();
 		$inventory = Vtiger_InventoryField_Model::getInstance($moduleName);
-		$fields = $inventory->getColumns();
 		$table = $inventory->getTableName('data');
 		$request = new Vtiger_Request($_REQUEST, $_REQUEST);
 		$numRow = $request->get('inventoryItemsNo');
 
-		$db->pquery("delete from $table where id = ?", [$this->getId()]);
-		for ($i = 1; $i <= $numRow; $i++) {
-			if (!$request->has(reset($fields)) && !$request->has(reset($fields) . $i)) {
-				continue;
-			}
-			$insertData = ['id' => $this->getId(), 'seq' => $request->get('seq' . $i)];
-			foreach ($fields as $field) {
-				$insertData[$field] = $inventory->getValueForSave($request, $field, $i);
-			}
+		//In Bulk mode stop triggering events
+		if (!CRMEntity::isBulkSaveMode()) {
+			$em = new VTEventsManager($adb);
+			// Initialize Event trigger cache
+			$em->initTriggerCache();
+			$em->triggerEvent('entity.inventory.beforesave', [$this, $inventory, $this->inventoryData]);
+		}
+
+		$db->delete($table, 'id = ?', [$this->getId()]);
+		foreach ($this->inventoryData as $insertData) {
+			$insertData['id'] = $this->getId();
 			$db->insert($table, $insertData);
 		}
+
+		if ($em) {
+			//Event triggering code
+			$em->triggerEvent('entity.inventory.aftersave', [$this, $inventory, $this->inventoryData]);
+		}
+
 		$log->debug('Exiting ' . __CLASS__ . '::' . __METHOD__);
 	}
 }

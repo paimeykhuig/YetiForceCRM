@@ -31,18 +31,7 @@ jQuery.Class("Vtiger_Header_Js", {
 	contentContainer: false,
 	quickCreateCallBacks: [],
 	init: function () {
-		this.setMenuContainer('.navbar-fixed-top').setContentsContainer('.mainContainer');
-	},
-	setMenuContainer: function (element) {
-		if (element instanceof jQuery) {
-			this.menuContainer = element;
-		} else {
-			this.menuContainer = jQuery(element);
-		}
-		return this;
-	},
-	getMenuContainer: function () {
-		return this.menuContainer;
+		this.setContentsContainer('.bodyContent');
 	},
 	setContentsContainer: function (element) {
 		if (element instanceof jQuery) {
@@ -98,8 +87,8 @@ jQuery.Class("Vtiger_Header_Js", {
 		if (show) {
 			var announcement = jQuery('#announcement').outerHeight();
 			navTop = (navTop + announcement);
-		}		
-		var contentsContainer = $('.bodyContent');
+		}	
+		var contentsContainer = this.getContentsContainer();
 		contentsContainer.animate({'margin-top': navTop}, speed, effect);
 		return this;
 	},
@@ -138,7 +127,7 @@ jQuery.Class("Vtiger_Header_Js", {
 	},
 	setAnnouncement: function () {
 		var announcementoff = app.cacheGet('announcement.turnoff', false);
-		var announcementBtn = jQuery('[id="announcementBtn"]');
+		var announcementBtn = jQuery('#announcementBtn');
 		var thisInstance = this;
 		if (announcementoff === true) {
 			jQuery('#announcement').hide();
@@ -153,8 +142,9 @@ jQuery.Class("Vtiger_Header_Js", {
 	},
 	registerAnnouncement: function () {
 		var thisInstance = this;
-		var announcementBtn = $('[id="announcementBtn"]');
+		var announcementBtn = jQuery('#announcementBtn');
 		var announcementTurnOffKey = 'announcement.turnoff';
+
 		announcementBtn.click(function (e, manual) {
 			thisInstance.hideActionMenu();
 			var displayStatus = jQuery('#announcement').css('display');
@@ -283,25 +273,35 @@ jQuery.Class("Vtiger_Header_Js", {
 					icon = 'glyphicon glyphicon-calendar';
 					linkHtml = '';
 					hidden = '';
+					helpIcon = ''
 					if (events[ev]['set'] == 'Task') {
 						icon = 'icon-tasks';
 					}
 					if (events[ev]['linkl']) {
 						linkHtml = '<div class="cut-string"><i class="calIcon modIcon_' + events[ev]['linkm'] + '"></i> ' + events[ev]['linkl'] + '</div>';
 					}
+					helpIcon = '<div><label> ' + app.vtranslate('JS_START_DATE') + ': &nbsp</label>' + events[ev]['start'] + ' </div>\n\
+								<div><label> ' + app.vtranslate('JS_END_DATE') + ': &nbsp</label>' + events[ev]['end'] + ' </div>\n\
+								<div class=' + 'textOverflowEllipsis' + '><label> ' + app.vtranslate('JS_SUBJECT') + ': &nbsp</label>' + events[ev]['title'] + '</div>\n\
+								<div><label> ' + app.vtranslate('JS_STATE') + ': &nbsp</label>' + events[ev]['labels']['state'] + ' </div>\n\
+								<div><label> ' + app.vtranslate('JS_STATUS') + ': &nbsp</label>' + events[ev]['labels']['sta'] + ' </div>\n\
+								<div><label> ' + app.vtranslate('JS_PRIORITY') + ': &nbsp</label>' + events[ev]['labels']['pri'] + ' </div>'
 					/*if(typeActive == 'Task' && events[ev]['set'] != 'Task'){
 					 hidden = 'hide';
 					 }else if(typeActive == 'Event' && events[ev]['set'] == 'Task'){
 					 hidden = 'hide';
 					 }*/
 					if (events[ev]['start'].indexOf(validDateFromat) > -1) {
-						data.find('#prev_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent" ><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span> ' + events[ev]['title'] + '</span></div></a>' + linkHtml + '</td></tr>');
+						data.find('#prev_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent" ><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span><strong> ' + events[ev]['start'] + '</strong></span><span> ' + events[ev]['title'].substring(0, 22) + ' </span><span style="margin-left: 5px;margin-top: 2px;"  class="HelpInfoPopover " title="" data-placement="top" data-content="' + helpIcon + '"><i class="glyphicon glyphicon-info-sign"></i></span</div></a>' + linkHtml + '</td></tr>');
 					} else if (events[ev]['start'].indexOf(currentDate) > -1) {
-						data.find('#cur_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent" ><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span> ' + events[ev]['title'] + '</span></div></a>' + linkHtml + '</td></tr>');
+						data.find('#cur_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent" ><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span><strong> ' + events[ev]['start'] + '</strong></span><span> ' + events[ev]['title'].substring(0, 22) + ' </span><span style="margin-left: 5px;margin-top: 2px;"  class="HelpInfoPopover " title="" data-placement="top" data-content="' + helpIcon + '"><i class="glyphicon glyphicon-info-sign"></i></span></div></a>' + linkHtml + '</td></tr>');
 					} else if (events[ev]['start'].indexOf(dateEndFirst) > -1) {
-						data.find('#next_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent"><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span> ' + events[ev]['title'] + '</span></div></a>' + linkHtml + '</td></tr>');
+						data.find('#next_events .table').append('<tr class="mode_' + events[ev]['set'] + ' ' + hidden + ' addedNearCalendarEvent"><td><a target="_blank" href="' + events[ev]['url'] + '"><div class="cut-string"><i class="' + icon + '" style="vertical-align:middle; margin-bottom:4px;"></i><span><strong> ' + events[ev]['start'] + '</strong></span><span> ' + events[ev]['title'].substring(0, 22) + ' </span><span style="margin-left: 5px;margin-top: 2px;"  class="HelpInfoPopover " title="" data-placement="top" data-content="' + helpIcon + '"><i class="glyphicon glyphicon-info-sign"></i></span</div></a>' + linkHtml + '</td></tr>');
 					}
 				}
+				var quickCreateForm
+				thisInstance.registerHelpInfo(quickCreateForm);
+
 			} else {
 				data.find('.modal-body').css({'max-height': '', 'overflow-y': ''});
 			}
@@ -486,39 +486,6 @@ jQuery.Class("Vtiger_Header_Js", {
 		liElements.filter(':not(.active)').find('a').each(function (e) {
 			quickCreateTabOnHide(jQuery(this).attr('data-target'));
 		});
-	},	
-	hideMobileMenu: function (){
-		$('.mobileLeftPanel ').removeClass('mobileMenuOn');
-	},
-	toogleMobileMenu: function (){
-		var thisInstance = this;
-		$('.rightHeaderBtnMenu').click(function(){
-			thisInstance.hideActionMenu();
-			thisInstance.hideSearchMenu();
-			$('.mobileLeftPanel ').toggleClass('mobileMenuOn');
-		});
-	},
-	hideSearchMenu: function() {
-		$('.searchMenu').removeClass('toogleSearchMenu');
-	},
-	searchMenu: function () {
-		var thisInstance = this;
-		$('.searchMenuBtn').click(function(){
-			thisInstance.hideActionMenu();
-			thisInstance.hideMobileMenu();
-			$('.searchMenu').toggleClass('toogleSearchMenu');
-		});
-	},
-	hideActionMenu: function (){
-		$('.actionMenu').removeClass('actionMenuOn');
-	},
-	toogleActionMenu: function () {
-		var thisInstance = this;
-		$('.actionMenuBtn').click(function (){
-			thisInstance.hideSearchMenu();
-			thisInstance.hideMobileMenu();
-			$('.actionMenu').toggleClass('actionMenuOn');
-		});
 	},
 	basicSearch: function () {
 		var thisInstance = this;
@@ -580,7 +547,7 @@ jQuery.Class("Vtiger_Header_Js", {
 					}
 				},
 				close: function (event, ui) {
-					//jQuery('#globalSearchValue, #globalMobileSearchValue').val('');
+					jQuery('#globalSearchValue, #globalMobileSearchValue').val('');
 				}
 			});
 		}
@@ -592,58 +559,14 @@ jQuery.Class("Vtiger_Header_Js", {
 			currentTarget.focus();
 			return false;
 		}
-		var selectedModule = currentTarget.prev('span').children('select').val();
-		if(undefined == selectedModule)
-			var selectedModule = currentTarget.parent().prev('div').children().children('select').val();
-
 		var basicSearch = new Vtiger_BasicSearch_Js();
 		var progress = jQuery.progressIndicator();
-		basicSearch.search(val, selectedModule).then(function (data) {
+		basicSearch.search(val).then(function (data) {
 			basicSearch.showSearchResults(data);
 			progress.progressIndicator({
 				'mode': 'hide'
 			});
 		});
-	},
-	adjustContentHeight: function () {
-		navTop = jQuery('nav.navbar-fixed-top').outerHeight();
-		navBottom = jQuery('footer.navbar-fixed-bottom').outerHeight();
-
-		if (app.getViewName() === 'Detail' || app.getViewName() === 'ExtensionImport') {
-			if (jQuery('div.detailViewInfo > .related').outerHeight() > jQuery('div.detailViewInfo > div.details ').outerHeight()) {
-				jQuery('div.detailViewInfo > div.details').css('min-height', jQuery('.detailViewInfo > .related').outerHeight());
-			}
-			bodyHeight = jQuery('div.detailViewContainer').outerHeight();
-			//jQuery('div.detailViewContainer').css('height', jQuery('div.bodyContents').outerHeight());
-		} else if (app.getViewName() === 'Edit') {
-			bodyHeight = jQuery('.editViewContainer').outerHeight();
-		} else if (app.getViewName() === 'List') {
-			bodyHeight = jQuery('.remindersNoticeContainer').outerHeight() - 5;
-			jQuery(".contentsDiv").css('min-height', bodyHeight);
-			//jQuery(".bodyContents").css('min-height', bodyHeight);
-		} else if (app.getViewName() === 'Calendar') {
-			bodyHeight = jQuery('.calendarViewContainer').outerHeight();
-			//jQuery(".contentsDiv").css('height', bodyHeight);
-		} else if (app.getViewName() === 'DashBoard') {
-			bodyHeight = jQuery('.remindersNoticeContainer').outerHeight() - 55;
-			//jQuery("div.gridster").css('min-height', jQuery('.contentsDiv').outerHeight() + 14);
-			//jQuery("div.bodyContents").css('min-height', bodyHeight);
-		} else if (app.getViewName() === 'Index') {
-			bodyHeight = jQuery('.mainContainer > .col-md-2').outerHeight();
-			//jQuery(".mainContainer").css('min-height', bodyHeight);
-		} else {
-			bodyHeight = jQuery('.bodyContents').css('min-height');//.outerHeight();
-		}
-		var styles = {
-			'min-height': bodyHeight,
-			'margin-bottom': navBottom + 'px',
-			'margin-top': navTop + 'px'
-		}
-		console.log(document.documentElement.scrollWidth);
-		//jQuery(".leftPanel").css('height',document.documentElement.scrollHeight);
-		//jQuery(".mainContainer > .col-md-2 ").css({'margin-bottom': navBottom + 'px', });
-		//jQuery(".contentsDiv").css({'margin-bottom': navBottom + 'px', });
-		Vtiger_Helper_Js.showHorizontalTopScrollBar();
 	},
 	recentPageViews: function () {
 		var thisInstance = this;
@@ -771,13 +694,57 @@ jQuery.Class("Vtiger_Header_Js", {
 		block.css('top', $('.commonActionsContainer').height());
 		block.height($(window).height() - $('footer.navbar-default').height() - $('.commonActionsContainer').height() + 2);
 	},
+	registerMobileEvents: function (){
+		var thisInstance = this;
+		$('.rightHeaderBtnMenu').click(function(){
+			thisInstance.hideActionMenu();
+			thisInstance.hideSearchMenu();
+			$('.mobileLeftPanel ').toggleClass('mobileMenuOn');
+		});
+		$('.actionMenuBtn').click(function (){
+			thisInstance.hideSearchMenu();
+			thisInstance.hideMobileMenu();
+			$('.actionMenu').toggleClass('actionMenuOn');
+		});
+		$('.searchMenuBtn').click(function(){
+			thisInstance.hideActionMenu();
+			thisInstance.hideMobileMenu();
+			$('.searchMenu').toggleClass('toogleSearchMenu');
+		});
+		$('#searchMobileIcon').on('click', function (e) {
+			var currentTarget = $('#globalMobileSearchValue');
+			thisInstance.hideSearchMenu();
+			var pressEvent = $.Event("keypress");
+			pressEvent.which = 13;
+			currentTarget.trigger(pressEvent);
+		});
+	},
+	hideMobileMenu: function (){
+		$('.mobileLeftPanel ').removeClass('mobileMenuOn');
+	},
+	hideSearchMenu: function() {
+		$('.searchMenu').removeClass('toogleSearchMenu');
+	},
+	hideActionMenu: function (){
+		$('.actionMenu').removeClass('actionMenuOn');
+	},
+	showPdfModal: function (url) {
+		var params = {};
+		if (app.getViewName() == 'List') {
+			var selected = Vtiger_List_Js.getSelectedRecordsParams();
+			if(selected === false){
+				return false;
+			}
+			jQuery.extend(params, selected);
+		}
+		url += '&' + jQuery.param(params);
+		app.showModalWindow(null, url);
+	},
 	registerEvents: function () {
 		var thisInstance = this;
 		thisInstance.recentPageViews();
-		thisInstance.toogleMobileMenu();
-		thisInstance.searchMenu();
-		thisInstance.toogleActionMenu();
-		jQuery('[id="globalSearch"]').click(function () {
+
+		jQuery('#globalSearch').click(function () {
 			thisInstance.hideSearchMenu();
 			var advanceSearchInstance = new Vtiger_AdvanceSearch_Js();
 			advanceSearchInstance.initiateSearch().then(function () {
@@ -790,28 +757,11 @@ jQuery.Class("Vtiger_Header_Js", {
 			pressEvent.which = 13;
 			currentTarget.trigger(pressEvent);
 		});
-		jQuery('#searchMobileIcon').on('click', function (e) {
-			var currentTarget = jQuery('#globalMobileSearchValue');
-			thisInstance.hideSearchMenu();
-			var pressEvent = jQuery.Event("keypress");
-			pressEvent.which = 13;
-			currentTarget.trigger(pressEvent);
-		});
 		thisInstance.registerAnnouncement();
 		this.setAnnouncement();
 
 		thisInstance.registerHotKeys();
 		//this.registerCalendarButtonClickEvent();
-		jQuery('#moreMenu').click(function (e) {
-			var moreElem = jQuery(e.currentTarget);
-			var moreMenu = jQuery('.moreMenus', moreElem)
-			var index = jQuery(".modulesList > li", thisInstance.getMenuContainer()).length;
-			// for left aligning the more menus dropdown if the modules list is below 5
-			if (index < 5) {
-				moreMenu.css('left', 0).addClass('leftAligned');
-			}
-		});
-
 		//After selecting the global search module, focus the input element to type
 		jQuery('#basicSearchModulesList').change(function () {
 			jQuery('#globalSearchValue').focus();
@@ -822,6 +772,9 @@ jQuery.Class("Vtiger_Header_Js", {
 			var moduleName = jQuery(e.currentTarget).data('name');
 			thisInstance.quickCreateModule(moduleName);
 		});
+		
+		thisInstance.registerMobileEvents();
+		
 		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			jQuery('#basicSearchModulesList_chosen').find('.chzn-results').css({'max-height': '350px', 'overflow-y': 'scroll'});
 		}
@@ -833,20 +786,16 @@ jQuery.Class("Vtiger_Header_Js", {
 						alwaysVisible: true,
 						size: '6px'
 					});
-					
-			// setting sidebar Height wrt Content
-			$(document).ajaxComplete(function () {
-				//Vtiger_Header_Js.getInstance().adjustContentHeight();
-			});
-			$(document).load(function () {
-				//Vtiger_Header_Js.getInstance().adjustContentHeight();
-			});
-			$(window).resize(function () {
-				//Vtiger_Header_Js.getInstance().adjustContentHeight();
-			})
+
+
+
+			//Added to support standard resolution 1024x768
+			if (window.outerWidth <= 1024) {
+				//$('.headerLinksContainer').css('margin-right', '8px');
+			}
 			thisInstance.registerReminderNotice();
 		}
-	}
+	},
 });
 jQuery(document).ready(function () {
 	Vtiger_Header_Js.getInstance().registerEvents();

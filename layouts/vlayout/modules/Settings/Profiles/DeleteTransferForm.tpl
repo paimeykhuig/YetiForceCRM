@@ -32,7 +32,7 @@
 										{foreach from=$ALL_RECORDS item=PROFILE_MODEL}
 											{assign var=PROFILE_ID value=$PROFILE_MODEL->get('profileid')}
 											{if $PROFILE_ID neq $RECORD_MODEL->getId()}
-												<option value="{$PROFILE_ID}">{$PROFILE_MODEL->get('profilename')}</option>
+												<option value="{$PROFILE_ID}">{vtranslate($PROFILE_MODEL->get('profilename'), $QUALIFIED_MODULE)}</option>
 											{/if}
 										{/foreach}
 									</optgroup>
@@ -42,7 +42,7 @@
 					</div>
 					<div class="modal-footer">
 						<div class=" pull-right cancelLinkContainer">
-							<a class="btn btn-warning cancelLink" data-dismiss="modal" type="reset">Cancel</a>
+							<button class="cancelLink btn btn-warning" data-dismiss="modal" type="reset">{vtranslate('LBL_CANCEL', $QUALIFIED_MODULE)}</button>
 						</div>
 						<button class="btn btn-success pull-right" type="submit">{vtranslate('LBL_SAVE', $MODULE)}</button>
 					</div>

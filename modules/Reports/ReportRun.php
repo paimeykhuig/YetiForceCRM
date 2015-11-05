@@ -91,6 +91,7 @@ class ReportRunQueryPlanner
 	protected $tempTablePrefix = 'vtiger_reptmptbl_';
 	protected static $tempTableCounter = 0;
 	protected $registeredCleanup = false;
+	public static $existTables = [];
 
 	function addTable($table)
 	{
@@ -182,21 +183,24 @@ class ReportRunQueryPlanner
 	function initializeTempTables()
 	{
 		$adb = PearDatabase::getInstance();
-
-		$oldDieOnError = $adb->dieOnError;
-		$adb->dieOnError = false; // If query planner is re-used there could be attempt for temp table...
 		foreach ($this->tempTables as $uniqueName => $tempTableInfo) {
-			$query1 = sprintf('CREATE TEMPORARY TABLE %s AS %s', $uniqueName, $tempTableInfo['query']);
-			$adb->pquery($query1, array());
+			if (!in_array($uniqueName, self::$existTables)) {
+				$query1 = sprintf('CREATE TEMPORARY TABLE %s AS %s', $uniqueName, $tempTableInfo['query']);
+				$adb->query($query1);
+			}
 
 			$keyColumns = $tempTableInfo['keycolumns'];
 			foreach ($keyColumns as $keyColumn) {
-				$query2 = sprintf('ALTER TABLE %s ADD INDEX (%s)', $uniqueName, $keyColumn);
-				$adb->pquery($query2, array());
+				if (!empty($keyColumn)) {
+					$result = $adb->query("SHOW COLUMNS FROM `$uniqueName` LIKE '$keyColumn';");
+					if ($result->rowCount() > 0) {
+						$query2 = sprintf('ALTER TABLE %s ADD INDEX (%s)', $uniqueName, $keyColumn);
+						$adb->query($query2);
+					}
+				}
 			}
+			self::$existTables[] = $uniqueName;
 		}
-
-		$adb->dieOnError = $oldDieOnError;
 
 		// Trigger cleanup of temporary tables when the execution of the request ends.
 		// NOTE: This works better than having in __destruct
@@ -475,7 +479,7 @@ class ReportRun extends CRMEntity
 				$this->queryPlanner->addTable($selectedfields[0]);
 			}
 		} elseif ($selectedfields[0] == 'vtiger_activity' && $selectedfields[1] == 'status') {
-			$columnSQL = " case when (vtiger_activity.status not like '') then vtiger_activity.status else vtiger_activity.eventstatus end AS Calendar__Status";
+			$columnSQL = "vtiger_activity.status AS Calendar__Status";
 		} elseif ($selectedfields[0] == 'vtiger_activity' && $selectedfields[1] == 'date_start') {
 			if ($module == 'Emails') {
 				$columnSQL = "cast(concat(vtiger_activity.date_start,'  ',vtiger_activity.time_start) as DATE) AS Emails__Date__Sent";
@@ -1095,7 +1099,7 @@ class ReportRun extends CRMEntity
 									$this->queryPlanner->addTable("vtiger_groups" . $module_from_tablename);
 								} elseif ($selectedfields[1] == 'status') {//when you use comma seperated values.
 									if ($selectedfields[2] == 'Calendar_Status') {
-										$advcolsql[] = "(case when (vtiger_activity.status not like '') then vtiger_activity.status else vtiger_activity.eventstatus end)" . $this->getAdvComparator($comparator, trim($valuearray[$n]), $datatype);
+										$advcolsql[] = "vtiger_activity.status" . $this->getAdvComparator($comparator, trim($valuearray[$n]), $datatype);
 									} else if ($selectedfields[2] == 'HelpDesk_Status') {
 										$advcolsql[] = "vtiger_troubletickets.status" . $this->getAdvComparator($comparator, trim($valuearray[$n]), $datatype);
 									} else if ($selectedfields[2] == 'Faq_Status') {
@@ -1178,15 +1182,12 @@ class ReportRun extends CRMEntity
 							$this->queryPlanner->addTable($tableName);
 							$fieldvalue = 'trim(' . getSqlForNameInDisplayFormat(array('last_name' => "$tableName.last_name", 'first_name' => "$tableName.first_name"), 'Users') . ')' .
 								$this->getAdvComparator($comparator, trim($value), $datatype);
-						} elseif ($selectedfields[0] == "vtiger_activity" && ($selectedfields[1] == 'status' || $selectedfields[1] == 'eventstatus')) {
+						} elseif ($selectedfields[0] == "vtiger_activity" && ($selectedfields[1] == 'status' || $selectedfields[1] == 'activitystatus')) {
 							// for "Is Empty" condition we need to check with "value NOT NULL" OR "value = ''" conditions
 							if ($comparator == 'y') {
-								$fieldvalue = "(case when (vtiger_activity.status not like '') then vtiger_activity.status
-                                                else vtiger_activity.eventstatus end) IS NULL OR (case when (vtiger_activity.status not like '')
-                                                then vtiger_activity.status else vtiger_activity.eventstatus end) = ''";
+								$fieldvalue = "(case when vtiger_activity.status IS NULL OR vtiger_activity.status = ''";
 							} else {
-								$fieldvalue = "(case when (vtiger_activity.status not like '') then vtiger_activity.status
-                                                else vtiger_activity.eventstatus end)" . $this->getAdvComparator($comparator, trim($value), $datatype);
+								$fieldvalue = "vtiger_activity.status" . $this->getAdvComparator($comparator, trim($value), $datatype);
 							}
 						} else if ($comparator == 'ny') {
 							if ($fieldInfo['uitype'] == '10' || isReferenceUIType($fieldInfo['uitype']))
@@ -2623,7 +2624,7 @@ class ReportRun extends CRMEntity
 			if ($is_admin == false && $profileGlobalPermission[1] == 1 && $profileGlobalPermission[2] == 1)
 				$picklistarray = $this->getAccessPickListValues();
 			if ($result) {
-				$y = $adb->num_fields($result);
+				$y = $adb->getFieldsCount($result);
 				$arrayHeaders = Array();
 				for ($x = 0; $x < $y; $x++) {
 					$fld = $adb->columnMeta($result, $x);
@@ -2831,7 +2832,7 @@ class ReportRun extends CRMEntity
 				$picklistarray = $this->getAccessPickListValues();
 
 			if ($result) {
-				$y = $adb->num_fields($result);
+				$y = $adb->getFieldsCount($result);
 				$noofrows = $adb->num_rows($result);
 				$custom_field_values = $adb->fetch_array($result);
 				$column_definitions = $adb->getFieldsDefinition($result);
@@ -2868,7 +2869,7 @@ class ReportRun extends CRMEntity
 			if (isset($this->totallist)) {
 				if ($sSQL != "") {
 					$result = $adb->query($sSQL);
-					$y = $adb->num_fields($result);
+					$y = $adb->getFieldsCount($result);
 					$custom_field_values = $adb->fetch_array($result);
 
 					foreach ($this->totallist as $key => $value) {
@@ -2893,7 +2894,7 @@ class ReportRun extends CRMEntity
 					}
 					for ($i = 0; $i < $y; $i++) {
 						$fld = $adb->columnMeta($result, $i);
-						$keyhdr[$fld->name] = $custom_field_values[$i];
+						$keyhdr[$fld->name] = $custom_field_values[$fld->name];
 					}
 
 					$rowcount = 0;
@@ -2966,7 +2967,7 @@ class ReportRun extends CRMEntity
 			if (isset($this->totallist)) {
 				if ($sSQL != "") {
 					$result = $adb->query($sSQL);
-					$y = $adb->num_fields($result);
+					$y = $adb->getFieldsCount($result);
 					$custom_field_values = $adb->fetch_array($result);
 					$coltotalhtml .= "<table align='center' width='60%' cellpadding='3' cellspacing='0' border='0' class='rptTable'><tr><td class='rptCellLabel'>" . $mod_strings[Totals] . "</td><td class='rptCellLabel'>" . $mod_strings[SUM] . "</td><td class='rptCellLabel'>" . $mod_strings[AVG] . "</td><td class='rptCellLabel'>" . $mod_strings[MIN] . "</td><td class='rptCellLabel'>" . $mod_strings[MAX] . "</td></tr>";
 
@@ -3093,7 +3094,7 @@ class ReportRun extends CRMEntity
 				$picklistarray = $this->getAccessPickListValues();
 
 			if ($result) {
-				$y = $adb->num_fields($result);
+				$y = $adb->getFieldsCount($result);
 				$arrayHeaders = Array();
 				for ($x = 0; $x < $y - 1; $x++) {
 					$fld = $adb->columnMeta($result, $x);
@@ -3179,7 +3180,7 @@ class ReportRun extends CRMEntity
 			if (isset($this->totallist)) {
 				if ($sSQL != "") {
 					$result = $adb->query($sSQL);
-					$y = $adb->num_fields($result);
+					$y = $adb->getFieldsCount($result);
 					$custom_field_values = $adb->fetch_array($result);
 
 					$coltotalhtml .= "<br /><table align='center' width='60%' cellpadding='3' cellspacing='0' border='1' class='printReport'><tr><td class='rptCellLabel'>" . $mod_strings['Totals'] . "</td><td><b>" . $mod_strings['SUM'] . "</b></td><td><b>" . $mod_strings['AVG'] . "</b></td><td><b>" . $mod_strings['MIN'] . "</b></td><td><b>" . $mod_strings['MAX'] . "</b></td></tr>";
@@ -3564,7 +3565,7 @@ class ReportRun extends CRMEntity
 				$fieldvalues[] = $fldvalue;
 			}
 			$field_count = count($fieldvalues);
-			if ($uitype == 15 && $field_count > 0 && ($fieldname == 'taskstatus' || $fieldname == 'eventstatus')) {
+			if ($uitype == 15 && $field_count > 0 && ($fieldname == 'activitystatus')) {
 				$temp_count = count($temp_status[$keyvalue]);
 				if ($temp_count > 0) {
 					for ($t = 0; $t < $field_count; $t++) {

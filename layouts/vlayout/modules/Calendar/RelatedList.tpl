@@ -19,7 +19,7 @@
 		<input type="hidden" value="{$RELATED_ENTIRES_COUNT}" id="noOfEntries">
 		<input type='hidden' value="{$PAGING->getPageLimit()}" id='pageLimit'>
 		<input type='hidden' value="{$TOTAL_ENTRIES}" id='totalCount'>
-		<div class="relatedHeader ">
+		<div class="relatedHeader calendarRelatedHeader">
 			<div class="btn-toolbar row">
 				<div class="col-sm-6 col-md-6">
 					{foreach item=RELATED_LINK from=$RELATED_LIST_LINKS['LISTVIEWBASIC']}
@@ -39,7 +39,7 @@
 					{/foreach}
 					&nbsp;
 					<div class="btn-group" style="vertical-align: top;">
-						<input class="switchBtn" type="checkbox" {if $TIME=='current'}checked{/if} title="{vtranslate('LBL_CHANGE_ACTIVITY_TYPE')}" data-size="normal" data-label-width="5" data-handle-width="90" data-on-text="{vtranslate('LBL_TO_REALIZE')}" data-off-text="{vtranslate('LBL_HISTORY')}">
+						<input class="switchBtn" type="checkbox" {if $TIME=='current'}checked{/if} title="{vtranslate('LBL_CHANGE_ACTIVITY_TYPE')}" data-size="normal" data-label-width="5" data-handle-width="90" data-on-text="{vtranslate('LBL_CURRENT')}" data-off-text="{vtranslate('LBL_HISTORY')}">
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-6">

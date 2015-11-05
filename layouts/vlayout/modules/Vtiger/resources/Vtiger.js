@@ -196,7 +196,7 @@ var Vtiger_Index_Js = {
 			var nextActivityReminderCheck = app.cacheGet('nextActivityReminderCheckTime', 0);
 
 			if ((currentTime + activityReminder) > nextActivityReminderCheck) {
-				Vtiger_Index_Js.requestReminder(true);
+				Vtiger_Index_Js.requestReminder();
 				setTimeout('Vtiger_Index_Js.requestReminder()', activityReminder);
 				app.cacheSet('nextActivityReminderCheckTime', currentTime + parseInt(activityReminder));
 			}
@@ -205,30 +205,14 @@ var Vtiger_Index_Js = {
 	/**
 	 * Function request for reminder popups
 	 */
-	requestReminder: function (typeRemainder) {
+	requestReminder: function () {
 		var thisInstance = this;
 		var content = $('.remindersNoticeContainer');
-		var url = 'index.php?module=Calendar&view=Reminders';
-		if (typeRemainder) {
-			url += '&type_remainder=true';
-		}
+		var url = 'index.php?module=Calendar&view=Reminders&type_remainder=true';
 		AppConnector.request(url).then(function (data) {
-			content.append(data);
+			content.html(data);
 			thisInstance.refreshNumberNotifications(content);
-			content.find('.reminderAccept').on('click', function (e) {
-				var currentElement = jQuery(e.currentTarget);
-				var recordID = currentElement.closest('.panel').data('record');
-				var url = 'index.php?module=Calendar&action=ActivityReminder&mode=cancelReminder&record=' + recordID;
-				AppConnector.request(url).then(function (data) {
-					currentElement.closest('.panel').fadeOut(300, function () {
-						$(this).remove();
-						var reminderAmount = $('.remindersNoticeContainer .borderColorMeeting').length
-						if (0 == reminderAmount)
-							content.toggleClass("toggled");
-						thisInstance.refreshNumberNotifications(content);
-					});
-				});
-			});
+			app.registerModal(content);
 
 			content.find('.reminderPostpone').on('click', function (e) {
 				var currentElement = jQuery(e.currentTarget);
@@ -400,41 +384,6 @@ var Vtiger_Index_Js = {
 			});
 		}
 	},
-	registerShowHideLeftPanelEvent: function () {
-		jQuery('#toggleButton').click(function (e) {
-			e.preventDefault();
-			var leftPanel = jQuery('#leftPanel');
-			var centerContents = jQuery('#centerPanel');
-			var rightPanel = document.getElementById('rightPanel');
-			var tButtonImage = jQuery('#tButtonImage');
-			if (leftPanel.attr('class').indexOf(' hide') == -1) {
-				var leftPanelshow = 1;
-				leftPanel.addClass('hide');
-				if (rightPanel && jQuery(rightPanel).attr('class').indexOf('hide') == -1) {
-					centerContents.removeClass('col-md-8').addClass('col-md-10');
-				} else {
-					centerContents.removeClass('col-md-10').addClass('col-md-12');
-				}
-				tButtonImage.removeClass('glyphicon-chevron-left').addClass("glyphicon-chevron-right");
-			} else {
-				var leftPanelshow = 0;
-				leftPanel.removeClass('hide');
-				if (rightPanel && jQuery(rightPanel).attr('class').indexOf('hide') == -1) {
-					centerContents.removeClass('col-md-10').addClass('col-md-8');
-				} else {
-					centerContents.removeClass('col-md-12').addClass('col-md-10');
-				}
-				tButtonImage.removeClass('glyphicon-chevron-right').addClass("glyphicon-chevron-left");
-			}
-			var params = {
-				'module': 'Users',
-				'action': 'IndexAjax',
-				'mode': 'toggleLeftPanel',
-				'showPanel': leftPanelshow
-			}
-			AppConnector.request(params);
-		});
-	},
 	registerShowHideRightPanelEvent: function () {
 		jQuery('#toggleRightPanelButton').click(function (e) {
 			e.preventDefault();
@@ -456,15 +405,6 @@ var Vtiger_Index_Js = {
 		SaveResult = new SaveResult()
 		return SaveResult.checkData(form);
 	},
-	registerModlaWindow: function () {
-		jQuery('button.showModalWindow').on('click', function (e) {
-			var currentElement = jQuery(e.currentTarget);
-			var url = currentElement.data('url');
-			if (url && typeof url != 'undefined') {
-				app.showModalWindow(null, url);
-			}
-		});
-	},
 	registerEvents: function () {
 		Vtiger_Index_Js.registerWidgetsEvents();
 		Vtiger_Index_Js.loadWidgetsOnLoad();
@@ -472,10 +412,8 @@ var Vtiger_Index_Js = {
 		Vtiger_Index_Js.adjustTopMenuBarItems();
 		Vtiger_Index_Js.registerPostAjaxEvents();
 		Vtiger_Index_Js.changeSkin();
-		//Vtiger_Index_Js.registerShowHideLeftPanelEvent();
 		Vtiger_Index_Js.registerShowHideRightPanelEvent();
 		Vtiger_Index_Js.registerResizeEvent();
-		Vtiger_Index_Js.registerModlaWindow();
 	},
 	registerPostAjaxEvents: function () {
 		Vtiger_Index_Js.registerTooltipEvents();

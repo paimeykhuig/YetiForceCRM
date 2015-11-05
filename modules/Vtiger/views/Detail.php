@@ -493,8 +493,8 @@ class Vtiger_Detail_View extends Vtiger_Index_View
 	{
 		$record = $recordModel->getId();
 		$moduleName = $recordModel->getModuleName();
-		$recordPermissionToEditView = Users_Privileges_Model::CheckPermissionsToEditView($moduleName, $record);
-		if ($recordPermissionToEditView)
+		$recordPermissionToEditView = Users_Privileges_Model::checkLockEdit($moduleName, $record);
+		if (!$recordPermissionToEditView)
 			return $recordModel->isEditable();
 		else
 			return false;
@@ -670,8 +670,7 @@ class Vtiger_Detail_View extends Vtiger_Index_View
 		$viewer->assign('USER_MODEL', Users_Record_Model::getCurrentUserModel());
 		$viewer->assign('IS_AJAX_ENABLED', $this->isAjaxEnabled($recordModel));
 		$viewer->assign('MODULE_NAME', $moduleName);
-		$viewer->assign('LIMIT', 5);
-		$viewer->assign('PANDS', 'yes');
+		$viewer->assign('LIMIT', 'no_limit');
 		$recordStrucure = Vtiger_RecordStructure_Model::getInstanceFromRecordModel($recordModel, Vtiger_RecordStructure_Model::RECORD_STRUCTURE_MODE_DETAIL);
 		$structuredValues = $recordStrucure->getStructure();
 

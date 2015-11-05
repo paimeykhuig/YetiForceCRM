@@ -54,11 +54,16 @@ padding: 5px;
 			<div id="moduleBlocks">
 				<div style="border-radius: 4px 4px 0px 0px;background: white;" class="editFieldsTable block_1 marginBottom10px border1px">
 					<div class="row layoutBlockHeader marginLRZero">
-						<div class="col-md-6 col-sm-6" >
-							<span class="pull-left marginRight20" style="padding: 10px 5px;">
-								<strong>{vtranslate('LBL_HOLIDAY_LIST', $QUALIFIED_MODULE)}:</strong>
+						<div class="col-md-6">
+							<h4>{vtranslate('LBL_HOLIDAY_LIST', $QUALIFIED_MODULE)}:</h4>
+						</div>
+						<div class="col-md-6">
+							<div class="pull-right">
 								<input type="text" class="dateField dateFilter marginbottomZero form-control" data-date-format="yyyy-mm-dd" data-calendar-type="range" value="{$DATE}" />
-							</span>
+							</div>
+							<div class="pull-right">
+								<strong>{vtranslate('LBL_DATE_RANGE', $QUALIFIED_MODULE)}:</strong>
+							</div>
 						</div>
 					</div>
 					<table class="table tableRWD table-bordered table-condensed themeTableColor userTable">						
@@ -103,7 +108,7 @@ padding: 5px;
 				</div>
 			</div>
 			{* copy elements hide *}
-			<div class="modal addDateWindowModal fade" tabindex="-1">
+			<div class="modal addDateWindowModal fade publicHolidayModal" tabindex="-1">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header contentsBackground">

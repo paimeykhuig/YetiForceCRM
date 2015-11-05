@@ -152,6 +152,16 @@ $languageStrings = [
 	'LBL_SHIFT_BLOCK' => 'Показать/Скрыть Блок',
 	'LBL_ON_SWITCH' => 'Вкл',
 	'LBL_OFF_SWITCH' => 'Выкл',
+	'LBL_FOLLOWUP' => 'Related event',
+	
+	'PLL_PLANNED' => 'Planned',
+	'PLL_IN_REALIZATION' => 'To be realized',
+	'PLL_OVERDUE' => 'Overdue',
+	'PLL_POSTPONED' => 'Postponed',
+	'PLL_CANCELLED' => 'Cancelled',
+	'PLL_COMPLETED' => 'Completed',
+
+	'LBL_NO_AVAILABLE_ACTIONS' => 'No available actions',
 ];
 $jsLanguageStrings = [
 	'JS_ADD_EVENT_TASK' => '+ Событие | Задача',
@@ -289,4 +299,5 @@ $jsLanguageStrings = [
     'JS_RECORD_DELETED' => 'Запись удалена',
 	'JS_TASK_IS_SUCCESSFULLY_ADDED_TO_YOUR_CALENDAR'	=>	'Задача добавлена в Ваш календарь',
 	'JS_CHANGE_ACTIVITY_TIME' => 'Изменить статус Календаря: В работе - В ожидании',
+	'JS_ASSIGNED_TO' => 'Ответственный',
 ];

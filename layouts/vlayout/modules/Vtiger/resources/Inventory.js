@@ -112,12 +112,15 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 		var thisInstance = this;
 		var groupTax = thisInstance.getInventorySummaryTaxesContainer().find('.groupTax');
 		var items = thisInstance.getInventoryItemsContainer();
+		var newRow = $('#blackIthemTable tbody');
 		if (thisInstance.isIndividualTaxMode()) {
 			groupTax.addClass('hide');
 			items.find('.changeTax').removeClass('hide');
+			newRow.find('.changeTax').removeClass('hide');
 		} else {
 			groupTax.removeClass('hide');
 			items.find('.changeTax').addClass('hide');
+			newRow.find('.changeTax').addClass('hide');
 		}
 		thisInstance.setTax(items, 0);
 		thisInstance.setTaxParam(items, []);
@@ -142,11 +145,14 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 		var thisInstance = this;
 		var groupDiscount = thisInstance.getInventorySummaryDiscountContainer().find('.groupDiscount');
 		var items = thisInstance.getInventoryItemsContainer();
+		var newRow = $('#blackIthemTable tbody');
 		if (thisInstance.isIndividualDiscountMode()) {
 			groupDiscount.addClass('hide');
 			items.find('.changeDiscount').removeClass('hide');
+			newRow.find('.changeDiscount').removeClass('hide');
 		} else {
 			groupDiscount.removeClass('hide');
+			items.find('.changeDiscount').addClass('hide');
 			items.find('.changeDiscount').addClass('hide');
 		}
 		thisInstance.setDiscount(items, 0);
@@ -177,7 +183,11 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 		return app.parseNumberToFloat($('.netPrice', row).val());
 	},
 	getTotalPrice: function (row) {
-		return app.parseNumberToFloat($('.totalPrice', row).val());
+		if ($('.totalPrice', row).length != 0) {
+			return app.parseNumberToFloat($('.totalPrice', row).val())
+		} else {
+			return 0;
+		}
 	},
 	getGrossPrice: function (row) {
 		return app.parseNumberToFloat($('.grossPrice', row).val());
@@ -603,11 +613,12 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 
 			var currencyId = thisInstance.getCurrency();
 			if (typeof unitPriceValues[currencyId] !== 'undefined') {
-				thisInstance.setUnitPrice(parentRow, unitPriceValues[currencyId]);
-			}else{
-				thisInstance.setUnitPrice(parentRow, recordData.price);
+				var unitPrice = unitPriceValues[currencyId];
+			} else {
+				var unitPrice = recordData.price;
 			}
-			
+			thisInstance.setUnitPrice(parentRow, app.parseNumberToFloat(unitPrice));
+
 			$('input.unitPrice', parentRow).attr('list-info', unitPriceValuesJson);
 			$('textarea.commentTextarea', parentRow).val(description);
 		}
@@ -665,7 +676,11 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 		element.find('.glyphicon').removeClass('glyphicon-menu-down');
 		element.find('.glyphicon').addClass('glyphicon-menu-up');
 		inventoryRowExpanded.removeClass('hide');
-		Vtiger_Edit_Js.getInstance().loadCkEditorElement(inventoryRowExpanded.find('.ckEditorSource'));
+
+		var listInstance = Vtiger_Edit_Js.getInstance();
+		$.each(inventoryRowExpanded.find('.ckEditorSource'), function (key, data) {
+			listInstance.loadCkEditorElement(jQuery(data));
+		});
 	},
 	hideExpandedRow: function (row) {
 		var thisInstance = this;
@@ -676,15 +691,17 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 		element.find('.glyphicon').removeClass('glyphicon-menu-up');
 		element.find('.glyphicon').addClass('glyphicon-menu-down');
 		inventoryRowExpanded.addClass('hide');
-		var editorInstance = CKEDITOR.instances[inventoryRowExpanded.find('.ckEditorSource').attr('id')];
-		if (editorInstance) {
-			editorInstance.destroy();
-		}
+		$.each(inventoryRowExpanded.find('.ckEditorSource'), function (key, data) {
+			var editorInstance = CKEDITOR.instances[jQuery(data).attr('id')];
+			if (editorInstance) {
+				editorInstance.destroy();
+			}
+		});
 	},
 	initDiscountsParameters: function (parentRow, modal) {
 		var thisInstance = this;
 		var parameters = parentRow.find('.discountParam').val();
-		if (parameters == '') {
+		if (parameters == '' || parameters == undefined) {
 			return;
 		}
 		var parameters = JSON.parse(parameters);
@@ -811,7 +828,7 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 			var modal = $(data);
 			var currencyParam = JSON.parse(block.find('.currencyparam').val());
 
-			if (currencyParam != false){
+			if (currencyParam != false) {
 				modal.find('.currencyName').text(option.text());
 				modal.find('.currencyRate').val(currencyParam[option.val()]['value']);
 				modal.find('.currencyDate').text(currencyParam[option.val()]['date']);
@@ -997,7 +1014,11 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 			}
 			if (element.hasClass('groupDiscount')) {
 				var parentRow = thisInstance.getInventoryItemsContainer();
-				params.totalPrice = app.parseNumberToFloat(parentRow.find('tfoot .colTotalPrice').text());
+				if (parentRow.find('tfoot .colTotalPrice').length != 0) {
+					params.totalPrice = app.parseNumberToFloat(parentRow.find('tfoot .colTotalPrice').text());
+				} else {
+					params.totalPrice = 0;
+				}
 				params.discountType = 1;
 			} else {
 				var parentRow = element.closest(thisInstance.rowClass);
@@ -1076,7 +1097,13 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 			}
 			if (element.hasClass('groupTax')) {
 				var parentRow = thisInstance.getInventoryItemsContainer();
-				params.totalPrice = app.parseNumberToFloat(parentRow.find('tfoot .colNetPrice').text());
+				var totalPrice = 0;
+				if (parentRow.find('tfoot .colNetPrice').length > 0) {
+					totalPrice = parentRow.find('tfoot .colNetPrice').text();
+				} else if (parentRow.find('tfoot .colTotalPrice ').length > 0) {
+					totalPrice = parentRow.find('tfoot .colTotalPrice ').text();
+				}
+				params.totalPrice = app.parseNumberToFloat(totalPrice);
 				params.taxType = 1;
 			} else {
 				var parentRow = element.closest(thisInstance.rowClass);
@@ -1146,7 +1173,12 @@ jQuery.Class("Vtiger_Inventory_Js", {}, {
 			} else {
 				var rate = app.parseNumberToFloat(modal.find('.valueTax').text()) / app.parseNumberToFloat(modal.find('.valueNetPrice').text());
 				parentRow.find(thisInstance.rowClass).each(function (index) {
-					thisInstance.setTax($(this), thisInstance.getNetPrice($(this)) * rate);
+					if ($('.netPrice', $(this)).length > 0) {
+						var totalPrice = thisInstance.getNetPrice($(this));
+					} else if ($('.totalPrice', $(this)).length > 0) {
+						var totalPrice = thisInstance.getTotalPrice($(this));
+					}
+					thisInstance.setTax($(this), totalPrice * rate);
 					thisInstance.quantityChangeActions($(this));
 				});
 			}

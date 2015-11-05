@@ -11,13 +11,20 @@
 jQuery.Class("Vtiger_AdvanceFilter_Js", {
 	getInstance: function (container) {
 		var module = app.getModuleName();
-		var moduleClassName = module + "_AdvanceFilter_Js";
-		var fallbackClassName = "Vtiger_AdvanceFilter_Js";
-		if (typeof window[moduleClassName] != 'undefined') {
-			var instance = new window[moduleClassName](container);
+		var moduleClassName1 = module + "_AdvanceFilterEx_Js";
+		var moduleClassName2 = module + "_AdvanceFilter_Js";
+		var moduleClassName3 = "Vtiger_AdvanceFilterEx_Js";
+		var moduleClassName4 = "Vtiger_AdvanceFilter_Js";
+		if (typeof window[moduleClassName1] != 'undefined') {
+			var instance = new window[moduleClassName1](container);
+		} else if (typeof window[moduleClassName2] != 'undefined') {
+			var instance = new window[moduleClassName2](container);
+		} else if (typeof window[moduleClassName3] != 'undefined') {
+			var instance = new window[moduleClassName3](container);
 		} else {
-			instance = new window[fallbackClassName](container);
+			var instance = new window[moduleClassName4](container);
 		}
+
 		return instance;
 	}
 }, {
@@ -271,11 +278,11 @@ jQuery.Class("Vtiger_AdvanceFilter_Js", {
 		//remove validation since we dont need validations for all eleements
 		// Both filter and find is used since we dont know whether the element is enclosed in some conainer like currency
 		var fieldName = fieldModel.getName();
-		if (fieldModel.getType() == 'multipicklist' || fieldModel.getType() == 'sharedOwner') {
+
+		if ($.inArray(fieldModel.getType(), ['multipicklist', 'sharedOwner', 'multiReferenceValue']) > -1) {
 			fieldName = fieldName + "[]";
-		}
-		if ((fieldModel.getType() == 'picklist' || fieldModel.getType() == 'owner' || fieldModel.getType() == 'modules') && fieldSpecificUi.is('select')
-				&& (comparatorElementVal == 'e' || comparatorElementVal == 'n')) {
+		} else if ((fieldModel.getType() == 'picklist' || fieldModel.getType() == 'owner' || fieldModel.getType() == 'modules')
+				&& fieldSpecificUi.is('select') && (comparatorElementVal == 'e' || comparatorElementVal == 'n')) {
 			fieldName = fieldName + "[]";
 		}
 
@@ -456,7 +463,7 @@ jQuery.Class("Vtiger_AdvanceFilter_Js", {
 							rowValues[field] = jQuery('[name="' + field + '"]', rowElement).val();
 						}
 					}
-				} else if (fieldType == 'picklist' || fieldType == 'multipicklist' || fieldType == 'modules' || fieldType == 'sharedOwner') {
+				} else if ($.inArray(fieldType, ['picklist', 'multipicklist', 'modules', 'sharedOwner', 'multiReferenceValue']) > -1) {
 					for (var key in fieldList) {
 						var field = fieldList[key];
 						if (field == 'value' && valueSelectElement.is('input')) {
@@ -473,14 +480,7 @@ jQuery.Class("Vtiger_AdvanceFilter_Js", {
 							}
 							var reconstructedCommaSeperatedValues = newvaluesArr.join(',');
 							rowValues[field] = reconstructedCommaSeperatedValues;
-						} else if (field == 'value' && valueSelectElement.is('select') && (fieldType == 'picklist' || fieldType == 'modules')) {
-							var value = valueSelectElement.val();
-							if (value == null) {
-								rowValues[field] = value;
-							} else {
-								rowValues[field] = value.join(',');
-							}
-						} else if (field == 'value' && valueSelectElement.is('select') && (fieldType == 'multipicklist' || fieldType == 'sharedOwner')) {
+						} else if (field == 'value' && valueSelectElement.is('select') && ($.inArray(fieldType, ['picklist', 'multipicklist', 'modules', 'sharedOwner', 'multiReferenceValue']) > -1)) {
 							var value = valueSelectElement.val();
 							if (value == null) {
 								rowValues[field] = value;
@@ -596,7 +596,7 @@ Vtiger_Field_Js('AdvanceFilter_Field_Js', {}, {
 		var currentModule = app.getModuleName();
 
 		var type = this.getType();
-		if (type == 'picklist' || type == 'multipicklist' || type == 'owner' || type == 'modules' || type == 'date' || type == 'datetime' || type == 'sharedOwner') {
+		if ($.inArray(type, ['picklist', 'multipicklist', 'owner', 'modules', 'date', 'datetime', 'sharedOwner', 'multiReferenceValue']) > -1) {
 			currentModule = 'AdvanceFilter';
 		}
 		return currentModule;
@@ -671,6 +671,9 @@ Vtiger_Owner_Field_Js('AdvanceFilter_Owner_Field_Js', {}, {
 			return selectContainer;
 		}
 	}
+});
+
+Vtiger_Multireferencevalue_Field_Js('AdvanceFilter_Multireferencevalue_Field_Js', {}, {
 });
 
 Vtiger_Sharedowner_Field_Js('AdvanceFilter_Sharedowner_Field_Js', {}, {

@@ -24,8 +24,11 @@ class Settings_Vtiger_CompanyDetailsSave_Action extends Settings_Vtiger_Basic_Ac
 					$logoDetails[$image] = $_FILES[$image];
 					$fileType = explode('/', $logoDetails[$image]['type']);
 					$fileType = $fileType[1];
-					if (!$logoDetails[$image]['size'] || !in_array($fileType, Settings_Vtiger_CompanyDetails_Model::$logoSupportedFormats)) {
-						$saveLogo[$image] = false;
+					//mime type check 
+					$mimeType = Vtiger_Functions::getMimeContentType($_FILES[$image]["tmp_name"]);
+					$mimeTypeContents = explode('/', $mimeType);
+					if (!$logoDetails['size'] || $mimeTypeContents[0] != 'image' || !in_array($mimeTypeContents[1], Settings_Vtiger_CompanyDetails_Model::$logoSupportedFormats)) {
+						$saveLogo = false;
 					}
 					// Check for php code injection
 					$imageContents = file_get_contents($_FILES[$image]["tmp_name"]);

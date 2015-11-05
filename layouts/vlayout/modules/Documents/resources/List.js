@@ -96,7 +96,7 @@ Vtiger_List_Js("Documents_List_Js", {
 			listViewFilterBlock.on('mouseup', 'li span.deleteFilter', function (event) {
 				//to close the dropdown
 				thisInstance.getFilterSelectElement().data('select2').close();
-				var liElement = jQuery(event.currentTarget).closest('.select2-result-selectable');
+						var liElement = jQuery(event.currentTarget).closest('.select2-results__option');
 				var message = app.vtranslate('JS_LBL_ARE_YOU_SURE_YOU_WANT_TO_DELETE');
 				if (liElement.hasClass('folderOption')) {
 					if (liElement.find('.deleteFilter').hasClass('dull')) {
@@ -129,8 +129,7 @@ Vtiger_List_Js("Documents_List_Js", {
 					Vtiger_Helper_Js.showConfirmationBox({'message': message}).then(
 							function (e) {
 								var currentOptionElement = thisInstance.getSelectOptionFromChosenOption(liElement);
-								var deleteUrl = currentOptionElement.data('deleteurl');
-								window.location.href = deleteUrl;
+								AppConnector.requestForm(currentOptionElement.data('deleteurl'));
 							},
 							function (error, err) {
 							}

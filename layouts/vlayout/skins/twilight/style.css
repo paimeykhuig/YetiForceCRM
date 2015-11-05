@@ -663,7 +663,7 @@ hr {
 .gridster ul li.dashboardWidget .filterContainer .col-md-5 {
 	margin-top: 3px;
 }
-.gridster ul li.dashboardWidget .dashboardWidgetContent {
+.gridster ul li.dashboardWidget .dashboardWidgetContent:not(.dashboardWidgetCalendar) {
 	padding: 10px 0;
 	line-height: 20px;
 }
@@ -1015,7 +1015,7 @@ margin: -2px 3px 0 0 !important;
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	border: 1px solid #dddddd;
 	padding: 12px 12px 5px;
-	min-height: 115px;
+	min-height: 125px;
 	margin-top: 15px;
 	display: block;
 }
@@ -1319,7 +1319,7 @@ td.fieldValue .input-group {
 	color: #404952;
 }
 .searchUIBasic .listRow .defaultInputTextContainer {
-	max-width: 87% !important;
+	max-width: 100% !important;
 	margin-bottom: 0 !important;
 }
 #lineItemTab.table tr:first-child:hover th ~ td {
@@ -1593,7 +1593,9 @@ th.htColHeader,
 .profilesEditView tr.blockHeader th:first-child {
 	text-align: left;
 }
-.profilesEditView input {
+.profilesEditView input,
+.calendarRelatedHeader .addButton,
+.calendarRelatedHeader .selectRelation{
 	margin-right: 5px;
 }
 .profilesEditView tr td.row table.table {
@@ -1937,7 +1939,8 @@ th.htColHeader,
 	border-top: 1px solid #ffffff;
 	border-bottom: 1px solid #dddddd;
 }
-.layoutContent .moduleBlocks .editFieldsTable .layoutBlockHeader .blockLabel {
+.layoutContent .moduleBlocks .editFieldsTable .layoutBlockHeader .blockLabel,
+#salesProcessesContainer .layoutContent {
 	padding-top: 13px;
 }
 .layoutContent .moduleBlocks .editFieldsTable .layoutBlockHeader .blockActions .btn-group {
@@ -2317,10 +2320,20 @@ th.htColHeader,
 }
 .fc-content {
 	background: #fff;
-	margin-top: 15px;
+	margin-left: 10px;
+}
+.fc-event-container .fc-event.fc-draggable{
+	margin: 0 0px 2px 0px;
+	border-radius: 0;
+}
+.fc-content .fc-title{
+	padding-left: 2px;
 }
 .fc-content td:hover {
 	background: #f3f3f3;
+}
+.calendarPopover.popover{
+	max-width: 100%;
 }
 .btn:focus {
 	outline: 0;
@@ -3056,10 +3069,7 @@ td.listViewEntryValue .row input {
 	float: right !important;
 }
 .cut-string {
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	-webkit-text-overflow: ellipsis;
-	width: 200px;
+	width: 285px;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -3303,7 +3313,7 @@ span[name=existingImages] img{
 	padding: 10px;
 }
 .remindersNoticeContainer .actionRow a.btn{
-	margin-right: 3%;
+	margin-right: 2%;
 }
 .cancelLink.btn[type='reset'],.cancel.btn[type='reset'],.cancelLink.btn[type='button']  {
 	float: right;
@@ -4617,4 +4627,52 @@ html,body,.baseContainer
 }
 .padding10{
 	padding:10px;
+}
+.dashboardWidgetContent .summary-detail .summary-text{
+	vertical-align: sub;
+}
+.activityWidgetContainer .activityDescription .popover,
+.quickCreateContent .addedNearCalendarEvent .popover{
+	min-width: 300px;
+}
+.activityWidgetContainer .popover-content,
+.quickCreateContent .addedNearCalendarEvent .popover-content{
+	font-size: 12px;
+}
+#activityStateModal .form-horizontal .form-group{
+	margin-bottom: 2px;
+}
+#activityStateModal .form-horizontal .form-group .control-label{
+	padding-top: 0;
+}
+.mainContainer.mailContainer{
+	margin-top: 102px !important;
+}
+.pageNumber.active.disabled a{
+	background-color: #337AB7;
+	border-color: #337AB7;
+	color: #FFF;
+} 
+#announcementBtn,
+.listViewEntriesCheckBox,
+#listViewEntriesMainCheckBox{
+	cursor: pointer;
+}
+#roleDeleteForm .relatedPopup{
+	padding: 6px 12px;
+}
+.publicHolidayModal .dateField{
+	width: 100%;
+}
+#rssFeedHeading h3{
+	margin-top: 0;
+}
+.globalSearchResults .nav li a{
+	padding: 10px 0;
+}
+.bootbox .btn-warning{
+	margin-left: 5px;
+}
+.menuPanel{
+	padding: 5px;
 }

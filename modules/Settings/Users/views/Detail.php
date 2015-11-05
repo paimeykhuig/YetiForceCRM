@@ -6,32 +6,59 @@
  * The Initial Developer of the Original Code is vtiger.
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
- * Contributor(s): YetiForce.com
  *************************************************************************************/
 
-class Settings_Users_Detail_View extends Users_PreferenceDetail_View {
-
+class Users_Detail_View extends Users_PreferenceDetail_View {
+	public function checkPermission(Vtiger_Request $request) {
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
+		$record = $request->get('record');
+		if($currentUserModel->isAdminUser() == true || $currentUserModel->get('id') == $record) {
+			return true;
+		} else {
+			throw new AppException('LBL_PERMISSION_DENIED');
+		}
+	}
+	
 	public function preProcess(Vtiger_Request $request) {
 		parent::preProcess($request, false);
 		$this->preProcessSettings($request);
 	}
 
-	public function preProcessSettings(Vtiger_Request $request)
-	{
-
+	public function preProcessSettings(Vtiger_Request $request) {
+		$currentUserModel = Users_Record_Model::getCurrentUserModel();
 		$viewer = $this->getViewer($request);
-
 		$moduleName = $request->getModule();
 		$qualifiedModuleName = $request->getModule(false);
 		$selectedMenuId = $request->get('block');
 		$fieldId = $request->get('fieldid');
+
 		$settingsModel = Settings_Vtiger_Module_Model::getInstance();
 		$menuModels = $settingsModel->getMenus();
-		$menu = $settingsModel->prepareMenuToDisplay($menuModels, $moduleName, $selectedMenuId, $fieldId);
-		
-		$viewer->assign('MENUS', $menu);
+
+		if(!empty($selectedMenuId)) {
+			$selectedMenu = Settings_Vtiger_Menu_Model::getInstanceById($selectedMenuId);
+		} elseif(!empty($moduleName) && $moduleName != 'Vtiger') {
+			$fieldItem = Settings_Vtiger_Index_View::getSelectedFieldFromModule($menuModels,$moduleName);
+			if($fieldItem){
+				$selectedMenu = Settings_Vtiger_Menu_Model::getInstanceById($fieldItem->get('blockid'));
+				$fieldId = $fieldItem->get('fieldid');
+			} else {
+				reset($menuModels);
+				$firstKey = key($menuModels);
+				$selectedMenu = $menuModels[$firstKey];
+			}
+		} else {
+			reset($menuModels);
+			$firstKey = key($menuModels);
+			$selectedMenu = $menuModels[$firstKey];
+		}
+
+		$viewer->assign('SELECTED_FIELDID',$fieldId);
+		$viewer->assign('SELECTED_MENU', $selectedMenu);
+		$viewer->assign('SETTINGS_MENUS', $menuModels);
 		$viewer->assign('MODULE', $moduleName);
 		$viewer->assign('QUALIFIED_MODULE', $qualifiedModuleName);
+		$viewer->assign('CURRENT_USER_MODEL', $currentUserModel);
 		$viewer->view('SettingsMenuStart.tpl', $qualifiedModuleName);
 	}
 
